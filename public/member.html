@@ -299,20 +299,30 @@ a { text-decoration: none; color: var(--primary); }
 .left-overlay p { font-size: 1rem; }
 
 /* Center Steps */
-.center-steps {
-  flex: 1;
-  padding: 25px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: #f5f7fa;
-}
 .brand { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.brand .logo {
-  width: 50px; height: 50px; background: var(--primary); color: #fff;
-  font-weight: 700; font-size: 1.2rem; display: flex;
-  align-items: center; justify-content: center; border-radius: 50%;
+
+      .center-steps .brand {
+  display: flex;
+  flex-direction: column; /* stack logo and text vertically */
+  align-items: center;    /* center horizontally */
+  text-align: center;     /* center text under logo */
+  gap: 12px;              /* spacing between logo and text */
+  margin-bottom: 20px;
 }
+
+.center-steps .brand .logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 10px; }
 .step-item {
   display: flex; align-items: center; gap: 12px; opacity: 0.5; transition: all var(--transition);
@@ -623,6 +633,29 @@ ul { list-style-type: disc; padding-left: 20px; text-align: left; max-width: 600
 ul li { margin-bottom: 8px; }
 #contactForm input, #contactForm textarea { margin-bottom: 12px; width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem; }
 #contactForm button { width: 100%; }
+/* Card Colors */
+.action-card:nth-child(1) {
+  background: #e0f7fa; /* light cyan */
+  color: #006064;
+}
+.action-card:nth-child(2) {
+  background: #fce4ec; /* light pink */
+  color: #880e4f;
+}
+.action-card:nth-child(3) {
+  background: #fff3e0; /* light orange */
+  color: #e65100;
+}
+.action-card:nth-child(4) {
+  background: #e8f5e9; /* light green */
+  color: #1b5e20;
+}
+
+/* Adjust hover shadow for colored cards */
+.action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
 
 </style>
 
