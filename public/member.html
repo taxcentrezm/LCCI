@@ -1204,7 +1204,6 @@ ul li { margin-bottom: 8px; }
   </form>
 </section>
 
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   feather.replace();
@@ -1313,36 +1312,35 @@ document.addEventListener('DOMContentLoaded', () => {
   ========================= */
   const registerForm = document.getElementById('registerForm');
   const emailField = document.getElementById('registerEmail');
-  const popup = document.getElementById('loginPopup');
+  const popup = document.getElementById('registerPopup');
   let regAttempts = 0;
 
   function isBusinessEmail(email) {
-    const allowedDomains = ['.org', '.co.zm', '.com.zm', '.biz', '.company', '.africa'];
-    const blockedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+    const blocked = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
     const domain = email.split('@')[1]?.toLowerCase() || '';
-    return domain && !blockedDomains.includes(domain) && allowedDomains.some(d => domain.endsWith(d));
+    return domain && !blocked.includes(domain);
   }
 
-  window.validateRegisterEmail = function () {
-    if (!emailField) return;
+  function validateRegisterEmail() {
+    if (!emailField) return false;
     const email = emailField.value.trim();
     if (!isBusinessEmail(email)) {
       regAttempts++;
       if (regAttempts >= 2 && popup) {
         popup.style.display = 'block';
       } else {
-        alert('Please use a business email address (e.g. yourname@company.com.zm)');
+        alert('Please use a business email address (e.g. yourname@company.com)');
       }
       return false;
-    } else {
-      nextStep(2);
     }
-  };
+    return true;
+  }
 
   if (registerForm) {
     registerForm.addEventListener('submit', e => {
-      e.preventDefault();
-      validateRegisterEmail();
+      if (!validateRegisterEmail()) {
+        e.preventDefault();
+      }
     });
   }
 
@@ -1371,7 +1369,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* =========================
-     Render Review
+     Final Review Renderer
   ========================= */
   function renderReview() {
     if (currentStep !== 4) return;
@@ -1400,7 +1398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal('registerModal');
   };
 });
-</script>
+    </scrit>
   <script>
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.left-bg img'); // All images inside left-bg
