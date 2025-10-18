@@ -6,6 +6,7 @@
 <title>Members | Lusaka Chamber</title>
 <script src="https://unpkg.com/feather-icons"></script>
 <style>
+
 :root {
   --primary: #0078d7;
   --accent: #ff9800;
@@ -55,7 +56,7 @@ a { text-decoration: none; color: var(--primary); }
   background: url('zlcc.jpg') center/cover no-repeat fixed; /* parallax effect with 'fixed' */
   color: #fff;
   text-align: center;
-  padding: 60px 20px;
+  padding: 429px 20px;
   overflow: hidden;
 }
 
@@ -306,10 +307,224 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
 #forgotForm h4 { text-align: center; margin-bottom: 16px; color: var(--primary); }
 #forgotForm input { margin-bottom: 16px; }
 
+  /* Right Form Inputs */
+.right-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Space between input fields */
+  margin-top: 20px;
+}
+
+.right-form input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.right-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0,120,215,0.15);
+}
+
+/* Forgot Password link */
+.forgot-container {
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.forgot-container a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.forgot-container a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons in forms */
+.right-form .btn {
+  padding: 12px 20px;
+  font-weight: 600;
+}
+
+.right-form .btn + .btn {
+  margin-top: 8px;
+}
+
+/* Forgot Password Form */
+#forgotForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+#forgotForm h4 {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* Ensure consistent spacing for avatar and heading */
+.right-form .avatar {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.right-form h3 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+  /* Sidebar Flag Stripe */
+/* Sidebar Flag Stripe */
+.flag-stripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 12px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1100;
+}
+.flag-stripe .stripe {
+  flex: 1;
+  transform: translateX(-100%);   /* hidden initially */
+  transition: transform 0.5s ease;
+}
+.sidebar.open .flag-stripe .stripe {
+  transform: translateX(0);       /* slide in when expanded */
+}
+
+/* Add a little stagger effect */
+.sidebar.open .flag-stripe .stripe:nth-child(1) { transition-delay: 0s; }
+.sidebar.open .flag-stripe .stripe:nth-child(2) { transition-delay: 0.1s; }
+.sidebar.open .flag-stripe .stripe:nth-child(3) { transition-delay: 0.2s; }
+.sidebar.open .flag-stripe .stripe:nth-child(4) { transition-delay: 0.3s; }
+
+.stripe.green { background: #006400; }
+.stripe.red { background: #e53935; }
+.stripe.black { background: #111; }
+.stripe.orange { background: #ff9800; }
+
+/* Toggle Arrow */
+.sidebar-toggle {
+  position: fixed;  /* fixed to viewport so it moves with sidebar width */
+  top: 50%;
+  left: 10px;       /* matches collapsed sidebar width */
+  transform: translateY(-50%);
+  background: #0078d7;
+  color: #fff;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: left 0.4s ease, transform 0.3s ease;
+  z-index: 1200;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+/* When sidebar is open */
+.sidebar.open ~ .sidebar-toggle {
+  left: 220px; /* push toggle outward with sidebar */
+}
+.sidebar.open ~ .sidebar-toggle i {
+  transform: rotate(180deg); /* arrow points left */
+}
+.commitment-btn {
+  background: transparent;
+  color: #0078d7;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #0078d7;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  display: inline-block;
+}
+.commitment-btn:hover {
+  background-color: #0078d7;
+  color: #fff;
+  transform: scale(1.05); /* subtle expand effect */
+}
+ 
+/* Sidebar footer button */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px;
+  text-align: center;
+}
+ 
+.about-text p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.about-highlights {
+  list-style: none;
+  padding: 0;
+}
+
+.about-highlights li {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.about-highlights i {
+  color: #0078d7;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+ .about-text h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+    footer a { color:#ff9800; text-decoration:none; }
+@media (max-width: 768px) {
+  /* Sidebar auto-collapse */
+  .sidebar { width: 0; }
+  .sidebar.open { width: 220px; }
+
+  .sidebar-toggle { left: 0; }}
 </style>
 
 </head>
 <body>
+<aside class="sidebar" id="sidebar">
+  <div class="flag-stripe">
+    <div class="stripe green"></div>
+    <div class="stripe red"></div>
+    <div class="stripe black"></div>
+    <div class="stripe orange"></div>
+  </div>
+  <ul>
+    <li><a href="#home"><i data-feather="home"></i><span>Home</span></a></li>
+    <li><a href="#about"><i data-feather="info"></i><span>About Us</span></a></li>
+    <li><a href="member.html"><i data-feather="user-plus"></i><span>Members</span></a></li>
+    <li><a href="#events"><i data-feather="calendar"></i><span>Events</span></a></li>
+    <li><a href="#services"><i data-feather="briefcase"></i><span>Services</span></a></li>
+    <li><a href="#partners"><i data-feather="users"></i><span>Partners</span></a></li>
+    <li><a href="#contact"><i data-feather="send"></i><span>Contact</span></a></li>
+  </ul>
+  <a href="payroll.html" class="commitment-btn">Payroll & ERPs</a>
+  <a href="web.html" class="commitment-btn">Web Based Services</a>
+</aside>
+<div class="sidebar-toggle" id="sidebarToggle">
+  <i class="fas fa-chevron-right"></i>
+</div>
 
 <header class="header">
   <div class="header-content">
@@ -538,7 +753,7 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
     <!-- Right Form -->
     <main class="right-form">
       <span class="close-btn" onclick="closeModal('loginModal')">×</span>
-      <div class="avatar"><i data-feather="log-in"></i></div>
+      <div class="avatar"><img src="stock.jpg" alt="avatar"></div>
       <h3>Member Login</h3>
 
       <form id="loginForm">
