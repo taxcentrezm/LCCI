@@ -18,8 +18,8 @@
 
 /* Base */
 body{margin:0;font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-h1,h2,h3,h4{margin:0;font-weight:600}
-a{text-decoration:none}
+h1,h2,h3,h4{margin:0;font-weight:600;}
+a{text-decoration:none;}
 .muted{color:var(--muted);font-size:0.9rem;}
 
 /* Header */
@@ -45,74 +45,61 @@ cursor:pointer;transition:background .3s,transform .3s;}
 /* Modal core */
 .modal{display:none;justify-content:center;align-items:center;position:fixed;inset:0;background:rgba(0,0,0,0.7);
 z-index:999;animation:fadeIn .4s ease;}
-.merged-container{width:95%;max-width:1100px;display:grid;grid-template-columns:1.1fr 0.9fr 1fr;
+.merged-container{width:95%;max-width:1200px;display:grid;grid-template-columns:1.2fr 1fr 1.3fr;
 background:#fff;border-radius:var(--radius);box-shadow:0 20px 50px rgba(0,0,0,0.15);overflow:hidden;}
-@media(max-width:950px){.merged-container{grid-template-columns:1fr;max-height:90vh;overflow-y:auto;}}
+@media(max-width:1050px){.merged-container{grid-template-columns:1fr;max-height:90vh;overflow-y:auto;}}
 
 /* Left */
 .left-bg{position:relative;overflow:hidden;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;}
 .left-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease;}
 .left-bg img.active{opacity:1;}
-.left-overlay{position:relative;z-index:2;background:rgba(0,0,0,0.45);padding:40px 30px;border-radius:var(--radius);max-width:300px;}
-.left-overlay h2{font-size:1.6rem;margin-bottom:10px;}
+.left-overlay{position:relative;z-index:2;background:rgba(0,0,0,0.45);padding:40px 30px;border-radius:var(--radius);max-width:320px;text-align:center;}
+.left-overlay h2{font-size:1.8rem;margin-bottom:10px;line-height:1.3;}
+.left-overlay p{font-size:1rem;line-height:1.4;}
 
 /* Stepper */
 .center-steps{background:linear-gradient(180deg,rgba(0,120,215,0.06),rgba(0,120,215,0.02));
-border-right:1px solid rgba(0,0,0,0.05);padding:24px 20px;}
-.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
-.logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#005aad);
-display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;}
+border-right:1px solid rgba(0,0,0,0.05);padding:30px 20px;}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:25px;}
+.logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--primary),#005aad);
+display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;}
 .steps{margin-top:10px;}
-.step-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;cursor:pointer;}
+.step-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;cursor:pointer;transition:background .3s;}
 .step-item:hover{background:rgba(0,120,215,0.06);}
-.step-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;
+.step-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:10px;
 border:1px solid rgba(0,0,0,0.1);color:var(--muted);}
 .step-labels .title{font-weight:600;color:#111;font-size:13px;}
 .step-labels .subtitle{font-size:12px;color:var(--muted);}
 .step-item.active .step-icon{background:var(--primary);color:#fff;border-color:transparent;box-shadow:0 5px 15px rgba(0,120,215,0.2);}
-.progress-line{height:8px;background:#eef2ff;border-radius:999px;margin-top:20px;position:relative;}
+.progress-line{height:8px;background:#eef2ff;border-radius:999px;margin-top:25px;position:relative;}
 .progress-fill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--primary),#005aad);
 width:0%;transition:width .4s ease;}
 
 /* Right form */
-.right-form{padding:40px 35px;position:relative;}
+.right-form{padding:50px 40px 40px 40px;position:relative;max-height:90vh;overflow-y:auto;}
 .close-btn{position:absolute;top:15px;right:20px;font-size:1.5rem;cursor:pointer;color:#888;}
-.avatar{width:90px;height:90px;border-radius:50%;overflow:hidden;margin:0 auto 20px;
-border:3px solid var(--primary);box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+.avatar{width:100px;height:100px;border-radius:50%;overflow:hidden;margin:0 auto 25px;
+border:3px solid var(--primary);box-shadow:0 4px 12px rgba(0,0,0,0.1);}
 .avatar img{width:100%;height:100%;object-fit:cover;}
-h3{text-align:center;color:var(--primary);margin-bottom:18px;}
+h3{text-align:center;color:var(--primary);margin-bottom:20px;}
 .step-content{display:none;opacity:0;transform:translateY(20px);transition:all .4s ease;}
 .step-content.active{display:block;opacity:1;transform:none;}
-form{display:flex;flex-direction:column;gap:14px;}
-input{padding:12px 14px;border:1px solid #ccc;border-radius:8px;font-size:1rem;}
+form{display:flex;flex-direction:column;gap:16px;}
+input{padding:14px 16px;border:1px solid #ccc;border-radius:10px;font-size:1rem;}
 input:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px rgba(0,120,215,0.15);}
-.actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px;}
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:25px;flex-wrap:wrap;}
 .btn.secondary{background:var(--primary);}
 .btn.secondary:hover{background:#005aad;}
-.review{font-size:0.95rem;color:#444;line-height:1.6;}
+.review{font-size:0.95rem;color:#444;line-height:1.6;margin-top:15px;}
+
+/* Popup */
 .popup{display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);
-background:#fff;padding:26px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,0.2);
-text-align:center;width:80%;max-width:360px;z-index:2000;}
+background:#fff;padding:28px;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,0.25);
+text-align:center;width:80%;max-width:380px;z-index:2000;}
 .popup a{color:var(--primary);font-weight:600;}
 .popup a:hover{text-decoration:underline;}
 
-/* Login modal */
-#loginModal .modal-content{display:flex;width:90%;max-width:800px;background:#fff;border-radius:12px;overflow:hidden;}
-#loginModal .modal-left{flex:1;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;}
-#loginModal .slide-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;}
-#loginModal .slide-bg.active{opacity:1;}
-#loginModal .modal-text{position:relative;z-index:2;text-align:center;padding:40px;background:rgba(0,0,0,0.45);border-radius:var(--radius);}
-#loginModal .modal-right{flex:1;padding:40px;position:relative;}
-#loginModal .avatar i{font-size:2.5rem;color:var(--primary);}
-#loginModal .modal-right input{width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;}
-#loginModal .modal-right h3{text-align:center;color:var(--primary);margin-bottom:18px;}
-
-/* Sections */
-section{padding:60px 20px;max-width:1000px;margin:0 auto;text-align:center;}
-section h2{color:var(--primary);font-size:2rem;margin-bottom:10px;}
-section p{color:#444;font-size:1.1rem;line-height:1.6;}
-
-  /* Suggestions dropdown */
+/* Suggestions dropdown */
 .suggestions {
   position: absolute;
   top: 100%;
@@ -120,8 +107,8 @@ section p{color:#444;font-size:1.1rem;line-height:1.6;}
   width: 100%;
   background: #fff;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  max-height: 180px; /* roughly 5 items */
+  border-radius: 10px;
+  max-height: 180px;
   overflow-y: auto;
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -140,20 +127,20 @@ section p{color:#444;font-size:1.1rem;line-height:1.6;}
   color: #fff;
 }
 
-/* Service cards for fees/options */
+/* Service cards */
 .service-cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 10px;
+  gap: 20px;
+  margin-top: 15px;
 }
 
 .service-card {
-  flex: 1 1 calc(50% - 16px);
+  flex: 1 1 calc(50% - 20px);
   background: #fff;
   border: 1px solid #ddd;
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 18px;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
@@ -173,11 +160,11 @@ section p{color:#444;font-size:1.1rem;line-height:1.6;}
 
 .service-card .service-name {
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .service-card .service-fee {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--muted);
 }
 
@@ -185,6 +172,7 @@ section p{color:#444;font-size:1.1rem;line-height:1.6;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
 </style>
+
 </head>
 <body>
 
@@ -213,161 +201,163 @@ section p{color:#444;font-size:1.1rem;line-height:1.6;}
 <!-- Registration Modal -->
 <div class="modal" id="registerModal">
   <div class="merged-container">
+
+    <!-- Left Background -->
     <aside class="left-bg">
       <img src="back (1).jpg" class="active"/><img src="side (2).jpg"/><img src="back (3).jpg"/><img src="back.jpg"/>
-      <div class="left-overlay"><h2>Join Lusaka Chamber</h2><p>Empowering businesses through connection, advocacy, and growth.</p></div>
+      <div class="left-overlay">
+        <h2>Join Lusaka Chamber</h2>
+        <p>Empowering businesses through connection, advocacy, and growth.</p>
+      </div>
     </aside>
-   <aside class="center-steps">
-  <div class="brand">
-    <div class="logo">LC</div>
-    <div>
-      <h3>Company Membership</h3>
-      <div class="muted">5 steps to join</div>
-    </div>
-  </div>
-  <div class="steps">
-    <div class="step-item active" data-step="1">
-      <div class="step-icon"><i data-feather="briefcase"></i></div>
-      <div class="step-labels">
-        <div class="title">1. Details</div>
-        <div class="subtitle">Company info</div>
+
+    <!-- Center Steps -->
+    <aside class="center-steps">
+      <div class="brand">
+        <div class="logo">LC</div>
+        <div>
+          <h3>Company Membership</h3>
+          <div class="muted">5 steps to join</div>
+        </div>
       </div>
-    </div>
-    <div class="step-item" data-step="2">
-      <div class="step-icon"><i data-feather="mail"></i></div>
-      <div class="step-labels">
-        <div class="title">2. Contact</div>
-        <div class="subtitle">Email & phone</div>
+
+      <div class="steps">
+        <div class="step-item active" data-step="1">
+          <div class="step-icon"><i data-feather="map-pin"></i></div>
+          <div class="step-labels">
+            <div class="title">1. Location</div>
+            <div class="subtitle">Country & district</div>
+          </div>
+        </div>
+        <div class="step-item" data-step="2">
+          <div class="step-icon"><i data-feather="briefcase"></i></div>
+          <div class="step-labels">
+            <div class="title">2. Sector & Services</div>
+            <div class="subtitle">Select your package</div>
+          </div>
+        </div>
+        <div class="step-item" data-step="3">
+          <div class="step-icon"><i data-feather="users"></i></div>
+          <div class="step-labels">
+            <div class="title">3. Company Persons</div>
+            <div class="subtitle">Key contacts</div>
+          </div>
+        </div>
+        <div class="step-item" data-step="4">
+          <div class="step-icon"><i data-feather="check-circle"></i></div>
+          <div class="step-labels">
+            <div class="title">4. Review</div>
+            <div class="subtitle">Submit</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="step-item" data-step="3">
-      <div class="step-icon"><i data-feather="users"></i></div>
-      <div class="step-labels">
-        <div class="title">3. Persons</div>
-        <div class="subtitle">Company persons</div>
+      <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
+    </aside>
+
+    <!-- Right Form -->
+    <main class="right-form">
+      <span class="close-btn" onclick="closeModal('registerModal')">×</span>
+      <div class="avatar"><img src="stock.jpg" alt="avatar"></div>
+
+      <!-- Step 1: Location -->
+      <section class="step-content active" data-step="1">
+        <h3>Company Location</h3>
+        <div class="field-row">
+          <label for="country">Country (SADC)</label>
+          <select id="country">
+            <option value="">Select country</option>
+            <option value="ZW">Zimbabwe</option>
+            <option value="ZA">South Africa</option>
+            <option value="BW">Botswana</option>
+            <option value="NA">Namibia</option>
+            <option value="MZ">Mozambique</option>
+            <option value="ZM">Zambia</option>
+            <option value="TZ">Tanzania</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="col field-row">
+            <label for="district">District / Province</label>
+            <select id="district"><option value="">Select district</option></select>
+          </div>
+          <div class="col field-row">
+            <label for="town">Town</label>
+            <select id="town"><option value="">Select town</option></select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <div></div>
+          <button class="btn secondary" onclick="nextStep(2)">Next →</button>
+        </div>
+      </section>
+
+      <!-- Step 2: Sector & Service Packages -->
+      <section class="step-content" data-step="2">
+        <h3>Company Sector & Services</h3>
+
+        <label for="sectorInput">Type and select sectors/services</label>
+        <input id="sectorInput" type="text" placeholder="e.g. IT, Manufacturing" oninput="showSectorSuggestions(this.value)" />
+        <div class="suggestions" id="sectorSuggestions"></div>
+        <div class="chip-container" id="sectorChips" aria-live="polite"></div>
+
+        <h4>Choose Membership Package</h4>
+        <div class="category-cards" id="serviceCards">
+          <div class="service-card" data-package="Premium" data-fee="500" onclick="selectPackage(this)">
+            <h4>Premium Membership</h4>
+            <p>Full access to all chamber resources</p>
+            <span>Fee: ZMW 500</span>
+          </div>
+          <div class="service-card" data-package="Standard" data-fee="300" onclick="selectPackage(this)">
+            <h4>Standard Membership</h4>
+            <p>Basic access</p>
+            <span>Fee: ZMW 300</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" onclick="prevStep(1)">← Back</button>
+        </div>
+      </section>
+
+      <!-- Step 3: Company Persons -->
+      <section class="step-content" data-step="3">
+        <h3>Company Persons</h3>
+        <input id="personName" placeholder="Full Name" required>
+        <input id="designation" placeholder="Designation" list="designationSuggestions">
+        <datalist id="designationSuggestions">
+          <option>CEO</option>
+          <option>Managing Director</option>
+          <option>Finance Manager</option>
+          <option>Operations Head</option>
+        </datalist>
+
+        <div class="actions">
+          <button class="btn" onclick="prevStep(2)">← Back</button>
+          <button class="btn secondary" onclick="nextStep(4)">Next →</button>
+        </div>
+      </section>
+
+      <!-- Step 4: Review -->
+      <section class="step-content" data-step="4">
+        <h3>Review & Submit</h3>
+        <div class="review" id="finalReview"></div>
+
+        <div class="actions">
+          <button class="btn" onclick="prevStep(3)">← Back</button>
+          <button class="btn secondary" onclick="submitApplication()">Submit</button>
+        </div>
+      </section>
+
+      <!-- Mock Transaction Popup -->
+      <div class="popup" id="transactionPopup" style="display:none;">
+        <h3>Payment for <span id="selectedPackage"></span></h3>
+        <p>Fee: ZMW <span id="selectedFee"></span></p>
+        <button class="btn secondary" onclick="completeTransaction()">Pay</button>
       </div>
-    </div>
-    <div class="step-item" data-step="4">
-      <div class="step-icon"><i data-feather="briefcase"></i></div>
-      <div class="step-labels">
-        <div class="title">4. Services</div>
-        <div class="subtitle">Sector & category</div>
-      </div>
-    </div>
-    <div class="step-item" data-step="5">
-      <div class="step-icon"><i data-feather="check-circle"></i></div>
-      <div class="step-labels">
-        <div class="title">5. Confirmation</div>
-        <div class="subtitle">Signature & submit</div>
-      </div>
-    </div>
-  </div>
-  <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
-</aside>
 
-<main class="right-form">
-  <span class="close-btn" onclick="closeModal('registerModal')">×</span>
-  <div class="avatar"><img src="stock.jpg" alt="avatar"></div>
-
-  <!-- Step 1: Company Details -->
-  <section class="step-content active" data-step="1">
-    <h3>Company Details</h3>
-    <input id="companyName" placeholder="Company Name" required>
-    <input id="incorpNo" placeholder="Incorporation No" required>
-    <input id="address" placeholder="Physical Address" required>
-    <div class="actions">
-      <div></div>
-      <button class="btn secondary" onclick="nextStep(2)">Next →</button>
-    </div>
-  </section>
-
-  <!-- Step 2: Contact Information -->
-  <section class="step-content" data-step="2">
-    <h3>Contact Information</h3>
-    <input id="contactPerson" placeholder="Contact Person" required>
-    <input id="registerEmail" placeholder="Business Email" required>
-    <input id="phone" placeholder="Phone Number" required>
-    <input id="fax" placeholder="Fax Number">
-    <div class="actions">
-      <button class="btn" onclick="prevStep(1)">← Back</button>
-      <button class="btn secondary" onclick="validateEmail()">Next →</button>
-    </div>
-  </section>
-
-  <!-- Step 3: Company Persons -->
-  <section class="step-content" data-step="3">
-    <h3>Company Persons</h3>
-    <input id="personName" placeholder="Full Name" required>
-    <input id="designation" placeholder="Designation" list="designationSuggestions">
-    <datalist id="designationSuggestions">
-      <option>CEO</option>
-      <option>Managing Director</option>
-      <option>Finance Manager</option>
-      <option>Operations Head</option>
-    </datalist>
-
-    <input id="title" placeholder="Title" list="titleSuggestions">
-    <datalist id="titleSuggestions">
-      <option>Director</option>
-      <option>Manager</option>
-      <option>Supervisor</option>
-    </datalist>
-
-    <input id="goodsServices" placeholder="Principal Goods/Services" list="goodsSuggestions">
-    <datalist id="goodsSuggestions">
-      <option>Consulting</option>
-      <option>Manufacturing</option>
-      <option>IT Solutions</option>
-    </datalist>
-
-    <div class="actions">
-      <button class="btn" onclick="prevStep(2)">← Back</button>
-      <button class="btn secondary" onclick="nextStep(4)">Next →</button>
-    </div>
-  </section>
-
-  <!-- Step 4: Business Sector & Service Selection -->
-  <section class="step-content" data-step="4">
-    <h3>Business Sector & Category</h3>
-    <input id="sectorInput" placeholder="Sector" required>
-
-    <div class="category-cards">
-      <div class="service-card" data-fee="500" onclick="selectService(this)">
-        <h4>Premium Membership</h4>
-        <p>Access to all chamber resources</p>
-        <span>Fee: ZMW 500</span>
-      </div>
-      <div class="service-card" data-fee="300" onclick="selectService(this)">
-        <h4>Standard Membership</h4>
-        <p>Basic access</p>
-        <span>Fee: ZMW 300</span>
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="btn" onclick="prevStep(3)">← Back</button>
-    </div>
-  </section>
-
-  <!-- Step 5: Signature & Confirmation -->
-  <section class="step-content" data-step="5">
-    <h3>Signature & Confirmation</h3>
-    <input type="text" id="signature" placeholder="Type Your Full Name as Signature" required>
-    <input type="date" id="signDate" required>
-
-    <div class="review" id="finalReview"></div>
-
-    <div class="actions">
-      <button class="btn" onclick="prevStep(4)">← Back</button>
-      <button class="btn secondary" onclick="submitApplication()">Submit</button>
-    </div>
-  </section>
-
-  <div class="popup" id="registerPopup">
-    <p>You're using a personal email. To access member services, apply for a custom business email.</p>
-    <a href="https://lusakachamber.com/apply-mail" target="_blank">Apply for Custom Mail</a>
-  </div>
-</main>
+    </main>
   </div>
 </div>
 
@@ -397,64 +387,128 @@ section p{color:#444;font-size:1.1rem;line-height:1.6;}
 feather.replace();
 
 /* Modal controls */
-function openModal(id){document.getElementById(id).style.display='flex';}
-function closeModal(id){document.getElementById(id).style.display='none';const p=document.getElementById('registerPopup');if(p)p.style.display='none';}
+function openModal(id){
+  document.getElementById(id).style.display = 'flex';
+}
+function closeModal(id){
+  document.getElementById(id).style.display = 'none';
+  const popup = document.getElementById('registerPopup');
+  if(popup) popup.style.display = 'none';
+  const txn = document.getElementById('transactionModal');
+  if(txn) txn.style.display = 'none';
+}
 
 /* Slideshows */
-const regSlides=document.querySelectorAll('#registerModal .left-bg img');
-let r=0;if(regSlides.length){setInterval(()=>{regSlides[r].classList.remove('active');r=(r+1)%regSlides.length;regSlides[r].classList.add('active');},6000);}
-const loginSlides=document.querySelectorAll('#loginModal .slide-bg');
-let l=0;if(loginSlides.length){setInterval(()=>{loginSlides[l].classList.remove('active');l=(l+1)%loginSlides.length;loginSlides[l].classList.add('active');},7000);}
+const regSlides = document.querySelectorAll('#registerModal .left-bg img');
+let r = 0;
+if(regSlides.length){
+  setInterval(() => {
+    regSlides[r].classList.remove('active');
+    r = (r + 1) % regSlides.length;
+    regSlides[r].classList.add('active');
+  }, 6000);
+}
 
 /* Stepper logic */
-const steps=document.querySelectorAll('.step-item');
-const progress=document.getElementById('progressFill');
-const stepContents=document.querySelectorAll('.step-content');
-let current=1;
+const steps = document.querySelectorAll('.step-item');
+const progress = document.getElementById('progressFill');
+const stepContents = document.querySelectorAll('.step-content');
+let currentStep = 1;
+
 function updateStepper(n){
-  steps.forEach((s,i)=>s.classList.toggle('active',i<n));
-  if(progress) progress.style.width=((n-1)/(steps.length-1))*100+'%';
-  stepContents.forEach(sc=>sc.classList.toggle('active',Number(sc.dataset.step)===n));
-  current=n;
+  steps.forEach((s,i) => s.classList.toggle('active', i < n));
+  if(progress) progress.style.width = ((n-1)/(steps.length-1))*100 + '%';
+  stepContents.forEach(sc => sc.classList.toggle('active', Number(sc.dataset.step) === n));
+  currentStep = n;
   renderReview();
 }
-function nextStep(n){updateStepper(n);}
-function prevStep(n){updateStepper(n);}
+function nextStep(n){ updateStepper(n); }
+function prevStep(n){ updateStepper(n); }
 
-/* Email validation */
-const popup=document.getElementById('registerPopup');let attempts=0;
-function isBusinessEmail(email) {
-  // Trim whitespace and lowercase
+/* Email validation & business popup */
+const popup = document.getElementById('registerPopup');
+let emailAttempts = 0;
+function isBusinessEmail(email){
   const e = email.trim().toLowerCase();
-
-  // Reject common free email domains
   const freeDomains = ["gmail.com","yahoo.com","hotmail.com","outlook.com"];
-  const domain = e.split("@")[1]; // get domain part
-  if (!domain) return false;       // invalid if no domain
-  if (freeDomains.includes(domain)) return false;
-
-  // Must contain @ and a domain
+  const domain = e.split("@")[1];
+  if(!domain) return false;
+  if(freeDomains.includes(domain)) return false;
   return e.includes("@") && domain.includes(".");
 }
-
-function validateEmail() {
-  const e = document.getElementById('registerEmail').value;
-  if (!isBusinessEmail(e)) {
-    attempts++;
-    if (attempts >= 2) {
+function validateEmail(){
+  const email = document.getElementById('registerEmail').value;
+  if(!isBusinessEmail(email)){
+    emailAttempts++;
+    if(emailAttempts >= 2){
       popup.style.display = 'block';
     } else {
       alert('Please use a business email (e.g. name@company.com)');
     }
     return;
   }
-
   popup.style.display = 'none';
   nextStep(3);
 }
 
+/* Cascading Country / District / Town */
+const countryData = {
+  'ZW':{name:'Zimbabwe',flag:'🇿🇼',code:'+263'},
+  'ZA':{name:'South Africa',flag:'🇿🇦',code:'+27'},
+  'BW':{name:'Botswana',flag:'🇧🇼',code:'+267'},
+  'NA':{name:'Namibia',flag:'🇳🇦',code:'+264'},
+  'MZ':{name:'Mozambique',flag:'🇲🇿',code:'+258'},
+  'ZM':{name:'Zambia',flag:'🇿🇲',code:'+260'},
+  'TZ':{name:'Tanzania',flag:'🇹🇿',code:'+255'}
+};
+const districts = {
+  'ZW':['Harare','Bulawayo','Manicaland','Mashonaland Central'],
+  'ZA':['Gauteng','Western Cape','KwaZulu-Natal'],
+  'BW':['Gaborone','Francistown'],
+  'NA':['Khomas','Erongo'],
+  'MZ':['Maputo','Beira'],
+  'ZM':['Lusaka','Ndola'],
+  'TZ':['Dar es Salaam','Dodoma']
+};
+const towns = {
+  'Harare':['Harare CBD','Chisipite','Borrowdale'],
+  'Bulawayo':['Khami','Nkulumane'],
+  'Gauteng':['Johannesburg','Pretoria'],
+  'Western Cape':['Cape Town','Stellenbosch'],
+  'KwaZulu-Natal':['Durban','Pietermaritzburg'],
+  'Maputo':['Maputo City'],
+  'Lusaka':['Lusaka Central']
+};
 
-/* Service Selection & Transaction Modal */
+const countrySelect = document.getElementById('country');
+const districtSelect = document.getElementById('district');
+const townSelect = document.getElementById('town');
+
+if(countrySelect){
+  countrySelect.addEventListener('change', ()=>{
+    const code = countrySelect.value;
+    districtSelect.innerHTML = '<option value="">Select district</option>';
+    townSelect.innerHTML = '<option value="">Select town</option>';
+    if(code && districts[code]) districts[code].forEach(d => {
+      districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
+    });
+    const cd = countryData[code];
+    document.getElementById('flagEmoji').textContent = cd ? cd.flag : '🏳️';
+    document.getElementById('countryCode').textContent = cd ? cd.code : '+000';
+  });
+}
+
+if(districtSelect){
+  districtSelect.addEventListener('change', ()=>{
+    const val = districtSelect.value;
+    townSelect.innerHTML = '<option value="">Select town</option>';
+    if(towns[val]) towns[val].forEach(t => {
+      townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
+    });
+  });
+}
+
+/* Service cards & mock transaction */
 function selectService(card){
   const service = card.querySelector('h4').innerText;
   const fee = card.dataset.fee;
@@ -463,14 +517,14 @@ function selectService(card){
   openModal('transactionModal');
 }
 function confirmPayment(){
-  alert('✅ Payment confirmed! Proceed to Signature & Confirmation.');
+  alert('✅ Payment confirmed! Proceeding to Signature & Confirmation.');
   closeModal('transactionModal');
   nextStep(5);
 }
 
-/* Render Review for Step 5 */
+/* Step 5 review rendering */
 function renderReview(){
-  if(current !== 5) return;
+  if(currentStep !== 5) return;
   const area = document.getElementById('finalReview');
   if(!area) return;
 
@@ -511,7 +565,7 @@ function renderReview(){
   `;
 }
 
-/* Submit Application */
+/* Submit registration */
 function submitApplication(){
   const data = {
     companyName: document.getElementById('companyName')?.value || '',
@@ -531,13 +585,12 @@ function submitApplication(){
     signature: document.getElementById('signature')?.value || '',
     signDate: document.getElementById('signDate')?.value || ''
   };
-
-  console.log('Collected Registration Data:', data); // send to backend later
+  console.log('Collected Registration Data:', data);
   alert('✅ Membership application submitted successfully!');
   closeModal('registerModal');
 }
 
-/* Login Form Logic */
+/* Login form mock */
 const loginForm = document.getElementById('loginForm');
 if(loginForm){
   loginForm.addEventListener('submit', e=>{
