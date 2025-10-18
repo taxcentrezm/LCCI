@@ -1230,6 +1230,11 @@ ul li { margin-bottom: 8px; }
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   feather.replace();
+function isBusinessEmail(email) {
+  const blockedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+  const domain = email.split('@')[1]?.toLowerCase() || '';
+  return domain && !blockedDomains.includes(domain);
+}
 
   /* =========================
      Modal Controls
