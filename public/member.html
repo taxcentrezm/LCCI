@@ -1253,6 +1253,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepContents = document.querySelectorAll('.step-content');
   let currentStep = 1;
 
+function nextStep(n) {
+  if (validateStep(currentStep)) {
+    updateStepper(n);
+  }
+}
+
+function prevStep(n) {
+  updateStepper(n);
+}
+
+
   function updateStepper(n) {
     steps.forEach((s, i) => s.classList.toggle('active', i < n));
     if (progress) progress.style.width = ((n - 1) / (steps.length - 1)) * 100 + '%';
