@@ -4,6 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Members | Lusaka Chamber</title>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <!-- Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script src="https://unpkg.com/feather-icons"></script>
 <style>
 
@@ -794,9 +805,10 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
       <!-- Step 3: Company Persons -->
       <section class="step-content" data-step="3">
         <h3>Company Persons</h3>
+        <div class="field-row">
         <input id="personName" placeholder="Full Name" required>
-        <br/>
-        <br/>
+        </div>
+        <div class="field-row">
         <input id="designation" placeholder="Designation" list="designationSuggestions">
         <datalist id="designationSuggestions">
           <option>CEO</option>
@@ -804,6 +816,7 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
           <option>Finance Manager</option>
           <option>Operations Head</option>
         </datalist>
+        </div>
         <div class="actions">
           <button class="btn" onclick="prevStep(2)">← Back</button>
           <button class="btn secondary" onclick="nextStep(4)">Next →</button>
@@ -1124,6 +1137,13 @@ forgotForm.addEventListener('submit', e => {
   alert(`✅ Password reset link sent to ${email}`);
   showLoginForm();
 });
+// Sidebar toggle
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('sidebarToggle');
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
 
 </script>
 
