@@ -1,231 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Members | Lusaka Chamber</title>
-  <script src="https://unpkg.com/feather-icons"></script>
-  <style>
-    :root {
-      --primary: #0078d7;
-      --accent: #ff9800;
-      --bg: #f9fafc;
-      --text-dark: #111;
-      --text: #333;
-      --radius: 16px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Members | Lusaka Chamber</title>
+<script src="https://unpkg.com/feather-icons"></script>
+<style>
+:root {
+  --primary:#0078d7;
+  --accent:#ff9800;
+  --bg:#f9fafc;
+  --text:#333;
+  --text-dark:#111;
+  --radius:16px;
+  --muted:#6b7280;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+/* Base */
+body{margin:0;font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+h1,h2,h3,h4{margin:0;font-weight:600}
+a{text-decoration:none}
+.muted{color:var(--muted);font-size:0.9rem;}
 
-    /* HEADER */
-    .header {
-      position: relative;
-      height: 60vh;
-      background: url('header-bg.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-    }
-    .header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-    }
-    .header-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      padding: 20px;
-      animation: fadeInUp 1.2s ease;
-    }
-    .header h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
-    .header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
+/* Header */
+.header{position:relative;height:60vh;background:url('header-bg.jpg') center/cover no-repeat;
+display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;}
+.header::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.5);}
+.header-content{position:relative;z-index:1;max-width:800px;padding:20px;animation:fadeInUp 1s ease;}
+.header h1{font-size:3rem;margin-bottom:10px;}
+.header p{font-size:1.2rem;opacity:0.9;}
 
-    /* CARD GRID */
-    .card-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      justify-content: center;
-      padding: 60px 20px;
-      animation: fadeIn 1.2s ease;
-    }
-    .action-card {
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      width: 320px;
-      padding: 30px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .action-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    }
-    .card-icon i {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
+/* Action cards */
+.card-grid{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;padding:60px 20px;}
+.action-card{background:#fff;border-radius:var(--radius);box-shadow:0 8px 20px rgba(0,0,0,0.08);
+width:320px;padding:30px;text-align:center;transition:transform .3s,box-shadow .3s;cursor:pointer;}
+.action-card:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(0,0,0,0.12);}
+.card-icon i{font-size:2.5rem;color:var(--primary);margin-bottom:15px;}
+.btn{background:var(--accent);color:#fff;padding:12px 24px;border:none;border-radius:8px;font-weight:600;
+cursor:pointer;transition:background .3s,transform .3s;}
+.btn:hover{background:#f48a00;transform:translateY(-2px);}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary);}
+.btn-outline:hover{background:var(--primary);color:#fff;}
 
-    .btn {
-      background: var(--accent);
-      color: #fff;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      background: #f48a00;
-    }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-    .btn-outline:hover {
-      background: var(--primary);
-      color: #fff;
-    }
+/* Modal core */
+.modal{display:none;justify-content:center;align-items:center;position:fixed;inset:0;background:rgba(0,0,0,0.7);
+z-index:999;animation:fadeIn .4s ease;}
+.merged-container{width:95%;max-width:1100px;display:grid;grid-template-columns:1.1fr 0.9fr 1fr;
+background:#fff;border-radius:var(--radius);box-shadow:0 20px 50px rgba(0,0,0,0.15);overflow:hidden;}
+@media(max-width:950px){.merged-container{grid-template-columns:1fr;max-height:90vh;overflow-y:auto;}}
 
-        /* ================== Modal Core ================== */
-  .modal{display:flex;justify-content:center;align-items:center;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;}
-  .merged-container{
-    width:95%;max-width:1100px;
-    display:grid;grid-template-columns:1.1fr 0.9fr 1fr;
-    background:var(--card);border-radius:var(--radius);
-    box-shadow:0 20px 50px rgba(0,0,0,0.15);overflow:hidden;
-    animation:fadeInUp .6s ease;
-  }
-  @media(max-width:950px){
-    .merged-container{grid-template-columns:1fr;max-height:90vh;overflow-y:auto;}
-  }
+/* Left */
+.left-bg{position:relative;overflow:hidden;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;}
+.left-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease;}
+.left-bg img.active{opacity:1;}
+.left-overlay{position:relative;z-index:2;background:rgba(0,0,0,0.45);padding:40px 30px;border-radius:var(--radius);max-width:300px;}
+.left-overlay h2{font-size:1.6rem;margin-bottom:10px;}
 
-  /* LEFT Background */
-  .left-bg{position:relative;overflow:hidden;color:#fff;text-align:center;display:flex;align-items:center;justify-content:center;}
-  .left-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease;}
-  .left-bg img.active{opacity:1;z-index:1;}
-  .left-overlay{position:relative;z-index:2;background:rgba(0,0,0,0.45);padding:40px 30px;border-radius:var(--radius);max-width:300px;}
-  .left-overlay h2{font-size:1.6rem;margin-bottom:10px;}
-  .left-overlay p{font-size:0.95rem;line-height:1.4;}
+/* Stepper */
+.center-steps{background:linear-gradient(180deg,rgba(0,120,215,0.06),rgba(0,120,215,0.02));
+border-right:1px solid rgba(0,0,0,0.05);padding:24px 20px;}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#005aad);
+display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;}
+.steps{margin-top:10px;}
+.step-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;cursor:pointer;}
+.step-item:hover{background:rgba(0,120,215,0.06);}
+.step-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;
+border:1px solid rgba(0,0,0,0.1);color:var(--muted);}
+.step-labels .title{font-weight:600;color:#111;font-size:13px;}
+.step-labels .subtitle{font-size:12px;color:var(--muted);}
+.step-item.active .step-icon{background:var(--primary);color:#fff;border-color:transparent;box-shadow:0 5px 15px rgba(0,120,215,0.2);}
+.progress-line{height:8px;background:#eef2ff;border-radius:999px;margin-top:20px;position:relative;}
+.progress-fill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--primary),#005aad);
+width:0%;transition:width .4s ease;}
 
-  /* CENTER: stepper */
-  .center-steps{background:linear-gradient(180deg,rgba(0,120,215,0.06),rgba(0,120,215,0.02));border-right:1px solid rgba(0,0,0,0.05);padding:24px 20px;}
-  .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
-  .brand .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#005aad);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;}
-  .brand h3{font-size:16px;color:#111;}
-  .steps{margin-top:12px;}
-  .step-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;cursor:pointer;transition:background .25s;}
-  .step-item:hover{background:rgba(0,120,215,0.06);}
-  .step-icon{width:var(--step-size);height:var(--step-size);display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid rgba(0,0,0,0.1);color:var(--muted);}
-  .step-labels{display:flex;flex-direction:column;}
-  .step-labels .title{font-weight:600;color:#111;font-size:13px;}
-  .step-labels .subtitle{font-size:12px;color:var(--muted);}
-  .step-item.active .step-icon{background:var(--primary);color:#fff;border-color:transparent;box-shadow:0 5px 15px rgba(0,120,215,0.2);}
-  .progress-line{height:8px;background:#eef2ff;border-radius:999px;margin-top:20px;position:relative;overflow:hidden;}
-  .progress-fill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--primary),#005aad);width:0%;transition:width .4s ease;}
+/* Right form */
+.right-form{padding:40px 35px;position:relative;}
+.close-btn{position:absolute;top:15px;right:20px;font-size:1.5rem;cursor:pointer;color:#888;}
+.avatar{width:90px;height:90px;border-radius:50%;overflow:hidden;margin:0 auto 20px;
+border:3px solid var(--primary);box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+h3{text-align:center;color:var(--primary);margin-bottom:18px;}
+.step-content{display:none;opacity:0;transform:translateY(20px);transition:all .4s ease;}
+.step-content.active{display:block;opacity:1;transform:none;}
+form{display:flex;flex-direction:column;gap:14px;}
+input{padding:12px 14px;border:1px solid #ccc;border-radius:8px;font-size:1rem;}
+input:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px rgba(0,120,215,0.15);}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px;}
+.btn.secondary{background:var(--primary);}
+.btn.secondary:hover{background:#005aad;}
+.review{font-size:0.95rem;color:#444;line-height:1.6;}
+.popup{display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);
+background:#fff;padding:26px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,0.2);
+text-align:center;width:80%;max-width:360px;z-index:2000;}
+.popup a{color:var(--primary);font-weight:600;}
+.popup a:hover{text-decoration:underline;}
 
-  /* RIGHT FORM AREA */
-  .right-form{padding:40px 35px;position:relative;}
-  .close-btn{position:absolute;top:15px;right:20px;font-size:1.5rem;cursor:pointer;color:#888;}
-  .avatar{width:90px;height:90px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--primary);box-shadow:0 4px 10px rgba(0,0,0,0.1);}
-  .avatar img{width:100%;height:100%;object-fit:cover;}
-  h3{text-align:center;color:var(--primary);margin-bottom:18px;}
-  .step-content{display:none;opacity:0;transform:translateY(20px);transition:all .4s ease;}
-  .step-content.active{display:block;opacity:1;transform:none;}
-  form{display:flex;flex-direction:column;gap:14px;}
-  input{padding:12px 14px;border:1px solid #ccc;border-radius:8px;font-size:1rem;transition:border .2s, box-shadow .2s;}
-  input:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px rgba(0,120,215,0.15);}
-  .actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px;}
-  .btn{background:var(--accent);border:none;color:white;font-weight:600;border-radius:8px;padding:12px 20px;cursor:pointer;transition:background .3s;}
-  .btn:hover{background:#f48a00;}
-  .btn.secondary{background:var(--primary);}
-  .btn.secondary:hover{background:#005aad;}
-  .popup{display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:26px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,0.2);text-align:center;width:80%;max-width:360px;z-index:2000;}
-  .popup a{color:var(--primary);font-weight:600;text-decoration:none;}
-  .popup a:hover{text-decoration:underline;}
-  .review{font-size:0.95rem;color:#444;line-height:1.6;}
-  @keyframes fadeInUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:none;}}
+/* Login modal */
+#loginModal .modal-content{display:flex;width:90%;max-width:800px;background:#fff;border-radius:12px;overflow:hidden;}
+#loginModal .modal-left{flex:1;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;}
+#loginModal .slide-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;}
+#loginModal .slide-bg.active{opacity:1;}
+#loginModal .modal-text{position:relative;z-index:2;text-align:center;padding:40px;background:rgba(0,0,0,0.45);border-radius:var(--radius);}
+#loginModal .modal-right{flex:1;padding:40px;position:relative;}
+#loginModal .avatar i{font-size:2.5rem;color:var(--primary);}
+#loginModal .modal-right input{width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;}
+#loginModal .modal-right h3{text-align:center;color:var(--primary);margin-bottom:18px;}
 
-    /* POPUP */
-    .popup {
-      display: none;
-      position: fixed;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      z-index: 1100;
-      text-align: center;
-      animation: fadeIn 0.4s ease;
-    }
-    .popup a {
-      color: var(--primary);
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .popup a:hover {
-      text-decoration: underline;
-    }
+/* Sections */
+section{padding:60px 20px;max-width:1000px;margin:0 auto;text-align:center;}
+section h2{color:var(--primary);font-size:2rem;margin-bottom:10px;}
+section p{color:#444;font-size:1.1rem;line-height:1.6;}
 
-    /* SECTIONS */
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      animation: fadeInUp 1s ease;
-    }
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: var(--primary);
-      text-align: center;
-    }
-    section p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: center;
-      color: #444;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+/* Animations */
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+</style>
 </head>
 <body>
 
-<!-- Header -->
 <header class="header">
   <div class="header-content">
     <h1>Welcome to Lusaka Chamber</h1>
@@ -233,110 +126,62 @@
   </div>
 </header>
 
-<!-- Action Cards -->
 <div class="card-grid">
   <div class="action-card" onclick="openModal('registerModal')">
     <div class="card-icon"><i data-feather="edit-3"></i></div>
-    <div class="card-content">
-      <h3>Register Company</h3>
-      <p>Apply for membership and join Lusaka’s business network.</p>
-      <button class="btn">Start Registration</button>
-    </div>
+    <h3>Register Company</h3>
+    <p>Apply for membership and join Lusaka’s business network.</p>
+    <button class="btn">Start Registration</button>
   </div>
   <div class="action-card" onclick="openModal('loginModal')">
     <div class="card-icon"><i data-feather="lock"></i></div>
-    <div class="card-content">
-      <h3>Access Portal</h3>
-      <p>Login to manage your membership and access resources.</p>
-      <button class="btn btn-outline">Login Now</button>
-    </div>
+    <h3>Access Portal</h3>
+    <p>Login to manage your membership and access resources.</p>
+    <button class="btn btn-outline">Login Now</button>
   </div>
 </div>
 
+<!-- Registration Modal -->
 <div class="modal" id="registerModal">
   <div class="merged-container">
-
-    <!-- LEFT SLIDES -->
     <aside class="left-bg">
-      <img src="side (1).jpg" class="active" />
-      <img src="side (2).jpg" />
-      <img src="side (3).jpg" />
-      <img src="side.jpg" />
-      <div class="left-overlay">
-        <h2>Join Lusaka Chamber</h2>
-        <p>Empowering businesses through connection, advocacy, and growth.</p>
-      </div>
+      <img src="side (1).jpg" class="active"/><img src="side (2).jpg"/><img src="side (3).jpg"/><img src="side.jpg"/>
+      <div class="left-overlay"><h2>Join Lusaka Chamber</h2><p>Empowering businesses through connection, advocacy, and growth.</p></div>
     </aside>
-
-    <!-- CENTER STEPPER -->
     <aside class="center-steps">
-      <div class="brand">
-        <div class="logo">LC</div>
-        <div>
-          <h3>Company Membership</h3>
-          <div class="muted">3 steps to join</div>
-        </div>
-      </div>
+      <div class="brand"><div class="logo">LC</div><div><h3>Company Membership</h3><div class="muted">3 steps to join</div></div></div>
       <div class="steps">
-        <div class="step-item active" data-step="1">
-          <div class="step-icon"><i data-feather="briefcase"></i></div>
-          <div class="step-labels"><div class="title">1. Details</div><div class="subtitle">Company info</div></div>
-        </div>
-        <div class="step-item" data-step="2">
-          <div class="step-icon"><i data-feather="mail"></i></div>
-          <div class="step-labels"><div class="title">2. Contact</div><div class="subtitle">Email & phone</div></div>
-        </div>
-        <div class="step-item" data-step="3">
-          <div class="step-icon"><i data-feather="check-circle"></i></div>
-          <div class="step-labels"><div class="title">3. Review</div><div class="subtitle">Submit details</div></div>
-        </div>
+        <div class="step-item active" data-step="1"><div class="step-icon"><i data-feather="briefcase"></i></div><div class="step-labels"><div class="title">1. Details</div><div class="subtitle">Company info</div></div></div>
+        <div class="step-item" data-step="2"><div class="step-icon"><i data-feather="mail"></i></div><div class="step-labels"><div class="title">2. Contact</div><div class="subtitle">Email & phone</div></div></div>
+        <div class="step-item" data-step="3"><div class="step-icon"><i data-feather="check-circle"></i></div><div class="step-labels"><div class="title">3. Review</div><div class="subtitle">Submit details</div></div></div>
       </div>
       <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
     </aside>
-
-    <!-- RIGHT: MULTI STEP FORM -->
     <main class="right-form">
-      <span class="close-btn" onclick="closeModal()">×</span>
-      <div class="avatar"><img src="stock.jpg" alt="Avatar"></div>
+      <span class="close-btn" onclick="closeModal('registerModal')">×</span>
+      <div class="avatar"><img src="stock.jpg" alt="avatar"></div>
 
-      <!-- STEP 1 -->
       <section class="step-content active" data-step="1">
         <h3>Company Details</h3>
-        <form id="step1Form">
-          <input type="text" id="companyName" placeholder="Company Name" required />
-          <input type="text" id="sector" placeholder="Business Sector" required />
-          <div class="actions">
-            <div></div>
-            <button type="button" class="btn secondary" onclick="nextStep(2)">Next →</button>
-          </div>
-        </form>
+        <input id="companyName" placeholder="Company Name" required>
+        <input id="sector" placeholder="Business Sector" required>
+        <div class="actions"><div></div><button class="btn secondary" onclick="nextStep(2)">Next →</button></div>
       </section>
 
-      <!-- STEP 2 -->
       <section class="step-content" data-step="2">
         <h3>Contact Information</h3>
-        <form id="step2Form">
-          <input type="text" id="contactPerson" placeholder="Contact Person" required />
-          <input type="email" id="registerEmail" placeholder="Business Email" required />
-          <input type="tel" id="phone" placeholder="Phone Number" required />
-          <div class="actions">
-            <button type="button" class="btn" onclick="prevStep(1)">← Back</button>
-            <button type="button" class="btn secondary" onclick="validateEmail()">Next →</button>
-          </div>
-        </form>
+        <input id="contactPerson" placeholder="Contact Person" required>
+        <input id="registerEmail" placeholder="Business Email" required>
+        <input id="phone" placeholder="Phone Number" required>
+        <div class="actions"><button class="btn" onclick="prevStep(1)">← Back</button><button class="btn secondary" onclick="validateEmail()">Next →</button></div>
       </section>
 
-      <!-- STEP 3 -->
       <section class="step-content" data-step="3">
         <h3>Review & Submit</h3>
         <div class="review" id="reviewArea"></div>
-        <div class="actions">
-          <button type="button" class="btn" onclick="prevStep(2)">← Back</button>
-          <button type="button" class="btn secondary" onclick="submitApplication()">Submit</button>
-        </div>
+        <div class="actions"><button class="btn" onclick="prevStep(2)">← Back</button><button class="btn secondary" onclick="submitApplication()">Submit</button></div>
       </section>
 
-      <!-- EMAIL POPUP -->
       <div class="popup" id="registerPopup">
         <p>You're using a personal email. To access member services, apply for a custom business email.</p>
         <a href="https://lusakachamber.com/apply-mail" target="_blank">Apply for Custom Mail</a>
@@ -349,195 +194,91 @@
 <div class="modal" id="loginModal">
   <div class="modal-content">
     <div class="modal-left">
-      <img src="back (2).jpg" class="slide-bg active" />
-      <img src="back.jpg" class="slide-bg" />
-      <div class="modal-text">
-        <h2>Welcome Back</h2>
-        <p>Access your member portal and manage your company profile.</p>
-      </div>
+      <img src="back (2).jpg" class="slide-bg active"/><img src="back.jpg" class="slide-bg"/>
+      <div class="modal-text"><h2>Welcome Back</h2><p>Access your member portal and manage your company profile.</p></div>
     </div>
     <div class="modal-right">
       <span class="close-btn" onclick="closeModal('loginModal')">×</span>
       <div class="avatar"><i data-feather="log-in"></i></div>
       <h3>Member Login</h3>
       <form id="loginForm">
-        <input type="email" placeholder="Business Email" required />
-        <input type="password" placeholder="Password" required />
+        <input type="email" placeholder="Business Email" required>
+        <input type="password" placeholder="Password" required>
         <button type="submit" class="btn">Login</button>
-        <p style="text-align:center; margin-top:10px;">
-          <a href="#" style="color: var(--primary); text-decoration:none;">Forgot Password?</a>
-        </p>
       </form>
     </div>
   </div>
 </div>
 
-<!-- Popup -->
-<div class="popup" id="registerPopup">
-  <p>You're using a personal email. To access member services, apply for a custom business email.</p>
-  <a href="https://lusakachamber.com/apply-mail" target="_blank">Apply for Custom Mail</a>
-</div>
-
-<!-- Info Sections -->
-<section id="about">
-  <h2>About the Chamber</h2>
-  <p>The Lusaka Chamber of Commerce is a non-profit partnership of business and professional leaders building a stronger economy and community.</p>
-</section>
-
-<section id="events">
-  <h2>Upcoming Events</h2>
-  <p>Join Business Expos, Networking Breakfasts, and Policy Roundtables with Lusaka’s leading entrepreneurs.</p>
-</section>
-
-<section id="benefits">
-  <h2>Membership Benefits</h2>
-  <p>Get exclusive access to advocacy, capacity-building programs, and networking opportunities.</p>
-</section>
-
-<section id="agencies">
-  <h2>Featured Agencies</h2>
-  <p>In partnership with ZACCI, ZRA, and other national institutions supporting Zambian businesses.</p>
-</section>
-
-<section id="board">
-  <h2>Board Members</h2>
-  <p>Meet the visionary leaders driving Lusaka’s business community toward innovation and growth.</p>
-</section>
+<section><h2>About the Chamber</h2><p>The Lusaka Chamber of Commerce is a non-profit partnership building a stronger economy and community.</p></section>
 
 <script>
-  /* ================================
-     Feather Icons
-  =================================*/
-  feather.replace();
+feather.replace();
 
-  /* ================================
-     Modal Controls
-  =================================*/
-  function openModal(id) {
-    document.getElementById(id).style.display = 'flex';
-  }
+/* Modal controls */
+function openModal(id){document.getElementById(id).style.display='flex';}
+function closeModal(id){document.getElementById(id).style.display='none';const p=document.getElementById('registerPopup');if(p)p.style.display='none';}
 
-  function closeModal(id) {
-    document.getElementById(id).style.display = 'none';
-    const popup = document.getElementById('registerPopup');
-    if (popup) popup.style.display = 'none';
-  }
+/* Slideshows */
+const regSlides=document.querySelectorAll('#registerModal .left-bg img');
+let r=0;if(regSlides.length){setInterval(()=>{regSlides[r].classList.remove('active');r=(r+1)%regSlides.length;regSlides[r].classList.add('active');},6000);}
+const loginSlides=document.querySelectorAll('#loginModal .slide-bg');
+let l=0;if(loginSlides.length){setInterval(()=>{loginSlides[l].classList.remove('active');l=(l+1)%loginSlides.length;loginSlides[l].classList.add('active');},7000);}
 
-  /* ================================
-     Background Slideshows
-  =================================*/
-  // Registration modal slides
-  const regSlides = document.querySelectorAll('#registerModal .left-bg img');
-  let regIndex = 0;
-  if (regSlides.length) {
-    setInterval(() => {
-      regSlides[regIndex].classList.remove('active');
-      regIndex = (regIndex + 1) % regSlides.length;
-      regSlides[regIndex].classList.add('active');
-    }, 6000);
-  }
+/* Stepper logic */
+const steps=document.querySelectorAll('.step-item');
+const progress=document.getElementById('progressFill');
+const stepContents=document.querySelectorAll('.step-content');
+let current=1;
+function updateStepper(n){steps.forEach((s,i)=>s.classList.toggle('active',i<n));
+if(progress)progress.style.width=((n-1)/(steps.length-1))*100+'%';
+stepContents.forEach(sc=>sc.classList.toggle('active',Number(sc.dataset.step)===n));
+current=n;renderReview();}
+function nextStep(n){updateStepper(n);}function prevStep(n){updateStepper(n);}
 
-  // Login modal slides
-  const loginSlides = document.querySelectorAll('#loginModal .slide-bg');
-  let loginIndex = 0;
-  if (loginSlides.length) {
-    setInterval(() => {
-      loginSlides[loginIndex].classList.remove('active');
-      loginIndex = (loginIndex + 1) % loginSlides.length;
-      loginSlides[loginIndex].classList.add('active');
-    }, 7000);
-  }
+/* Email validation */
+const popup=document.getElementById('registerPopup');let attempts=0;
+function isBusinessEmail(e){return e.includes('@')&&!e.match(/@(gmail|yahoo|hotmail|outlook)\.com$/i);}
+function validateEmail(){const e=document.getElementById('registerEmail').value.trim();
+if(!isBusinessEmail(e)){attempts++;if(attempts>=2){popup.style.display='block';}
+else{alert('Please use a business email (e.g. name@company.com)');}return;}
+popup.style.display='none';nextStep(3);}
 
-  /* ================================
-     Stepper Logic (Registration)
-  =================================*/
-  const steps = document.querySelectorAll('.step-item');
-  const progressFill = document.getElementById('progressFill');
-  const stepContents = document.querySelectorAll('.step-content');
-  let currentStep = 1;
+/* Review & Submit */
+function renderReview(){
+  if(current !== 3) return;
+  const area = document.getElementById('reviewArea');
+  if(!area) return;
 
-  function updateStepper(n) {
-    steps.forEach((step, i) => step.classList.toggle('active', i < n));
-    if (progressFill)
-      progressFill.style.width = ((n - 1) / (steps.length - 1)) * 100 + '%';
-    stepContents.forEach(sc => sc.classList.toggle('active', Number(sc.dataset.step) === n));
-    currentStep = n;
-    renderReview();
-  }
+  const company = document.getElementById('companyName')?.value || '';
+  const sector = document.getElementById('sector')?.value || '';
+  const contact = document.getElementById('contactPerson')?.value || '';
+  const email = document.getElementById('registerEmail')?.value || '';
+  const phone = document.getElementById('phone')?.value || '';
 
-  function nextStep(n) {
-    updateStepper(n);
-  }
+  area.innerHTML = `
+    <strong>Company:</strong> ${company}<br>
+    <strong>Sector:</strong> ${sector}<br>
+    <strong>Contact:</strong> ${contact}<br>
+    <strong>Email:</strong> ${email}<br>
+    <strong>Phone:</strong> ${phone}
+  `;
+}
 
-  function prevStep(n) {
-    updateStepper(n);
-  }
+function submitApplication(){
+  alert('✅ Application submitted successfully! Thank you for joining Lusaka Chamber.');
+  closeModal('registerModal');
+}
 
-  /* ================================
-     Registration Email Validation
-  =================================*/
-  const popup = document.getElementById('registerPopup');
-  let attempts = 0;
-
-  function isBusinessEmail(email) {
-    return email.includes('@') && !email.match(/@(gmail|yahoo|hotmail|outlook)\.com$/i);
-  }
-
-  function validateEmail() {
-    const email = document.getElementById('registerEmail').value.trim();
-    if (!isBusinessEmail(email)) {
-      attempts++;
-      if (attempts >= 2) {
-        popup.style.display = 'block';
-      } else {
-        alert('Please use a business email (e.g. name@company.com)');
-      }
-      return;
-    }
-    popup.style.display = 'none';
-    nextStep(3);
-  }
-
-  /* ================================
-     Review Summary & Submit
-  =================================*/
-  function renderReview() {
-    if (currentStep !== 3) return;
-    const area = document.getElementById('reviewArea');
-    if (!area) return;
-
-    const company = document.getElementById('companyName')?.value || '';
-    const sector = document.getElementById('sector')?.value || '';
-    const contact = document.getElementById('contactPerson')?.value || '';
-    const email = document.getElementById('registerEmail')?.value || '';
-    const phone = document.getElementById('phone')?.value || '';
-
-    area.innerHTML = `
-      <strong>Company:</strong> ${company}<br>
-      <strong>Sector:</strong> ${sector}<br>
-      <strong>Contact:</strong> ${contact}<br>
-      <strong>Email:</strong> ${email}<br>
-      <strong>Phone:</strong> ${phone}
-    `;
-  }
-
-  function submitApplication() {
-    alert('Application submitted successfully! Thank you for joining Lusaka Chamber.');
-    closeModal('registerModal');
-  }
-
-  /* ================================
-     Login Form Logic
-  =================================*/
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Login successful. Redirecting to dashboard...');
-      closeModal('loginModal');
-    });
-  }
+/* Login Form Logic */
+const loginForm = document.getElementById('loginForm');
+if(loginForm){
+  loginForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    alert('✅ Login successful. Redirecting to your member dashboard...');
+    closeModal('loginModal');
+  });
+}
 </script>
-
 </body>
 </html>
