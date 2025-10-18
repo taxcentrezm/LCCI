@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Member Access | Lusaka Chamber</title>
+  <link rel="stylesheet" href="https://unpkg.com/feather-icons" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: #f9fafc;
+      color: #333;
+    }
+    .form-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Left Slideshow */
+    .form-left {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+    }
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 0;
+    }
+    .slide-bg.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .form-left-content {
+      position: relative;
+      z-index: 2;
+      max-width: 500px;
+    }
+    .form-left h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .form-left p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    /* Right Form */
+    .form-right {
+      flex: 1;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      box-shadow: -4px 0 12px rgba(0,0,0,0.05);
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #eee;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar i {
+      font-size: 2rem;
+      color: #0078d7;
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #0078d7;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .btn {
+      background: #ff9800;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #0078d7;
+      color: #0078d7;
+    }
+    .btn-outline:hover {
+      background: #0078d7;
+      color: #fff;
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      text-align: center;
+    }
+    .popup a {
+      color: #0078d7;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-wrapper">
+  <!-- Left Side with Slideshow -->
+  <div class="form-left">
+    <img src="back.jpg" class="slide-bg active" alt="Chamber Slide 1" />
+    <img src="back (2).jpg" class="slide-bg" alt="Chamber Slide 2" />
+    <img src="back (3).jpg" class="slide-bg" alt="Chamber Slide 3" />
+    <img src="back (4).jpg" class="slide-bg" alt="Chamber Slide 4" />
+    <div class="form-left-content">
+      <h1>Welcome to Lusaka Chamber</h1>
+      <p>Join a network of professionals driving growth, advocacy, and opportunity across Lusaka. Your membership unlocks access to events, resources, and representation.</p>
+    </div>
+  </div>
+
+  <!-- Right Side Form -->
+  <div class="form-right">
+    <div class="avatar"><i data-feather="user"></i></div>
+    <h2>Member Login</h2>
+    <form id="loginForm">
+      <input type="email" id="emailInput" placeholder="Business Email Address" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit" class="btn">Sign In</button>
+      <button type="button" class="btn btn-outline" onclick="signWithEmail()">Sign with Email</button>
+    </form>
+  </div>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <p>It looks like you're using a personal email. To access member services, please apply for a custom business email.</p>
+  <a href="https://lusakachamber.com/apply-mail">Apply for Custom Mail</a>
+</div>
+
+<script>
+  feather.replace();
+
+  // Email validation logic
+  let invalidEmailAttempts = 0;
+  function isBusinessEmail(email) {
+    return email.includes('@') && !email.match(/@(gmail|yahoo|outlook|hotmail)\.com$/i);
+  }
+
+  function signWithEmail() {
+    const email = document.getElementById('emailInput').value.trim();
+    if (!isBusinessEmail(email)) {
+      invalidEmailAttempts++;
+      if (invalidEmailAttempts >= 2) {
+        document.getElementById('popup').style.display = 'block';
+      } else {
+        alert('Please use a business email address (e.g. yourname@company.com)');
+      }
+    } else {
+      alert('Business email accepted. Proceeding...');
+      // Proceed with login or redirect
+    }
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    signWithEmail();
+  });
+
+  // Slideshow logic
+  const slides = document.querySelectorAll('.slide-bg');
+  let current = 0;
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+  setInterval(nextSlide, 6000); // Change every 6 seconds
+</script>
+
+</body>
+</html>
