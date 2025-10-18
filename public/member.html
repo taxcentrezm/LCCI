@@ -1267,27 +1267,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.prevStep = n => updateStepper(n);
 
-  function validateStep(step) {
-    if (step === 1) {
-      const required = ['companyName', 'country', 'phone', 'registerEmail'];
-      for (const id of required) {
-        const el = document.getElementById(id);
-        if (!el || !el.value.trim()) {
-          alert(`Please fill in the ${id.replace(/([A-Z])/g, ' $1')} field.`);
-          return false;
-        }
-      }
-      const email = document.getElementById('registerEmail').value.trim();
-      if (!isBusinessEmail(email)) {
-        regAttempts++;
-        if (regAttempts >= 3 && popup) {
-          popup.style.display = 'block';
-        } else {
-          alert('Please use a business email address (e.g. yourname@company.com)');
-        }
+function validateStep(step) {
+  if (step === 1) {
+    const required = ['companyName', 'country', 'phone', 'registerEmail'];
+    for (const id of required) {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) {
+        alert(`Please fill in the ${id.replace(/([A-Z])/g, ' $1')} field.`);
         return false;
       }
     }
+
+    const emailField = document.getElementById('registerEmail');
+    const warningBanner = document.getElementById('emailWarning');
+    const email = emailField?.value.trim();
+    const blockedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+    const domain = email.split('@')[1]?.toLowerCase() || '';
+
+    if (!domain || blockedDomains.includes(domain)) {
+      regAttempts = typeof regAttempts === 'number' ? regAttempts + 1 : 1;
+      console.log(`Invalid email attempt #${regAttempts}`);
+
+      if (regAttempts >= 3 && warningBanner) {
+        warningBanner.style.display = 'block';
+      } else {
+        alert('Please use a business email address (e.g. yourname@company.com)');
+      }
+      return false;
+    }
+
+    // Hide banner if email becomes valid
+    if (warningBanner) warningBanner.style.display = 'none';
+  }
+
+  return true;
+}
+
 
     if (step === 2) {
       const sector = document.getElementById('sectorInput')?.value.trim();
@@ -1391,23 +1406,27 @@ function isBusinessEmail(email) {
   return domain && !blocked.includes(domain);
 }
 
-function validateEmailAndTriggerPopup() {
+function validateEmailAndShowBanner() {
   const emailField = document.getElementById('registerEmail');
-  const popup = document.getElementById('loginPopup');
+  const warningBanner = document.getElementById('emailWarning');
   const email = emailField?.value.trim();
 
   if (!email || !isBusinessEmail(email)) {
     regAttempts++;
     console.log(`Invalid email attempt #${regAttempts}`);
-    if (regAttempts >= 3 && popup) {
-      popup.style.display = 'block';
+    if (regAttempts >= 3 && warningBanner) {
+      warningBanner.style.display = 'block';
     } else {
       alert('Please use a business email address (e.g. yourname@company.com)');
     }
     return false;
   }
+
+  // Hide banner if email becomes valid
+  if (warningBanner) warningBanner.style.display = 'none';
   return true;
 }
+
 
 
   /* =========================
