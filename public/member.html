@@ -292,8 +292,8 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
         <div class="step-item active" data-step="1">
           <div class="step-icon"><i data-feather="map-pin"></i></div>
           <div class="step-labels">
-            <div class="title">1. Location</div>
-            <div class="subtitle">Country & district</div>
+            <div class="title">1. Company Details</div>
+            <div class="subtitle">Location, Phone Number and Email</div>
           </div>
         </div>
         <div class="step-item" data-step="2">
@@ -328,34 +328,63 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
 
       <!-- Step 1: Location -->
       <section class="step-content active" data-step="1">
-        <h3>Company Location</h3>
-        <div class="field-row">
-          <label for="country">Country (SADC)</label>
-          <select id="country">
-            <option value="">Select country</option>
-            <option value="ZW">Zimbabwe</option>
-            <option value="ZA">South Africa</option>
-            <option value="BW">Botswana</option>
-            <option value="NA">Namibia</option>
-            <option value="MZ">Mozambique</option>
-            <option value="ZM">Zambia</option>
-            <option value="TZ">Tanzania</option>
-          </select>
-        </div>
-        <div class="row">
-          <div class="col field-row">
-            <label for="district">District / Province</label>
-            <select id="district"><option value="">Select district</option></select>
-          </div>
-          <div class="col field-row">
-            <label for="town">Town</label>
-            <select id="town"><option value="">Select town</option></select>
-          </div>
-        </div>
-        <div class="actions">
-          <div></div>
-          <button class="btn secondary" onclick="nextStep(2)">Next →</button>
-        </div>
+        <h3>Company Details</h3>
+         <div class="field-row">
+      <label for="companyName">Company Name</label>
+      <input id="companyName" type="text" placeholder="Enter company name" required>
+    </div>
+
+    <div class="field-row">
+      <label for="incorpNo">Incorporation Number</label>
+      <input id="incorpNo" type="text" placeholder="Enter registration number">
+    </div>
+
+    <!-- Location -->
+    <div class="field-row">
+      <label for="country">Country (SADC)</label>
+      <select id="country" required>
+        <option value="">Select country</option>
+        <option value="ZW">Zimbabwe</option>
+        <option value="ZA">South Africa</option>
+        <option value="BW">Botswana</option>
+        <option value="NA">Namibia</option>
+        <option value="MZ">Mozambique</option>
+        <option value="ZM">Zambia</option>
+        <option value="TZ">Tanzania</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col field-row">
+        <label for="district">District / Province</label>
+        <select id="district"><option value="">Select district</option></select>
+      </div>
+      <div class="col field-row">
+        <label for="town">Town</label>
+        <select id="town"><option value="">Select town</option></select>
+      </div>
+    </div>
+
+    <!-- Phone -->
+    <div class="field-row">
+      <label for="phone">Phone</label>
+      <div class="phone-field">
+        <span id="flagEmoji">🏳️</span>
+        <span id="countryCode">+000</span>
+        <input id="phone" type="tel" placeholder="Enter phone number" required>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="field-row">
+      <label for="registerEmail">Business Email</label>
+      <input id="registerEmail" type="email" placeholder="yourname@company.com" required>
+    </div>
+
+    <div class="actions">
+      <div></div>
+      <button type="submit" class="btn secondary">Next →</button>
+    </div>
       </section>
 
       <!-- Step 2: Sector & Service Packages -->
@@ -454,8 +483,17 @@ function updateStepper(n){
 }
 function nextStep(n){ updateStepper(n); }
 function prevStep(n){ updateStepper(n); }
+// Country & flag data
+const countryData = {
+  'ZW': {name:'Zimbabwe', flag:'🇿🇼', code:'+263'},
+  'ZA': {name:'South Africa', flag:'🇿🇦', code:'+27'},
+  'BW': {name:'Botswana', flag:'🇧🇼', code:'+267'},
+  'NA': {name:'Namibia', flag:'🇳🇦', code:'+264'},
+  'MZ': {name:'Mozambique', flag:'🇲🇿', code:'+258'},
+  'ZM': {name:'Zambia', flag:'🇿🇲', code:'+260'},
+  'TZ': {name:'Tanzania', flag:'🇹🇿', code:'+255'}
+};
 
-/* Cascading Country / District / Town */
 const districts = {
   'ZW':['Harare','Bulawayo','Manicaland','Mashonaland Central'],
   'ZA':['Gauteng','Western Cape','KwaZulu-Natal'],
@@ -465,6 +503,7 @@ const districts = {
   'ZM':['Lusaka','Ndola'],
   'TZ':['Dar es Salaam','Dodoma']
 };
+
 const towns = {
   'Harare':['Harare CBD','Chisipite','Borrowdale'],
   'Bulawayo':['Khami','Nkulumane'],
@@ -475,30 +514,59 @@ const towns = {
   'Lusaka':['Lusaka Central']
 };
 
+// Cascading country → district → town
 const countrySelect = document.getElementById('country');
 const districtSelect = document.getElementById('district');
 const townSelect = document.getElementById('town');
+const flagEmoji = document.getElementById('flagEmoji');
+const countryCode = document.getElementById('countryCode');
 
-if(countrySelect){
-  countrySelect.addEventListener('change', ()=>{
-    const code = countrySelect.value;
-    districtSelect.innerHTML = '<option value="">Select district</option>';
-    townSelect.innerHTML = '<option value="">Select town</option>';
-    if(code && districts[code]) districts[code].forEach(d => {
-      districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
-    });
+countrySelect.addEventListener('change', ()=>{
+  const code = countrySelect.value;
+  districtSelect.innerHTML = '<option value="">Select district</option>';
+  townSelect.innerHTML = '<option value="">Select town</option>';
+  if(code && districts[code]) districts[code].forEach(d => {
+    districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
   });
+  const cd = countryData[code];
+  flagEmoji.textContent = cd ? cd.flag : '🏳️';
+  countryCode.textContent = cd ? cd.code : '+000';
+});
+
+districtSelect.addEventListener('change', ()=>{
+  const val = districtSelect.value;
+  townSelect.innerHTML = '<option value="">Select town</option>';
+  if(towns[val]) towns[val].forEach(t => {
+    townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
+  });
+});
+
+// Email validation logic
+let regAttempts = 0;
+function isBusinessEmail(email) {
+  return email.includes('@') && !email.match(/@(gmail|yahoo|outlook|hotmail)\.com$/i);
 }
 
-if(districtSelect){
-  districtSelect.addEventListener('change', ()=>{
-    const val = districtSelect.value;
-    townSelect.innerHTML = '<option value="">Select town</option>';
-    if(towns[val]) towns[val].forEach(t => {
-      townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
-    });
-  });
+function validateRegisterEmail() {
+  const email = document.getElementById('registerEmail').value.trim();
+  if (!isBusinessEmail(email)) {
+    regAttempts++;
+    if (regAttempts >= 2) {
+      document.getElementById('registerPopup').style.display = 'block';
+    } else {
+      alert('Please use a business email address (e.g. yourname@company.com)');
+    }
+  } else {
+    // Proceed to next step
+    nextStep(2);
+  }
 }
+
+// Form submission
+document.getElementById('registerForm').addEventListener('submit', e => {
+  e.preventDefault();
+  validateRegisterEmail();
+});
 
 /* Service selection */
 function selectPackage(card){
