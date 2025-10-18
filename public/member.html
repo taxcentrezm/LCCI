@@ -823,6 +823,25 @@ ul li { margin-bottom: 8px; }
   transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
+
+      .popup {
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 1100;
+  text-align: center;
+}
+.popup a {
+  color: #0078d7;
+  font-weight: bold;
+  text-decoration: none;
+}
 </style>
 
 </head>
@@ -1066,6 +1085,14 @@ ul li { margin-bottom: 8px; }
     </main>
   </div>
 </div>
+
+      <!-- Popup -->
+<div class="popup" id="loginPopup">
+  <p>You're using a personal email. To access member services, apply for a custom business email.</p>
+  <a href="https://lusakachamber.com/apply-mail">Apply for Custom Mail</a>
+</div>
+
+      
 <!-- Login Modal -->
 <div class="modal" id="loginModal">
   <div class="merged-container">
@@ -1282,33 +1309,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================
-     Email Validation
+     Registration Email Validation & Popup
   ========================= */
   let regAttempts = 0;
+
+  function isBusinessEmail(email){
+    return email.includes('@') && !/@(gmail|yahoo|hotmail|outlook)\.com$/i.test(email);
+  }
+
   window.validateRegisterEmail = function() {
     const emailField = document.getElementById('registerEmail');
     if (!emailField) return;
     const email = emailField.value.trim();
-    if (!email.includes('@') || /@(gmail|yahoo|hotmail|outlook)\.com$/i.test(email)) {
+    if(!isBusinessEmail(email)){
       regAttempts++;
-      if (regAttempts >= 2) {
-        const popup = document.getElementById('registerPopup');
-        if (popup) popup.style.display = 'block';
+      if(regAttempts >= 1){
+        const popup = document.getElementById('loginPopup'); // Reuse your popup
+        if(popup) popup.style.display = 'block';
       } else {
         alert('Please use a business email address (e.g. yourname@company.com)');
       }
     } else {
       nextStep(2);
     }
-  };
+  }
 
   const registerForm = document.getElementById('registerForm');
-  if (registerForm) {
+  if(registerForm){
     registerForm.addEventListener('submit', e => {
       e.preventDefault();
       validateRegisterEmail();
     });
   }
+
+  // Close popup when clicking outside
+  document.addEventListener('click', (e)=>{
+    const popup = document.getElementById('loginPopup');
+    if(popup && popup.style.display === 'block' && !popup.contains(e.target) && e.target.id !== 'registerEmail'){
+      popup.style.display = 'none';
+    }
+  });
 
   /* =========================
      Service Package Selection
@@ -1361,6 +1401,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 });
+
 </script>
   <script>
 document.addEventListener('DOMContentLoaded', () => {
