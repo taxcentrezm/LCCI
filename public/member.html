@@ -1207,22 +1207,20 @@ ul li { margin-bottom: 8px; }
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-
-  // Replace feather icons
   feather.replace();
 
   /* =========================
      Modal Controls
   ========================= */
-  window.openModal = function(id) {
+  window.openModal = id => {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'flex';
-  }
+  };
 
-  window.closeModal = function(id) {
+  window.closeModal = id => {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'none';
-  }
+  };
 
   /* =========================
      Stepper Logic
@@ -1232,9 +1230,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepContents = document.querySelectorAll('.step-content');
   let currentStep = 1;
 
-  window.nextStep = n => updateStepper(n);
-  window.prevStep = n => updateStepper(n);
-
   function updateStepper(n) {
     steps.forEach((s, i) => s.classList.toggle('active', i < n));
     if (progress) progress.style.width = ((n - 1) / (steps.length - 1)) * 100 + '%';
@@ -1243,8 +1238,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderReview();
   }
 
+  window.nextStep = n => updateStepper(n);
+  window.prevStep = n => updateStepper(n);
+
   /* =========================
-     Country / District / Town
+     Country / District / Town Selectors
   ========================= */
   const countrySelect = document.getElementById('country');
   const districtSelect = document.getElementById('district');
@@ -1253,33 +1251,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const countryCode = document.getElementById('countryCode');
 
   const countryData = {
-    'ZW': {name:'Zimbabwe', flag:'🇿🇼', code:'+263'},
-    'ZA': {name:'South Africa', flag:'🇿🇦', code:'+27'},
-    'BW': {name:'Botswana', flag:'🇧🇼', code:'+267'},
-    'NA': {name:'Namibia', flag:'🇳🇦', code:'+264'},
-    'MZ': {name:'Mozambique', flag:'🇲🇿', code:'+258'},
-    'ZM': {name:'Zambia', flag:'🇿🇲', code:'+260'},
-    'TZ': {name:'Tanzania', flag:'🇹🇿', code:'+255'}
+    ZW: { name: 'Zimbabwe', flag: '🇿🇼', code: '+263' },
+    ZA: { name: 'South Africa', flag: '🇿🇦', code: '+27' },
+    BW: { name: 'Botswana', flag: '🇧🇼', code: '+267' },
+    NA: { name: 'Namibia', flag: '🇳🇦', code: '+264' },
+    MZ: { name: 'Mozambique', flag: '🇲🇿', code: '+258' },
+    ZM: { name: 'Zambia', flag: '🇿🇲', code: '+260' },
+    TZ: { name: 'Tanzania', flag: '🇹🇿', code: '+255' }
   };
 
   const districts = {
-    'ZW':['Harare','Bulawayo','Manicaland','Mashonaland Central'],
-    'ZA':['Gauteng','Western Cape','KwaZulu-Natal'],
-    'BW':['Gaborone','Francistown'],
-    'NA':['Khomas','Erongo'],
-    'MZ':['Maputo','Beira'],
-    'ZM':['Lusaka','Ndola'],
-    'TZ':['Dar es Salaam','Dodoma']
+    ZW: ['Harare', 'Bulawayo', 'Manicaland', 'Mashonaland Central'],
+    ZA: ['Gauteng', 'Western Cape', 'KwaZulu-Natal'],
+    BW: ['Gaborone', 'Francistown'],
+    NA: ['Khomas', 'Erongo'],
+    MZ: ['Maputo', 'Beira'],
+    ZM: ['Lusaka', 'Ndola'],
+    TZ: ['Dar es Salaam', 'Dodoma']
   };
 
   const towns = {
-    'Harare':['Harare CBD','Chisipite','Borrowdale'],
-    'Bulawayo':['Khami','Nkulumane'],
-    'Gauteng':['Johannesburg','Pretoria'],
-    'Western Cape':['Cape Town','Stellenbosch'],
-    'KwaZulu-Natal':['Durban','Pietermaritzburg'],
-    'Maputo':['Maputo City'],
-    'Lusaka':['Lusaka Central']
+    Harare: ['Harare CBD', 'Chisipite', 'Borrowdale'],
+    Bulawayo: ['Khami', 'Nkulumane'],
+    Gauteng: ['Johannesburg', 'Pretoria'],
+    'Western Cape': ['Cape Town', 'Stellenbosch'],
+    'KwaZulu-Natal': ['Durban', 'Pietermaritzburg'],
+    Maputo: ['Maputo City'],
+    Lusaka: ['Lusaka Central']
   };
 
   if (countrySelect) {
@@ -1287,14 +1285,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const code = countrySelect.value;
       districtSelect.innerHTML = '<option value="">Select district</option>';
       townSelect.innerHTML = '<option value="">Select town</option>';
-      if (code && districts[code]) {
+      if (districts[code]) {
         districts[code].forEach(d => {
           districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
         });
       }
       const cd = countryData[code];
-      if (flagEmoji) flagEmoji.textContent = cd ? cd.flag : '🏳️';
-      if (countryCode) countryCode.textContent = cd ? cd.code : '+000';
+      if (flagEmoji) flagEmoji.textContent = cd?.flag || '🏳️';
+      if (countryCode) countryCode.textContent = cd?.code || '+000';
     });
   }
 
@@ -1302,63 +1300,57 @@ document.addEventListener('DOMContentLoaded', () => {
     districtSelect.addEventListener('change', () => {
       const val = districtSelect.value;
       townSelect.innerHTML = '<option value="">Select town</option>';
-      if (towns[val]) towns[val].forEach(t => {
-        townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
-      });
+      if (towns[val]) {
+        towns[val].forEach(t => {
+          townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
+        });
+      }
     });
   }
 
   /* =========================
      Registration Email Validation & Popup
   ========================= */
-  /* =========================
-   Registration Email Validation & Popup
-========================= */
-let regAttempts = 0;
-
-function isBusinessEmail(email) {
-  return email.includes('@') && !/@(gmail|yahoo|hotmail|outlook)\.com$/i.test(email);
-}
-
-window.validateRegisterEmail = function() {
+  const registerForm = document.getElementById('registerForm');
   const emailField = document.getElementById('registerEmail');
-  if (!emailField) return;
-  const email = emailField.value.trim();
-
-  if (!isBusinessEmail(email)) {
-    regAttempts++;
-    if (regAttempts >= 2) {
-      // Second invalid attempt: show popup
-      const popup = document.getElementById('loginPopup');
-      if (popup) popup.style.display = 'block';
-    } else {
-      // First invalid attempt: simple alert
-      alert('Please use a business email address (e.g. yourname@company.com)');
-    }
-    // Do not move to next step
-    return false;
-  } else {
-    // Valid business email: proceed to next step
-    nextStep(2);
-  }
-};
-
-// Form submission handler
-const registerForm = document.getElementById('registerForm');
-if (registerForm) {
-  registerForm.addEventListener('submit', e => {
-    e.preventDefault();
-    validateRegisterEmail();
-  });
-}
-
-// Close popup when clicking outside
-document.addEventListener('click', e => {
   const popup = document.getElementById('loginPopup');
-  if (popup && popup.style.display === 'block' && !popup.contains(e.target) && e.target.id !== 'registerEmail') {
-    popup.style.display = 'none';
+  let regAttempts = 0;
+
+  function isBusinessEmail(email) {
+    const allowedDomains = ['.org', '.co.zm', '.com.zm', '.biz', '.company', '.africa'];
+    const blockedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+    const domain = email.split('@')[1]?.toLowerCase() || '';
+    return domain && !blockedDomains.includes(domain) && allowedDomains.some(d => domain.endsWith(d));
   }
-});
+
+  window.validateRegisterEmail = function () {
+    if (!emailField) return;
+    const email = emailField.value.trim();
+    if (!isBusinessEmail(email)) {
+      regAttempts++;
+      if (regAttempts >= 2 && popup) {
+        popup.style.display = 'block';
+      } else {
+        alert('Please use a business email address (e.g. yourname@company.com.zm)');
+      }
+      return false;
+    } else {
+      nextStep(2);
+    }
+  };
+
+  if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+      e.preventDefault();
+      validateRegisterEmail();
+    });
+  }
+
+  document.addEventListener('click', e => {
+    if (popup && popup.style.display === 'block' && !popup.contains(e.target) && e.target !== emailField) {
+      popup.style.display = 'none';
+    }
+  });
 
   /* =========================
      Service Package Selection
@@ -1366,10 +1358,8 @@ document.addEventListener('click', e => {
   window.selectPackage = card => {
     document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
-    const selectedPackage = document.getElementById('selectedPackage');
-    const selectedFee = document.getElementById('selectedFee');
-    if (selectedPackage) selectedPackage.innerText = card.dataset.package;
-    if (selectedFee) selectedFee.innerText = card.dataset.fee;
+    document.getElementById('selectedPackage').innerText = card.dataset.package || '';
+    document.getElementById('selectedFee').innerText = card.dataset.fee || '';
     const txnPopup = document.getElementById('transactionPopup');
     if (txnPopup) txnPopup.style.display = 'block';
   };
@@ -1409,9 +1399,7 @@ document.addEventListener('click', e => {
     alert('✅ Membership application submitted successfully!');
     closeModal('registerModal');
   };
-
 });
-
 </script>
   <script>
 document.addEventListener('DOMContentLoaded', () => {
