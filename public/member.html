@@ -16,6 +16,26 @@
   --radius: 16px;
   --transition: 0.3s ease-in-out;
 }
+.phone-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 12px;
+  width: 100%;
+}
+
+.phone-field input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.phone-field span {
+  font-size: 1.1rem;
+}
 
 /* Base */
 body {
@@ -30,15 +50,43 @@ p { margin: 0 0 12px; }
 a { text-decoration: none; color: var(--primary); }
 .muted { color: var(--muted); font-size: 0.9rem; }
 
-/* Header */
 .header {
-  background: var(--primary);
+  position: relative;
+  background: url('zlcc.jpg') center/cover no-repeat fixed; /* parallax effect with 'fixed' */
   color: #fff;
   text-align: center;
   padding: 60px 20px;
+  overflow: hidden;
 }
-.header h1 { font-size: 2rem; margin-bottom: 10px; }
-.header p { font-size: 1.1rem; }
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45); /* Dark overlay */
+  z-index: 1;
+}
+
+.header .header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 1.1rem;
+}
+
+/* Optional subtle movement for smoother parallax on scroll */
+@media (min-width: 768px) {
+  .header {
+    background-attachment: fixed;
+  }
+}
 
 /* Card Grid */
 .card-grid {
@@ -247,6 +295,17 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
   .left-bg, .center-steps, .right-form { flex: unset; width: 100%; border: none; }
   .center-steps { border: none; }
 }
+
+  .forgot-container { text-align: right; margin-bottom: 12px; }
+.forgot-container a {
+  font-size: 0.85rem;
+  color: var(--primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+#forgotForm h4 { text-align: center; margin-bottom: 16px; color: var(--primary); }
+#forgotForm input { margin-bottom: 16px; }
+
 </style>
 
 </head>
@@ -281,7 +340,7 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
     <!-- Left Background -->
     <aside class="left-bg">
       <img src="back (1).jpg" class="active"/>
-      <img src="side (2).jpg"/>
+      <img src="back (2).jpg"/>
       <img src="back (3).jpg"/>
       <img src="back.jpg"/>
       <div class="left-overlay">
@@ -380,11 +439,11 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
     <!-- Phone -->
     <div class="field-row">
       <label for="phone">Phone</label>
-      <div class="phone-field">
-        <span id="flagEmoji">🏳️</span>
-        <span id="countryCode">+000</span>
-        <input id="phone" type="tel" placeholder="Enter phone number" required>
-      </div>
+     <div class="phone-field">
+  <span id="flagEmoji">🏳️</span>
+  <span id="countryCode">+000</span>
+  <input id="phone" type="tel" placeholder="Enter phone number" required>
+</div>
     </div>
 
     <!-- Email -->
@@ -460,6 +519,46 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
       </div>
 
     </main>
+  </div>
+</div>
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
+  <div class="merged-container">
+
+    <!-- Left Background -->
+    <aside class="left-bg">
+      <img src="back (2).jpg" class="active"/>
+      <img src="back.jpg"/>
+      <div class="left-overlay">
+        <h2>Welcome Back</h2>
+        <p>Access your member portal and manage your company profile.</p>
+      </div>
+    </aside>
+
+    <!-- Right Form -->
+    <main class="right-form">
+      <span class="close-btn" onclick="closeModal('loginModal')">×</span>
+      <div class="avatar"><i data-feather="log-in"></i></div>
+      <h3>Member Login</h3>
+
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Business Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <div class="forgot-container">
+          <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+      </form>
+
+      <!-- Forgot Password Section -->
+      <form id="forgotForm" style="display:none;">
+        <h4>Reset Password</h4>
+        <input type="email" id="forgotEmail" placeholder="Enter your business email" required>
+        <button type="submit" class="btn">Send Reset Link</button>
+        <button type="button" class="btn btn-outline" onclick="showLoginForm()">← Back to Login</button>
+      </form>
+    </main>
+
   </div>
 </div>
 
@@ -652,6 +751,71 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 });
+</script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.left-bg img'); // All images inside left-bg
+  let currentIndex = 0;
+  const intervalTime = 4000; // 4 seconds per slide
+
+  if (slides.length > 0) {
+    // Initialize first slide
+    slides[currentIndex].classList.add('active');
+
+    // Function to go to next slide
+    function nextSlide() {
+      slides[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % slides.length;
+      slides[currentIndex].classList.add('active');
+    }
+
+    // Auto-slide interval
+    setInterval(nextSlide, intervalTime);
+  }
+});
+    // Open and Close Modal
+function openModal(id){
+  document.getElementById(id).style.display = 'flex';
+}
+function closeModal(id){
+  document.getElementById(id).style.display = 'none';
+}
+
+// Show Forgot Password Form
+const forgotLink = document.getElementById('forgotPasswordLink');
+const loginForm = document.getElementById('loginForm');
+const forgotForm = document.getElementById('forgotForm');
+
+forgotLink.addEventListener('click', e => {
+  e.preventDefault();
+  loginForm.style.display = 'none';
+  forgotForm.style.display = 'block';
+});
+
+function showLoginForm() {
+  forgotForm.style.display = 'none';
+  loginForm.style.display = 'block';
+}
+
+// Login Form Submission
+loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  // TODO: replace with actual authentication logic
+  alert(`✅ Login successful for ${email}`);
+  closeModal('loginModal');
+});
+
+// Forgot Password Submission
+forgotForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('forgotEmail').value;
+  // TODO: replace with real password reset logic
+  alert(`✅ Password reset link sent to ${email}`);
+  showLoginForm();
+});
+
 </script>
 
 </body>
