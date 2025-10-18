@@ -825,23 +825,42 @@ ul li { margin-bottom: 8px; }
 }
 
       .popup {
-  display: none;
   position: fixed;
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2000; /* Higher than modal */
   background: #fff;
-  padding: 30px;
+  padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  z-index: 1100;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
   text-align: center;
+  display: none;
 }
+
+.popup p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
 .popup a {
-  color: #0078d7;
-  font-weight: bold;
+  display: inline-block;
+  background: #0078d7;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
   text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
 }
+
+.popup a:hover {
+  background: #005fa3;
+}
+
 </style>
 
 </head>
