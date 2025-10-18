@@ -466,12 +466,12 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Modal Controls
   ========================= */
-  function openModal(id) {
+  window.openModal = function(id) {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'flex';
   }
 
-  function closeModal(id) {
+  window.closeModal = function(id) {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'none';
   }
@@ -484,6 +484,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepContents = document.querySelectorAll('.step-content');
   let currentStep = 1;
 
+  window.nextStep = n => updateStepper(n);
+  window.prevStep = n => updateStepper(n);
+
   function updateStepper(n) {
     steps.forEach((s, i) => s.classList.toggle('active', i < n));
     if (progress) progress.style.width = ((n - 1) / (steps.length - 1)) * 100 + '%';
@@ -492,47 +495,44 @@ document.addEventListener('DOMContentLoaded', () => {
     renderReview();
   }
 
-  window.nextStep = n => updateStepper(n);
-  window.prevStep = n => updateStepper(n);
-
   /* =========================
      Country / District / Town
   ========================= */
-  const countryData = {
-    'ZW': { name: 'Zimbabwe', flag: '🇿🇼', code: '+263' },
-    'ZA': { name: 'South Africa', flag: '🇿🇦', code: '+27' },
-    'BW': { name: 'Botswana', flag: '🇧🇼', code: '+267' },
-    'NA': { name: 'Namibia', flag: '🇳🇦', code: '+264' },
-    'MZ': { name: 'Mozambique', flag: '🇲🇿', code: '+258' },
-    'ZM': { name: 'Zambia', flag: '🇿🇲', code: '+260' },
-    'TZ': { name: 'Tanzania', flag: '🇹🇿', code: '+255' }
-  };
-
-  const districts = {
-    'ZW': ['Harare', 'Bulawayo', 'Manicaland', 'Mashonaland Central'],
-    'ZA': ['Gauteng', 'Western Cape', 'KwaZulu-Natal'],
-    'BW': ['Gaborone', 'Francistown'],
-    'NA': ['Khomas', 'Erongo'],
-    'MZ': ['Maputo', 'Beira'],
-    'ZM': ['Lusaka', 'Ndola'],
-    'TZ': ['Dar es Salaam', 'Dodoma']
-  };
-
-  const towns = {
-    'Harare': ['Harare CBD', 'Chisipite', 'Borrowdale'],
-    'Bulawayo': ['Khami', 'Nkulumane'],
-    'Gauteng': ['Johannesburg', 'Pretoria'],
-    'Western Cape': ['Cape Town', 'Stellenbosch'],
-    'KwaZulu-Natal': ['Durban', 'Pietermaritzburg'],
-    'Maputo': ['Maputo City'],
-    'Lusaka': ['Lusaka Central']
-  };
-
   const countrySelect = document.getElementById('country');
   const districtSelect = document.getElementById('district');
   const townSelect = document.getElementById('town');
   const flagEmoji = document.getElementById('flagEmoji');
   const countryCode = document.getElementById('countryCode');
+
+  const countryData = {
+    'ZW': {name:'Zimbabwe', flag:'🇿🇼', code:'+263'},
+    'ZA': {name:'South Africa', flag:'🇿🇦', code:'+27'},
+    'BW': {name:'Botswana', flag:'🇧🇼', code:'+267'},
+    'NA': {name:'Namibia', flag:'🇳🇦', code:'+264'},
+    'MZ': {name:'Mozambique', flag:'🇲🇿', code:'+258'},
+    'ZM': {name:'Zambia', flag:'🇿🇲', code:'+260'},
+    'TZ': {name:'Tanzania', flag:'🇹🇿', code:'+255'}
+  };
+
+  const districts = {
+    'ZW':['Harare','Bulawayo','Manicaland','Mashonaland Central'],
+    'ZA':['Gauteng','Western Cape','KwaZulu-Natal'],
+    'BW':['Gaborone','Francistown'],
+    'NA':['Khomas','Erongo'],
+    'MZ':['Maputo','Beira'],
+    'ZM':['Lusaka','Ndola'],
+    'TZ':['Dar es Salaam','Dodoma']
+  };
+
+  const towns = {
+    'Harare':['Harare CBD','Chisipite','Borrowdale'],
+    'Bulawayo':['Khami','Nkulumane'],
+    'Gauteng':['Johannesburg','Pretoria'],
+    'Western Cape':['Cape Town','Stellenbosch'],
+    'KwaZulu-Natal':['Durban','Pietermaritzburg'],
+    'Maputo':['Maputo City'],
+    'Lusaka':['Lusaka Central']
+  };
 
   if (countrySelect) {
     countrySelect.addEventListener('change', () => {
@@ -554,11 +554,9 @@ document.addEventListener('DOMContentLoaded', () => {
     districtSelect.addEventListener('change', () => {
       const val = districtSelect.value;
       townSelect.innerHTML = '<option value="">Select town</option>';
-      if (towns[val]) {
-        towns[val].forEach(t => {
-          townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
-        });
-      }
+      if (towns[val]) towns[val].forEach(t => {
+        townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
+      });
     });
   }
 
@@ -566,16 +564,11 @@ document.addEventListener('DOMContentLoaded', () => {
      Email Validation
   ========================= */
   let regAttempts = 0;
-
-  function isBusinessEmail(email) {
-    return email.includes('@') && !email.match(/@(gmail|yahoo|outlook|hotmail)\.com$/i);
-  }
-
-  function validateRegisterEmail() {
+  window.validateRegisterEmail = function() {
     const emailField = document.getElementById('registerEmail');
     if (!emailField) return;
     const email = emailField.value.trim();
-    if (!isBusinessEmail(email)) {
+    if (!email.includes('@') || /@(gmail|yahoo|hotmail|outlook)\.com$/i.test(email)) {
       regAttempts++;
       if (regAttempts >= 2) {
         const popup = document.getElementById('registerPopup');
@@ -584,10 +577,9 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Please use a business email address (e.g. yourname@company.com)');
       }
     } else {
-      // Email accepted, move to next step
       nextStep(2);
     }
-  }
+  };
 
   const registerForm = document.getElementById('registerForm');
   if (registerForm) {
