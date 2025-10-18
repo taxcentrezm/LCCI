@@ -4,398 +4,293 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Members | Lusaka Chamber</title>
-  <link rel="stylesheet" href="https://unpkg.com/feather-icons" />
+  <script src="https://unpkg.com/feather-icons"></script>
   <style>
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      background: #f9fafc;
-      color: #333;
+    :root {
+      --primary: #0078d7;
+      --accent: #ff9800;
+      --bg: #f9fafc;
+      --text-dark: #111;
+      --text: #333;
+      --radius: 16px;
     }
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .header {
+      position: relative;
+      height: 60vh;
+      background: url('header-bg.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    .header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    .header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 20px;
+      animation: fadeInUp 1.2s ease;
+    }
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* CARD GRID */
     .card-grid {
       display: flex;
+      flex-wrap: wrap;
       gap: 40px;
       justify-content: center;
-      padding: 80px 20px 40px;
+      padding: 60px 20px;
+      animation: fadeIn 1.2s ease;
     }
     .action-card {
       background: #fff;
-      border-radius: 12px;
-      padding: 30px;
+      border-radius: var(--radius);
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      width: 320px;
+      padding: 30px;
       text-align: center;
-      width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      transition: transform 0.3s ease;
     }
     .action-card:hover {
       transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
     }
-    .action-card i {
+    .card-icon i {
       font-size: 2.5rem;
-      color: #0078d7;
-      margin-bottom: 15px;
-    }
-    .action-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
+      color: var(--primary);
+      margin-bottom: 20px;
     }
 
-  .modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  display: flex;
-  width: 90%;
-  max-width: 1000px;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-}
-.modal-left {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.slide-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-.slide-bg.active {
-  opacity: 1;
-  z-index: 1;
-}
-.modal-text {
-  position: relative;
-  z-index: 2;
-  padding: 40px;
-  text-align: center;
-}
-.modal-right {
-  flex: 1;
-  padding: 40px;
-  position: relative;
-}
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #eee;
-  margin: 0 auto 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.avatar i {
-  font-size: 2rem;
-  color: #0078d7;
-}
-h3 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #0078d7;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-.btn {
-  background: #ff9800;
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.btn-outline {
-  background: transparent;
-  border: 2px solid #0078d7;
-  color: #0078d7;
-}
-.btn-outline:hover {
-  background: #0078d7;
-  color: #fff;
-}
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #999;
-}
-.popup {
-  display: none;
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  z-index: 1100;
-  text-align: center;
-}
-.popup a {
-  color: #0078d7;
-  font-weight: bold;
-  text-decoration: none;
-}
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #f48a00;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
 
-    /* Sections */
+    /* MODAL (Shared) */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
+    }
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      max-width: 1000px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    @media (min-width: 800px) {
+      .modal-content {
+        flex-direction: row;
+      }
+    }
+    .modal-left {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .slide-bg.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .modal-text {
+      position: relative;
+      z-index: 2;
+      padding: 40px;
+      text-align: center;
+      backdrop-filter: blur(2px);
+    }
+    .modal-right {
+      flex: 1;
+      padding: 40px;
+      position: relative;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #eef4ff;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.3s ease;
+    }
+    .close-btn:hover {
+      color: var(--primary);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      animation: fadeInUp 0.6s ease;
+    }
+    input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(0,120,215,0.2);
+    }
+
+    /* POPUP */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      z-index: 1100;
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+    .popup a {
+      color: var(--primary);
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .popup a:hover {
+      text-decoration: underline;
+    }
+
+    /* SECTIONS */
     section {
       padding: 60px 20px;
       max-width: 1000px;
       margin: 0 auto;
+      animation: fadeInUp 1s ease;
     }
     section h2 {
       font-size: 2rem;
       margin-bottom: 20px;
-      color: #0078d7;
+      color: var(--primary);
+      text-align: center;
     }
     section p {
       font-size: 1.1rem;
       line-height: 1.6;
+      text-align: center;
+      color: #444;
     }
 
-    .modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  display: flex;
-  width: 90%;
-  max-width: 1000px;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-}
-.modal-left {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.slide-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-.slide-bg.active {
-  opacity: 1;
-  z-index: 1;
-}
-.modal-text {
-  position: relative;
-  z-index: 2;
-  padding: 40px;
-  text-align: center;
-}
-.modal-right {
-  flex: 1;
-  padding: 40px;
-  position: relative;
-}
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #eee;
-  margin: 0 auto 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.avatar i {
-  font-size: 2rem;
-  color: #0078d7;
-}
-h3 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #0078d7;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-.btn {
-  background: #ff9800;
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.btn-outline {
-  background: transparent;
-  border: 2px solid #0078d7;
-  color: #0078d7;
-}
-.btn-outline:hover {
-  background: #0078d7;
-  color: #fff;
-}
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #999;
-}
-.popup {
-  display: none;
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  z-index: 1100;
-  text-align: center;
-}
-.popup a {
-  color: #0078d7;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-    .card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
-  padding: 60px 20px;
-}
-
-.action-card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  width: 320px;
-  padding: 30px;
-  text-align: center;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.action-card:hover {
-  transform: translateY(-6px);
-}
-
-.card-icon {
-  margin-bottom: 20px;
-}
-
-.card-icon i {
-  font-size: 2.5rem;
-  color: #0078d7;
-}
-
-.card-content h3 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-  color: #111;
-}
-
-.card-content p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.btn {
-  background: #ff9800;
-  color: #fff;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 2px solid #0078d7;
-  color: #0078d7;
-}
-
-.btn-outline:hover {
-  background: #0078d7;
-  color: #fff;
-}
-
-
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <h1>Welcome to Lusaka Chamber</h1>
+    <p>Empowering businesses through connection, advocacy, and opportunity.</p>
+  </div>
+</header>
+
 <!-- Action Cards -->
 <div class="card-grid">
-  <!-- Register Company Card -->
-  <div class="action-card" onclick="openModal()">
+  <div class="action-card" onclick="openModal('registerModal')">
     <div class="card-icon"><i data-feather="edit-3"></i></div>
     <div class="card-content">
       <h3>Register Company</h3>
       <p>Apply for membership and join Lusaka’s business network.</p>
-      <button class="btn" onclick="openModal()">Start Registration</button>
+      <button class="btn">Start Registration</button>
     </div>
   </div>
-
-  <!-- Access Portal Card -->
-  <div class="action-card" onclick="openLoginModal()">
+  <div class="action-card" onclick="openModal('loginModal')">
     <div class="card-icon"><i data-feather="lock"></i></div>
     <div class="card-content">
       <h3>Access Portal</h3>
@@ -405,147 +300,145 @@ input {
   </div>
 </div>
 
-
-<!-- Modal -->
+<!-- Registration Modal -->
 <div class="modal" id="registerModal">
   <div class="modal-content">
-    <!-- Left Slideshow -->
     <div class="modal-left">
       <img src="back (1).jpg" class="slide-bg active" />
       <img src="back (2).jpg" class="slide-bg" />
       <img src="back (3).jpg" class="slide-bg" />
-      <img src="back.jpg" class="slide-bg" />
       <div class="modal-text">
-        <h2>Welcome to Lusaka Chamber</h2>
-        <p>Join a network of professionals driving growth, advocacy, and opportunity across Lusaka.</p>
+        <h2>Register Your Company</h2>
+        <p>Become a member and unlock access to events, resources, and representation.</p>
       </div>
     </div>
-
-    <!-- Right Form -->
     <div class="modal-right">
-      <span class="close-btn" onclick="closeModal()">×</span>
-      <div class="avatar"><i data-feather="user"></i></div>
-      <h3>Company Login</h3>
-      <form id="loginForm">
-        <input type="email" id="emailInput" placeholder="Business Email" required />
-        <input type="password" placeholder="Password" required />
-        <button type="submit" class="btn">Sign In</button>
-        <button type="button" class="btn-outline" onclick="signWithEmail()">Sign with Email</button>
+      <span class="close-btn" onclick="closeModal('registerModal')">×</span>
+      <div class="avatar"><i data-feather="user-plus"></i></div>
+      <h3>Company Registration</h3>
+      <form id="registerForm">
+        <input type="text" placeholder="Company Name" required />
+        <input type="text" placeholder="Contact Person" required />
+        <input type="email" id="registerEmail" placeholder="Business Email" required />
+        <input type="tel" placeholder="Phone Number" required />
+        <input type="text" placeholder="Business Sector" required />
+        <button type="submit" class="btn">Submit Application</button>
       </form>
     </div>
   </div>
 </div>
 
-  <div class="modal" id="loginModal">
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
   <div class="modal-content">
-    <!-- Left Slideshow -->
     <div class="modal-left">
-      <img src="slide1.jpg" class="slide-bg active" />
-      <img src="slide2.jpg" class="slide-bg" />
-      <img src="slide3.jpg" class="slide-bg" />
+      <img src="back (2).jpg" class="slide-bg active" />
+      <img src="back.jpg" class="slide-bg" />
       <div class="modal-text">
-        <h2>Welcome to Lusaka Chamber</h2>
-        <p>Join a network of professionals driving growth, advocacy, and opportunity across Lusaka.</p>
+        <h2>Welcome Back</h2>
+        <p>Access your member portal and manage your company profile.</p>
       </div>
     </div>
-
-    <!-- Right Form -->
     <div class="modal-right">
-      <span class="close-btn" onclick="closeModal()">×</span>
-      <div class="avatar"><i data-feather="user"></i></div>
-      <h3>Company Login</h3>
+      <span class="close-btn" onclick="closeModal('loginModal')">×</span>
+      <div class="avatar"><i data-feather="log-in"></i></div>
+      <h3>Member Login</h3>
       <form id="loginForm">
-        <input type="email" id="emailInput" placeholder="Business Email" required />
+        <input type="email" placeholder="Business Email" required />
         <input type="password" placeholder="Password" required />
-        <button type="submit" class="btn">Sign In</button>
-        <button type="button" class="btn-outline" onclick="signWithEmail()">Sign with Email</button>
+        <button type="submit" class="btn">Login</button>
+        <p style="text-align:center; margin-top:10px;">
+          <a href="#" style="color: var(--primary); text-decoration:none;">Forgot Password?</a>
+        </p>
       </form>
     </div>
   </div>
 </div>
 
 <!-- Popup -->
-<div class="popup" id="popup">
+<div class="popup" id="registerPopup">
   <p>You're using a personal email. To access member services, apply for a custom business email.</p>
-  <a href="https://lusakachamber.com/apply-mail">Apply for Custom Mail</a>
+  <a href="https://lusakachamber.com/apply-mail" target="_blank">Apply for Custom Mail</a>
 </div>
 
-
-<!-- Informational Sections -->
+<!-- Info Sections -->
 <section id="about">
   <h2>About the Chamber</h2>
-  <p>The Lusaka Chamber of Commerce is a voluntary, non-profit partnership of business and professional people working together to build a healthy economy and improve the quality of life in our community.</p>
+  <p>The Lusaka Chamber of Commerce is a non-profit partnership of business and professional leaders building a stronger economy and community.</p>
 </section>
 
 <section id="events">
   <h2>Upcoming Events</h2>
-  <p>Business Expo, Networking Breakfasts, Policy Roundtables — connect with Lusaka’s business leaders.</p>
+  <p>Join Business Expos, Networking Breakfasts, and Policy Roundtables with Lusaka’s leading entrepreneurs.</p>
 </section>
 
 <section id="benefits">
   <h2>Membership Benefits</h2>
-  <p>Access to events, policy advocacy, training workshops, and a network of trusted partners.</p>
+  <p>Get exclusive access to advocacy, capacity-building programs, and networking opportunities.</p>
 </section>
 
 <section id="agencies">
   <h2>Featured Agencies</h2>
-  <p>We collaborate with ZACCI, ZRA, and other national institutions to support our members.</p>
+  <p>In partnership with ZACCI, ZRA, and other national institutions supporting Zambian businesses.</p>
 </section>
 
 <section id="board">
   <h2>Board Members</h2>
-  <p>Meet the leaders guiding Lusaka’s business community toward sustainable growth and innovation.</p>
+  <p>Meet the visionary leaders driving Lusaka’s business community toward innovation and growth.</p>
 </section>
 
 <script>
   feather.replace();
 
-  function openLoginModal() {
-    document.getElementById('loginModal').style.display = 'flex';
+  // Modal controls
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.getElementById('registerPopup').style.display = 'none';
   }
 
-  function closeLoginModal() {
-    document.getElementById('loginModal').style.display = 'none';
-  }
-
-  // Slideshow
-  const loginSlides = document.querySelectorAll('#loginModal .slide-bg');
-  let loginCurrent = 0;
-  function showLoginSlide(index) {
-    loginSlides.forEach((s, i) => s.classList.toggle('active', i === index));
-  }
+  // Registration slides
+  const regSlides = document.querySelectorAll('#registerModal .slide-bg');
+  let regCurrent = 0;
   setInterval(() => {
-    loginCurrent = (loginCurrent + 1) % loginSlides.length;
-    showLoginSlide(loginCurrent);
+    regSlides[regCurrent].classList.remove('active');
+    regCurrent = (regCurrent + 1) % regSlides.length;
+    regSlides[regCurrent].classList.add('active');
   }, 6000);
 
-  // Email validation
-  let loginAttempts = 0;
-  function isBusinessEmail(email) {
-    return email.includes('@') && !email.match(/@(gmail|yahoo|outlook|hotmail)\.com$/i);
-  }
+  // Login slides
+  const loginSlides = document.querySelectorAll('#loginModal .slide-bg');
+  let loginCurrent = 0;
+  setInterval(() => {
+    loginSlides[loginCurrent].classList.remove('active');
+    loginCurrent = (loginCurrent + 1) % loginSlides.length;
+    loginSlides[loginCurrent].classList.add('active');
+  }, 7000);
 
-  function validateLoginEmail() {
-    const email = document.getElementById('loginEmail').value.trim();
-    if (!isBusinessEmail(email)) {
-      loginAttempts++;
-      if (loginAttempts >= 2) {
-        document.getElementById('loginPopup').style.display = 'block';
-      } else {
-        alert('Please use a business email address (e.g. yourname@company.com)');
-      }
+  // Registration email validation
+  let regAttempts = 0;
+  document.getElementById('registerForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('registerEmail').value.trim();
+    if (!email.match(/@(?!gmail|yahoo|hotmail|outlook)[\w-]+\.\w+$/i)) {
+      regAttempts++;
+      regAttempts >= 2
+        ? document.getElementById('registerPopup').style.display = 'block'
+        : alert('Please use a business email (e.g. name@company.com)');
     } else {
       alert('Business email accepted. Proceeding...');
+      closeModal('registerModal');
     }
-  }
-
-  document.getElementById('loginForm').addEventListener('submit', e => {
-    e.preventDefault();
-    validateLoginEmail();
   });
 
+  // Login validation
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Login successful. Redirecting to dashboard...');
+    closeModal('loginModal');
+  });
 </script>
-
-
 </body>
 </html>
