@@ -112,6 +112,75 @@ section{padding:60px 20px;max-width:1000px;margin:0 auto;text-align:center;}
 section h2{color:var(--primary);font-size:2rem;margin-bottom:10px;}
 section p{color:#444;font-size:1.1rem;line-height:1.6;}
 
+  /* Suggestions dropdown */
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 180px; /* roughly 5 items */
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none;
+}
+
+.suggestions li {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.suggestions li:hover,
+.suggestions li.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Service cards for fees/options */
+.service-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.service-card {
+  flex: 1 1 calc(50% - 16px);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border-color: var(--primary);
+}
+
+.service-card.selected {
+  border: 2px solid var(--primary);
+  box-shadow: 0 6px 20px rgba(0,120,215,0.2);
+  background: #eef4ff;
+}
+
+.service-card .service-name {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.service-card .service-fee {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 /* Animations */
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
