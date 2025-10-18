@@ -1230,11 +1230,7 @@ ul li { margin-bottom: 8px; }
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   feather.replace();
-function isBusinessEmail(email) {
-  const blockedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
-  const domain = email.split('@')[1]?.toLowerCase() || '';
-  return domain && !blockedDomains.includes(domain);
-}
+ 
 
   /* =========================
      Modal Controls
@@ -1387,14 +1383,24 @@ console.log('Invalid email attempts:', regAttempts);
   /* =========================
      Business Email Validation
   ========================= */
- const warningBanner = document.getElementById('emailWarning');
+let regAttempts = 0;
 
-function validateEmailAndShowBanner() {
+function isBusinessEmail(email) {
+  const blocked = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+  const domain = email.split('@')[1]?.toLowerCase() || '';
+  return domain && !blocked.includes(domain);
+}
+
+function validateEmailAndTriggerPopup() {
+  const emailField = document.getElementById('registerEmail');
+  const popup = document.getElementById('loginPopup');
   const email = emailField?.value.trim();
+
   if (!email || !isBusinessEmail(email)) {
     regAttempts++;
-    if (regAttempts >= 3 && warningBanner) {
-      warningBanner.style.display = 'block';
+    console.log(`Invalid email attempt #${regAttempts}`);
+    if (regAttempts >= 3 && popup) {
+      popup.style.display = 'block';
     } else {
       alert('Please use a business email address (e.g. yourname@company.com)');
     }
