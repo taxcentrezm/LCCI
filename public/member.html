@@ -145,48 +145,160 @@ section p{color:#444;font-size:1.1rem;line-height:1.6;}
 <div class="modal" id="registerModal">
   <div class="merged-container">
     <aside class="left-bg">
-      <img src="side (1).jpg" class="active"/><img src="side (2).jpg"/><img src="side (3).jpg"/><img src="side.jpg"/>
+      <img src="back (1).jpg" class="active"/><img src="side (2).jpg"/><img src="back (3).jpg"/><img src="back.jpg"/>
       <div class="left-overlay"><h2>Join Lusaka Chamber</h2><p>Empowering businesses through connection, advocacy, and growth.</p></div>
     </aside>
-    <aside class="center-steps">
-      <div class="brand"><div class="logo">LC</div><div><h3>Company Membership</h3><div class="muted">3 steps to join</div></div></div>
-      <div class="steps">
-        <div class="step-item active" data-step="1"><div class="step-icon"><i data-feather="briefcase"></i></div><div class="step-labels"><div class="title">1. Details</div><div class="subtitle">Company info</div></div></div>
-        <div class="step-item" data-step="2"><div class="step-icon"><i data-feather="mail"></i></div><div class="step-labels"><div class="title">2. Contact</div><div class="subtitle">Email & phone</div></div></div>
-        <div class="step-item" data-step="3"><div class="step-icon"><i data-feather="check-circle"></i></div><div class="step-labels"><div class="title">3. Review</div><div class="subtitle">Submit details</div></div></div>
+   <aside class="center-steps">
+  <div class="brand">
+    <div class="logo">LC</div>
+    <div>
+      <h3>Company Membership</h3>
+      <div class="muted">5 steps to join</div>
+    </div>
+  </div>
+  <div class="steps">
+    <div class="step-item active" data-step="1">
+      <div class="step-icon"><i data-feather="briefcase"></i></div>
+      <div class="step-labels">
+        <div class="title">1. Details</div>
+        <div class="subtitle">Company info</div>
       </div>
-      <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
-    </aside>
-    <main class="right-form">
-      <span class="close-btn" onclick="closeModal('registerModal')">×</span>
-      <div class="avatar"><img src="stock.jpg" alt="avatar"></div>
-
-      <section class="step-content active" data-step="1">
-        <h3>Company Details</h3>
-        <input id="companyName" placeholder="Company Name" required>
-        <input id="sector" placeholder="Business Sector" required>
-        <div class="actions"><div></div><button class="btn secondary" onclick="nextStep(2)">Next →</button></div>
-      </section>
-
-      <section class="step-content" data-step="2">
-        <h3>Contact Information</h3>
-        <input id="contactPerson" placeholder="Contact Person" required>
-        <input id="registerEmail" placeholder="Business Email" required>
-        <input id="phone" placeholder="Phone Number" required>
-        <div class="actions"><button class="btn" onclick="prevStep(1)">← Back</button><button class="btn secondary" onclick="validateEmail()">Next →</button></div>
-      </section>
-
-      <section class="step-content" data-step="3">
-        <h3>Review & Submit</h3>
-        <div class="review" id="reviewArea"></div>
-        <div class="actions"><button class="btn" onclick="prevStep(2)">← Back</button><button class="btn secondary" onclick="submitApplication()">Submit</button></div>
-      </section>
-
-      <div class="popup" id="registerPopup">
-        <p>You're using a personal email. To access member services, apply for a custom business email.</p>
-        <a href="https://lusakachamber.com/apply-mail" target="_blank">Apply for Custom Mail</a>
+    </div>
+    <div class="step-item" data-step="2">
+      <div class="step-icon"><i data-feather="mail"></i></div>
+      <div class="step-labels">
+        <div class="title">2. Contact</div>
+        <div class="subtitle">Email & phone</div>
       </div>
-    </main>
+    </div>
+    <div class="step-item" data-step="3">
+      <div class="step-icon"><i data-feather="users"></i></div>
+      <div class="step-labels">
+        <div class="title">3. Persons</div>
+        <div class="subtitle">Company persons</div>
+      </div>
+    </div>
+    <div class="step-item" data-step="4">
+      <div class="step-icon"><i data-feather="briefcase"></i></div>
+      <div class="step-labels">
+        <div class="title">4. Services</div>
+        <div class="subtitle">Sector & category</div>
+      </div>
+    </div>
+    <div class="step-item" data-step="5">
+      <div class="step-icon"><i data-feather="check-circle"></i></div>
+      <div class="step-labels">
+        <div class="title">5. Confirmation</div>
+        <div class="subtitle">Signature & submit</div>
+      </div>
+    </div>
+  </div>
+  <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
+</aside>
+
+<main class="right-form">
+  <span class="close-btn" onclick="closeModal('registerModal')">×</span>
+  <div class="avatar"><img src="stock.jpg" alt="avatar"></div>
+
+  <!-- Step 1: Company Details -->
+  <section class="step-content active" data-step="1">
+    <h3>Company Details</h3>
+    <input id="companyName" placeholder="Company Name" required>
+    <input id="incorpNo" placeholder="Incorporation No" required>
+    <input id="address" placeholder="Physical Address" required>
+    <div class="actions">
+      <div></div>
+      <button class="btn secondary" onclick="nextStep(2)">Next →</button>
+    </div>
+  </section>
+
+  <!-- Step 2: Contact Information -->
+  <section class="step-content" data-step="2">
+    <h3>Contact Information</h3>
+    <input id="contactPerson" placeholder="Contact Person" required>
+    <input id="registerEmail" placeholder="Business Email" required>
+    <input id="phone" placeholder="Phone Number" required>
+    <input id="fax" placeholder="Fax Number">
+    <div class="actions">
+      <button class="btn" onclick="prevStep(1)">← Back</button>
+      <button class="btn secondary" onclick="validateEmail()">Next →</button>
+    </div>
+  </section>
+
+  <!-- Step 3: Company Persons -->
+  <section class="step-content" data-step="3">
+    <h3>Company Persons</h3>
+    <input id="personName" placeholder="Full Name" required>
+    <input id="designation" placeholder="Designation" list="designationSuggestions">
+    <datalist id="designationSuggestions">
+      <option>CEO</option>
+      <option>Managing Director</option>
+      <option>Finance Manager</option>
+      <option>Operations Head</option>
+    </datalist>
+
+    <input id="title" placeholder="Title" list="titleSuggestions">
+    <datalist id="titleSuggestions">
+      <option>Director</option>
+      <option>Manager</option>
+      <option>Supervisor</option>
+    </datalist>
+
+    <input id="goodsServices" placeholder="Principal Goods/Services" list="goodsSuggestions">
+    <datalist id="goodsSuggestions">
+      <option>Consulting</option>
+      <option>Manufacturing</option>
+      <option>IT Solutions</option>
+    </datalist>
+
+    <div class="actions">
+      <button class="btn" onclick="prevStep(2)">← Back</button>
+      <button class="btn secondary" onclick="nextStep(4)">Next →</button>
+    </div>
+  </section>
+
+  <!-- Step 4: Business Sector & Service Selection -->
+  <section class="step-content" data-step="4">
+    <h3>Business Sector & Category</h3>
+    <input id="sectorInput" placeholder="Sector" required>
+
+    <div class="category-cards">
+      <div class="service-card" data-fee="500" onclick="selectService(this)">
+        <h4>Premium Membership</h4>
+        <p>Access to all chamber resources</p>
+        <span>Fee: ZMW 500</span>
+      </div>
+      <div class="service-card" data-fee="300" onclick="selectService(this)">
+        <h4>Standard Membership</h4>
+        <p>Basic access</p>
+        <span>Fee: ZMW 300</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="prevStep(3)">← Back</button>
+    </div>
+  </section>
+
+  <!-- Step 5: Signature & Confirmation -->
+  <section class="step-content" data-step="5">
+    <h3>Signature & Confirmation</h3>
+    <input type="text" id="signature" placeholder="Type Your Full Name as Signature" required>
+    <input type="date" id="signDate" required>
+
+    <div class="review" id="finalReview"></div>
+
+    <div class="actions">
+      <button class="btn" onclick="prevStep(4)">← Back</button>
+      <button class="btn secondary" onclick="submitApplication()">Submit</button>
+    </div>
+  </section>
+
+  <div class="popup" id="registerPopup">
+    <p>You're using a personal email. To access member services, apply for a custom business email.</p>
+    <a href="https://lusakachamber.com/apply-mail" target="_blank">Apply for Custom Mail</a>
+  </div>
+</main>
   </div>
 </div>
 
@@ -230,43 +342,111 @@ const steps=document.querySelectorAll('.step-item');
 const progress=document.getElementById('progressFill');
 const stepContents=document.querySelectorAll('.step-content');
 let current=1;
-function updateStepper(n){steps.forEach((s,i)=>s.classList.toggle('active',i<n));
-if(progress)progress.style.width=((n-1)/(steps.length-1))*100+'%';
-stepContents.forEach(sc=>sc.classList.toggle('active',Number(sc.dataset.step)===n));
-current=n;renderReview();}
-function nextStep(n){updateStepper(n);}function prevStep(n){updateStepper(n);}
+function updateStepper(n){
+  steps.forEach((s,i)=>s.classList.toggle('active',i<n));
+  if(progress) progress.style.width=((n-1)/(steps.length-1))*100+'%';
+  stepContents.forEach(sc=>sc.classList.toggle('active',Number(sc.dataset.step)===n));
+  current=n;
+  renderReview();
+}
+function nextStep(n){updateStepper(n);}
+function prevStep(n){updateStepper(n);}
 
 /* Email validation */
 const popup=document.getElementById('registerPopup');let attempts=0;
 function isBusinessEmail(e){return e.includes('@')&&!e.match(/@(gmail|yahoo|hotmail|outlook)\.com$/i);}
-function validateEmail(){const e=document.getElementById('registerEmail').value.trim();
-if(!isBusinessEmail(e)){attempts++;if(attempts>=2){popup.style.display='block';}
-else{alert('Please use a business email (e.g. name@company.com)');}return;}
-popup.style.display='none';nextStep(3);}
+function validateEmail(){
+  const e=document.getElementById('registerEmail').value.trim();
+  if(!isBusinessEmail(e)){
+    attempts++;
+    if(attempts>=2){popup.style.display='block';}
+    else{alert('Please use a business email (e.g. name@company.com)');}
+    return;
+  }
+  popup.style.display='none';
+  nextStep(3);
+}
 
-/* Review & Submit */
+/* Service Selection & Transaction Modal */
+function selectService(card){
+  const service = card.querySelector('h4').innerText;
+  const fee = card.dataset.fee;
+  document.getElementById('selectedService').innerText = service;
+  document.getElementById('serviceFee').innerText = fee;
+  openModal('transactionModal');
+}
+function confirmPayment(){
+  alert('✅ Payment confirmed! Proceed to Signature & Confirmation.');
+  closeModal('transactionModal');
+  nextStep(5);
+}
+
+/* Render Review for Step 5 */
 function renderReview(){
-  if(current !== 3) return;
-  const area = document.getElementById('reviewArea');
+  if(current !== 5) return;
+  const area = document.getElementById('finalReview');
   if(!area) return;
 
   const company = document.getElementById('companyName')?.value || '';
-  const sector = document.getElementById('sector')?.value || '';
+  const incorp = document.getElementById('incorpNo')?.value || '';
+  const address = document.getElementById('address')?.value || '';
   const contact = document.getElementById('contactPerson')?.value || '';
   const email = document.getElementById('registerEmail')?.value || '';
   const phone = document.getElementById('phone')?.value || '';
+  const fax = document.getElementById('fax')?.value || '';
+  const person = document.getElementById('personName')?.value || '';
+  const designation = document.getElementById('designation')?.value || '';
+  const title = document.getElementById('title')?.value || '';
+  const goods = document.getElementById('goodsServices')?.value || '';
+  const sector = document.getElementById('sectorInput')?.value || '';
+  const service = document.getElementById('selectedService')?.innerText || '';
+  const fee = document.getElementById('serviceFee')?.innerText || '';
+  const signature = document.getElementById('signature')?.value || '';
+  const date = document.getElementById('signDate')?.value || '';
 
   area.innerHTML = `
-    <strong>Company:</strong> ${company}<br>
-    <strong>Sector:</strong> ${sector}<br>
-    <strong>Contact:</strong> ${contact}<br>
+    <strong>Company Name:</strong> ${company}<br>
+    <strong>Incorporation No:</strong> ${incorp}<br>
+    <strong>Address:</strong> ${address}<br>
+    <strong>Contact Person:</strong> ${contact}<br>
     <strong>Email:</strong> ${email}<br>
-    <strong>Phone:</strong> ${phone}
+    <strong>Phone:</strong> ${phone}<br>
+    <strong>Fax:</strong> ${fax}<br>
+    <strong>Person Name:</strong> ${person}<br>
+    <strong>Designation:</strong> ${designation}<br>
+    <strong>Title:</strong> ${title}<br>
+    <strong>Principal Goods/Services:</strong> ${goods}<br>
+    <strong>Sector:</strong> ${sector}<br>
+    <strong>Selected Service:</strong> ${service}<br>
+    <strong>Fee:</strong> ZMW ${fee}<br>
+    <strong>Signature:</strong> ${signature}<br>
+    <strong>Date:</strong> ${date}
   `;
 }
 
+/* Submit Application */
 function submitApplication(){
-  alert('✅ Application submitted successfully! Thank you for joining Lusaka Chamber.');
+  const data = {
+    companyName: document.getElementById('companyName')?.value || '',
+    incorpNo: document.getElementById('incorpNo')?.value || '',
+    address: document.getElementById('address')?.value || '',
+    contactPerson: document.getElementById('contactPerson')?.value || '',
+    email: document.getElementById('registerEmail')?.value || '',
+    phone: document.getElementById('phone')?.value || '',
+    fax: document.getElementById('fax')?.value || '',
+    personName: document.getElementById('personName')?.value || '',
+    designation: document.getElementById('designation')?.value || '',
+    title: document.getElementById('title')?.value || '',
+    goodsServices: document.getElementById('goodsServices')?.value || '',
+    sector: document.getElementById('sectorInput')?.value || '',
+    selectedService: document.getElementById('selectedService')?.innerText || '',
+    serviceFee: document.getElementById('serviceFee')?.innerText || '',
+    signature: document.getElementById('signature')?.value || '',
+    signDate: document.getElementById('signDate')?.value || ''
+  };
+
+  console.log('Collected Registration Data:', data); // send to backend later
+  alert('✅ Membership application submitted successfully!');
   closeModal('registerModal');
 }
 
