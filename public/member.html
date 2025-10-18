@@ -1311,44 +1311,54 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Registration Email Validation & Popup
   ========================= */
-  let regAttempts = 0;
+  /* =========================
+   Registration Email Validation & Popup
+========================= */
+let regAttempts = 0;
 
-  function isBusinessEmail(email){
-    return email.includes('@') && !/@(gmail|yahoo|hotmail|outlook)\.com$/i.test(email);
-  }
+function isBusinessEmail(email) {
+  return email.includes('@') && !/@(gmail|yahoo|hotmail|outlook)\.com$/i.test(email);
+}
 
-  window.validateRegisterEmail = function() {
-    const emailField = document.getElementById('registerEmail');
-    if (!emailField) return;
-    const email = emailField.value.trim();
-    if(!isBusinessEmail(email)){
-      regAttempts++;
-      if(regAttempts >= 1){
-        const popup = document.getElementById('loginPopup'); // Reuse your popup
-        if(popup) popup.style.display = 'block';
-      } else {
-        alert('Please use a business email address (e.g. yourname@company.com)');
-      }
+window.validateRegisterEmail = function() {
+  const emailField = document.getElementById('registerEmail');
+  if (!emailField) return;
+  const email = emailField.value.trim();
+
+  if (!isBusinessEmail(email)) {
+    regAttempts++;
+    if (regAttempts >= 2) {
+      // Second invalid attempt: show popup
+      const popup = document.getElementById('loginPopup');
+      if (popup) popup.style.display = 'block';
     } else {
-      nextStep(2);
+      // First invalid attempt: simple alert
+      alert('Please use a business email address (e.g. yourname@company.com)');
     }
+    // Do not move to next step
+    return false;
+  } else {
+    // Valid business email: proceed to next step
+    nextStep(2);
   }
+};
 
-  const registerForm = document.getElementById('registerForm');
-  if(registerForm){
-    registerForm.addEventListener('submit', e => {
-      e.preventDefault();
-      validateRegisterEmail();
-    });
-  }
-
-  // Close popup when clicking outside
-  document.addEventListener('click', (e)=>{
-    const popup = document.getElementById('loginPopup');
-    if(popup && popup.style.display === 'block' && !popup.contains(e.target) && e.target.id !== 'registerEmail'){
-      popup.style.display = 'none';
-    }
+// Form submission handler
+const registerForm = document.getElementById('registerForm');
+if (registerForm) {
+  registerForm.addEventListener('submit', e => {
+    e.preventDefault();
+    validateRegisterEmail();
   });
+}
+
+// Close popup when clicking outside
+document.addEventListener('click', e => {
+  const popup = document.getElementById('loginPopup');
+  if (popup && popup.style.display === 'block' && !popup.contains(e.target) && e.target.id !== 'registerEmail') {
+    popup.style.display = 'none';
+  }
+});
 
   /* =========================
      Service Package Selection
