@@ -1230,39 +1230,32 @@ ul li { margin-bottom: 8px; }
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   feather.replace();
- 
 
-  /* =========================
-     Modal Controls
-  ========================= */
+  // =========================
+  // Modal Controls
+  // =========================
   window.openModal = id => {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'flex';
   };
-
   window.closeModal = id => {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'none';
   };
 
-  /* =========================
-     Stepper Logic with Validation
-  ========================= */
+  // =========================
+  // Stepper Logic
+  // =========================
   const steps = document.querySelectorAll('.step-item');
   const progress = document.getElementById('progressFill');
   const stepContents = document.querySelectorAll('.step-content');
   let currentStep = 1;
+  let regAttempts = 0;
 
-function nextStep(n) {
-  if (validateStep(currentStep)) {
-    updateStepper(n);
-  }
-}
-
-function prevStep(n) {
-  updateStepper(n);
-}
-
+  window.nextStep = n => {
+    if (validateStep(currentStep)) updateStepper(n);
+  };
+  window.prevStep = n => updateStepper(n);
 
   function updateStepper(n) {
     steps.forEach((s, i) => s.classList.toggle('active', i < n));
@@ -1272,76 +1265,58 @@ function prevStep(n) {
     if (n === 4) renderReview();
   }
 
-  window.nextStep = n => {
-    if (validateStep(currentStep)) updateStepper(n);
-  };
+  // =========================
+  // Step Validation
+  // =========================
+  function validateStep(step) {
+    if (step === 1) {
+      const required = ['companyName', 'country', 'phone', 'registerEmail'];
+      for (const id of required) {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
+          alert(`Please fill in the ${id.replace(/([A-Z])/g, ' $1')} field.`);
+          return false;
+        }
+      }
 
-  window.prevStep = n => updateStepper(n);
+      // Email validation
+      const emailField = document.getElementById('registerEmail');
+      const warningBanner = document.getElementById('emailWarning');
+      const email = emailField?.value.trim();
+      const blockedDomains = ['gmail.com','yahoo.com','hotmail.com','outlook.com'];
+      const domain = email.split('@')[1]?.toLowerCase() || '';
 
-function validateStep(step) {
-  if (step === 1) {
-    const required = ['companyName', 'country', 'phone', 'registerEmail'];
-    for (const id of required) {
-      const el = document.getElementById(id);
-      if (!el || !el.value.trim()) {
-        alert(`Please fill in the ${id.replace(/([A-Z])/g, ' $1')} field.`);
+      if (!domain || blockedDomains.includes(domain)) {
+        regAttempts++;
+        if (regAttempts >= 2 && warningBanner) {
+          warningBanner.style.display = 'block';
+        } else {
+          alert('Please use a business email address (e.g. yourname@company.com)');
+        }
         return false;
       }
+
+      if (warningBanner) warningBanner.style.display = 'none';
     }
-
-    const emailField = document.getElementById('registerEmail');
-    const warningBanner = document.getElementById('emailWarning');
-    const email = emailField?.value.trim();
-    const blockedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
-    const domain = email.split('@')[1]?.toLowerCase() || '';
-
-    if (!domain || blockedDomains.includes(domain)) {
-      regAttempts = typeof regAttempts === 'number' ? regAttempts + 1 : 1;
-      console.log(`Invalid email attempt #${regAttempts}`);
-
-      if (regAttempts >= 3 && warningBanner) {
-        warningBanner.style.display = 'block';
-      } else {
-        alert('Please use a business email address (e.g. yourname@company.com)');
-      }
-      return false;
-    }
-
-    // Hide banner if email becomes valid
-    if (warningBanner) warningBanner.style.display = 'none';
-  }
-
-  return true;
-}
-
 
     if (step === 2) {
       const sector = document.getElementById('sectorInput')?.value.trim();
       const selected = document.querySelector('.service-card.selected');
-      if (!sector) {
-        alert('Please enter your sector or service area.');
-        return false;
-      }
-      if (!selected) {
-        alert('Please select a membership package.');
-        return false;
-      }
+      if (!sector) { alert('Please enter your sector.'); return false; }
+      if (!selected) { alert('Please select a membership package.'); return false; }
     }
 
     if (step === 3) {
       const person = document.getElementById('personName')?.value.trim();
-      if (!person) {
-        alert('Please enter the full name of a company representative.');
-        return false;
-      }
+      if (!person) { alert('Please enter a company representative name.'); return false; }
     }
-console.log('Invalid email attempts:', regAttempts);
+
     return true;
   }
 
-  /* =========================
-     Country / District / Town Selectors
-  ========================= */
+  // =========================
+  // Country / District / Town
+  // =========================
   const countrySelect = document.getElementById('country');
   const districtSelect = document.getElementById('district');
   const townSelect = document.getElementById('town');
@@ -1349,121 +1324,81 @@ console.log('Invalid email attempts:', regAttempts);
   const countryCode = document.getElementById('countryCode');
 
   const countryData = {
-    ZW: { name: 'Zimbabwe', flag: '🇿🇼', code: '+263' },
-    ZA: { name: 'South Africa', flag: '🇿🇦', code: '+27' },
-    BW: { name: 'Botswana', flag: '🇧🇼', code: '+267' },
-    NA: { name: 'Namibia', flag: '🇳🇦', code: '+264' },
-    MZ: { name: 'Mozambique', flag: '🇲🇿', code: '+258' },
-    ZM: { name: 'Zambia', flag: '🇿🇲', code: '+260' },
-    TZ: { name: 'Tanzania', flag: '🇹🇿', code: '+255' }
+    ZW:{name:'Zimbabwe',flag:'🇿🇼',code:'+263'},
+    ZA:{name:'South Africa',flag:'🇿🇦',code:'+27'},
+    BW:{name:'Botswana',flag:'🇧🇼',code:'+267'},
+    NA:{name:'Namibia',flag:'🇳🇦',code:'+264'},
+    MZ:{name:'Mozambique',flag:'🇲🇿',code:'+258'},
+    ZM:{name:'Zambia',flag:'🇿🇲',code:'+260'},
+    TZ:{name:'Tanzania',flag:'🇹🇿',code:'+255'}
   };
-
   const districts = {
-    ZW: ['Harare', 'Bulawayo', 'Manicaland', 'Mashonaland Central'],
-    ZA: ['Gauteng', 'Western Cape', 'KwaZulu-Natal'],
-    BW: ['Gaborone', 'Francistown'],
-    NA: ['Khomas', 'Erongo'],
-    MZ: ['Maputo', 'Beira'],
-    ZM: ['Lusaka', 'Ndola'],
-    TZ: ['Dar es Salaam', 'Dodoma']
+    ZW:['Harare','Bulawayo','Manicaland','Mashonaland Central'],
+    ZA:['Gauteng','Western Cape','KwaZulu-Natal'],
+    BW:['Gaborone','Francistown'],
+    NA:['Khomas','Erongo'],
+    MZ:['Maputo','Beira'],
+    ZM:['Lusaka','Ndola'],
+    TZ:['Dar es Salaam','Dodoma']
   };
-
   const towns = {
-    Harare: ['Harare CBD', 'Chisipite', 'Borrowdale'],
-    Bulawayo: ['Khami', 'Nkulumane'],
-    Gauteng: ['Johannesburg', 'Pretoria'],
-    'Western Cape': ['Cape Town', 'Stellenbosch'],
-    'KwaZulu-Natal': ['Durban', 'Pietermaritzburg'],
-    Maputo: ['Maputo City'],
-    Lusaka: ['Lusaka Central']
+    Harare:['Harare CBD','Chisipite','Borrowdale'],
+    Bulawayo:['Khami','Nkulumane'],
+    Gauteng:['Johannesburg','Pretoria'],
+    'Western Cape':['Cape Town','Stellenbosch'],
+    'KwaZulu-Natal':['Durban','Pietermaritzburg'],
+    Maputo:['Maputo City'],
+    Lusaka:['Lusaka Central']
   };
 
   if (countrySelect) {
-    countrySelect.addEventListener('change', () => {
+    countrySelect.addEventListener('change', ()=>{
       const code = countrySelect.value;
       districtSelect.innerHTML = '<option value="">Select district</option>';
       townSelect.innerHTML = '<option value="">Select town</option>';
-      if (districts[code]) {
-        districts[code].forEach(d => {
-          districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
-        });
-      }
+      if(districts[code]) districts[code].forEach(d=>{
+        districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
+      });
       const cd = countryData[code];
-      if (flagEmoji) flagEmoji.textContent = cd?.flag || '🏳️';
-      if (countryCode) countryCode.textContent = cd?.code || '+000';
+      if(flagEmoji) flagEmoji.textContent = cd?.flag || '🏳️';
+      if(countryCode) countryCode.textContent = cd?.code || '+000';
     });
   }
 
-  if (districtSelect) {
-    districtSelect.addEventListener('change', () => {
+  if(districtSelect){
+    districtSelect.addEventListener('change', ()=>{
       const val = districtSelect.value;
       townSelect.innerHTML = '<option value="">Select town</option>';
-      if (towns[val]) {
-        towns[val].forEach(t => {
-          townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
-        });
-      }
+      if(towns[val]) towns[val].forEach(t=>{
+        townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
+      });
     });
   }
 
-  /* =========================
-     Business Email Validation
-  ========================= */
-let regAttempts = 0;
-
-function isBusinessEmail(email) {
-  const blocked = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
-  const domain = email.split('@')[1]?.toLowerCase() || '';
-  return domain && !blocked.includes(domain);
-}
-
-function validateEmailAndShowBanner() {
-  const emailField = document.getElementById('registerEmail');
-  const warningBanner = document.getElementById('emailWarning');
-  const email = emailField?.value.trim();
-
-  if (!email || !isBusinessEmail(email)) {
-    regAttempts++;
-    console.log(`Invalid email attempt #${regAttempts}`);
-    if (regAttempts >= 3 && warningBanner) {
-      warningBanner.style.display = 'block';
-    } else {
-      alert('Please use a business email address (e.g. yourname@company.com)');
-    }
-    return false;
-  }
-
-  // Hide banner if email becomes valid
-  if (warningBanner) warningBanner.style.display = 'none';
-  return true;
-}
-
-
-
-  /* =========================
-     Service Package Selection
-  ========================= */
+  // =========================
+  // Service Selection
+  // =========================
   window.selectPackage = card => {
-    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('.service-card').forEach(c=>c.classList.remove('selected'));
     card.classList.add('selected');
     document.getElementById('selectedPackage').innerText = card.dataset.package || '';
     document.getElementById('selectedFee').innerText = card.dataset.fee || '';
     const txnPopup = document.getElementById('transactionPopup');
-    if (txnPopup) txnPopup.style.display = 'block';
+    if(txnPopup) txnPopup.style.display = 'block';
   };
 
   window.completeTransaction = () => {
     alert('✅ Payment confirmed!');
     const txnPopup = document.getElementById('transactionPopup');
-    if (txnPopup) txnPopup.style.display = 'none';
+    if(txnPopup) txnPopup.style.display = 'none';
   };
 
-  /* =========================
-     Final Review Renderer
-  ========================= */
+  // =========================
+  // Review Renderer
+  // =========================
   function renderReview() {
     const area = document.getElementById('finalReview');
-    if (!area) return;
+    if(!area) return;
     const person = document.getElementById('personName')?.value || '';
     const designation = document.getElementById('designation')?.value || '';
     const sector = document.getElementById('sectorInput')?.value || '';
@@ -1479,15 +1414,16 @@ function validateEmailAndShowBanner() {
     `;
   }
 
-  /* =========================
-     Submit Registration
-  ========================= */
+  // =========================
+  // Submit Registration
+  // =========================
   window.submitApplication = () => {
     alert('✅ Membership application submitted successfully!');
     closeModal('registerModal');
   };
 });
 </script>
+
   <script>
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.left-bg img'); // All images inside left-bg
