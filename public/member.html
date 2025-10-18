@@ -458,152 +458,197 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
 </section>
 
 <script>
-feather.replace();
+document.addEventListener('DOMContentLoaded', () => {
 
-/* Modal controls */
-function openModal(id){
-  document.getElementById(id).style.display = 'flex';
-}
-function closeModal(id){
-  document.getElementById(id).style.display = 'none';
-}
+  // Replace feather icons
+  feather.replace();
 
-/* Stepper logic */
-const steps = document.querySelectorAll('.step-item');
-const progress = document.getElementById('progressFill');
-const stepContents = document.querySelectorAll('.step-content');
-let currentStep = 1;
-
-function updateStepper(n){
-  steps.forEach((s,i) => s.classList.toggle('active', i < n));
-  if(progress) progress.style.width = ((n-1)/(steps.length-1))*100 + '%';
-  stepContents.forEach(sc => sc.classList.toggle('active', Number(sc.dataset.step) === n));
-  currentStep = n;
-  renderReview();
-}
-function nextStep(n){ updateStepper(n); }
-function prevStep(n){ updateStepper(n); }
-// Country & flag data
-const countryData = {
-  'ZW': {name:'Zimbabwe', flag:'🇿🇼', code:'+263'},
-  'ZA': {name:'South Africa', flag:'🇿🇦', code:'+27'},
-  'BW': {name:'Botswana', flag:'🇧🇼', code:'+267'},
-  'NA': {name:'Namibia', flag:'🇳🇦', code:'+264'},
-  'MZ': {name:'Mozambique', flag:'🇲🇿', code:'+258'},
-  'ZM': {name:'Zambia', flag:'🇿🇲', code:'+260'},
-  'TZ': {name:'Tanzania', flag:'🇹🇿', code:'+255'}
-};
-
-const districts = {
-  'ZW':['Harare','Bulawayo','Manicaland','Mashonaland Central'],
-  'ZA':['Gauteng','Western Cape','KwaZulu-Natal'],
-  'BW':['Gaborone','Francistown'],
-  'NA':['Khomas','Erongo'],
-  'MZ':['Maputo','Beira'],
-  'ZM':['Lusaka','Ndola'],
-  'TZ':['Dar es Salaam','Dodoma']
-};
-
-const towns = {
-  'Harare':['Harare CBD','Chisipite','Borrowdale'],
-  'Bulawayo':['Khami','Nkulumane'],
-  'Gauteng':['Johannesburg','Pretoria'],
-  'Western Cape':['Cape Town','Stellenbosch'],
-  'KwaZulu-Natal':['Durban','Pietermaritzburg'],
-  'Maputo':['Maputo City'],
-  'Lusaka':['Lusaka Central']
-};
-
-// Cascading country → district → town
-const countrySelect = document.getElementById('country');
-const districtSelect = document.getElementById('district');
-const townSelect = document.getElementById('town');
-const flagEmoji = document.getElementById('flagEmoji');
-const countryCode = document.getElementById('countryCode');
-
-countrySelect.addEventListener('change', ()=>{
-  const code = countrySelect.value;
-  districtSelect.innerHTML = '<option value="">Select district</option>';
-  townSelect.innerHTML = '<option value="">Select town</option>';
-  if(code && districts[code]) districts[code].forEach(d => {
-    districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
-  });
-  const cd = countryData[code];
-  flagEmoji.textContent = cd ? cd.flag : '🏳️';
-  countryCode.textContent = cd ? cd.code : '+000';
-});
-
-districtSelect.addEventListener('change', ()=>{
-  const val = districtSelect.value;
-  townSelect.innerHTML = '<option value="">Select town</option>';
-  if(towns[val]) towns[val].forEach(t => {
-    townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
-  });
-});
-
-// Email validation logic
-let regAttempts = 0;
-function isBusinessEmail(email) {
-  return email.includes('@') && !email.match(/@(gmail|yahoo|outlook|hotmail)\.com$/i);
-}
-
-function validateRegisterEmail() {
-  const email = document.getElementById('registerEmail').value.trim();
-  if (!isBusinessEmail(email)) {
-    regAttempts++;
-    if (regAttempts >= 2) {
-      document.getElementById('registerPopup').style.display = 'block';
-    } else {
-      alert('Please use a business email address (e.g. yourname@company.com)');
-    }
-  } else {
-    // Proceed to next step
-    nextStep(2);
+  /* =========================
+     Modal Controls
+  ========================= */
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.style.display = 'flex';
   }
-}
 
-// Form submission
-document.getElementById('registerForm').addEventListener('submit', e => {
-  e.preventDefault();
-  validateRegisterEmail();
+  function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.style.display = 'none';
+  }
+
+  /* =========================
+     Stepper Logic
+  ========================= */
+  const steps = document.querySelectorAll('.step-item');
+  const progress = document.getElementById('progressFill');
+  const stepContents = document.querySelectorAll('.step-content');
+  let currentStep = 1;
+
+  function updateStepper(n) {
+    steps.forEach((s, i) => s.classList.toggle('active', i < n));
+    if (progress) progress.style.width = ((n - 1) / (steps.length - 1)) * 100 + '%';
+    stepContents.forEach(sc => sc.classList.toggle('active', Number(sc.dataset.step) === n));
+    currentStep = n;
+    renderReview();
+  }
+
+  window.nextStep = n => updateStepper(n);
+  window.prevStep = n => updateStepper(n);
+
+  /* =========================
+     Country / District / Town
+  ========================= */
+  const countryData = {
+    'ZW': { name: 'Zimbabwe', flag: '🇿🇼', code: '+263' },
+    'ZA': { name: 'South Africa', flag: '🇿🇦', code: '+27' },
+    'BW': { name: 'Botswana', flag: '🇧🇼', code: '+267' },
+    'NA': { name: 'Namibia', flag: '🇳🇦', code: '+264' },
+    'MZ': { name: 'Mozambique', flag: '🇲🇿', code: '+258' },
+    'ZM': { name: 'Zambia', flag: '🇿🇲', code: '+260' },
+    'TZ': { name: 'Tanzania', flag: '🇹🇿', code: '+255' }
+  };
+
+  const districts = {
+    'ZW': ['Harare', 'Bulawayo', 'Manicaland', 'Mashonaland Central'],
+    'ZA': ['Gauteng', 'Western Cape', 'KwaZulu-Natal'],
+    'BW': ['Gaborone', 'Francistown'],
+    'NA': ['Khomas', 'Erongo'],
+    'MZ': ['Maputo', 'Beira'],
+    'ZM': ['Lusaka', 'Ndola'],
+    'TZ': ['Dar es Salaam', 'Dodoma']
+  };
+
+  const towns = {
+    'Harare': ['Harare CBD', 'Chisipite', 'Borrowdale'],
+    'Bulawayo': ['Khami', 'Nkulumane'],
+    'Gauteng': ['Johannesburg', 'Pretoria'],
+    'Western Cape': ['Cape Town', 'Stellenbosch'],
+    'KwaZulu-Natal': ['Durban', 'Pietermaritzburg'],
+    'Maputo': ['Maputo City'],
+    'Lusaka': ['Lusaka Central']
+  };
+
+  const countrySelect = document.getElementById('country');
+  const districtSelect = document.getElementById('district');
+  const townSelect = document.getElementById('town');
+  const flagEmoji = document.getElementById('flagEmoji');
+  const countryCode = document.getElementById('countryCode');
+
+  if (countrySelect) {
+    countrySelect.addEventListener('change', () => {
+      const code = countrySelect.value;
+      districtSelect.innerHTML = '<option value="">Select district</option>';
+      townSelect.innerHTML = '<option value="">Select town</option>';
+      if (code && districts[code]) {
+        districts[code].forEach(d => {
+          districtSelect.insertAdjacentHTML('beforeend', `<option value="${d}">${d}</option>`);
+        });
+      }
+      const cd = countryData[code];
+      if (flagEmoji) flagEmoji.textContent = cd ? cd.flag : '🏳️';
+      if (countryCode) countryCode.textContent = cd ? cd.code : '+000';
+    });
+  }
+
+  if (districtSelect) {
+    districtSelect.addEventListener('change', () => {
+      const val = districtSelect.value;
+      townSelect.innerHTML = '<option value="">Select town</option>';
+      if (towns[val]) {
+        towns[val].forEach(t => {
+          townSelect.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`);
+        });
+      }
+    });
+  }
+
+  /* =========================
+     Email Validation
+  ========================= */
+  let regAttempts = 0;
+
+  function isBusinessEmail(email) {
+    return email.includes('@') && !email.match(/@(gmail|yahoo|outlook|hotmail)\.com$/i);
+  }
+
+  function validateRegisterEmail() {
+    const emailField = document.getElementById('registerEmail');
+    if (!emailField) return;
+    const email = emailField.value.trim();
+    if (!isBusinessEmail(email)) {
+      regAttempts++;
+      if (regAttempts >= 2) {
+        const popup = document.getElementById('registerPopup');
+        if (popup) popup.style.display = 'block';
+      } else {
+        alert('Please use a business email address (e.g. yourname@company.com)');
+      }
+    } else {
+      // Email accepted, move to next step
+      nextStep(2);
+    }
+  }
+
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+      e.preventDefault();
+      validateRegisterEmail();
+    });
+  }
+
+  /* =========================
+     Service Package Selection
+  ========================= */
+  window.selectPackage = card => {
+    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    const selectedPackage = document.getElementById('selectedPackage');
+    const selectedFee = document.getElementById('selectedFee');
+    if (selectedPackage) selectedPackage.innerText = card.dataset.package;
+    if (selectedFee) selectedFee.innerText = card.dataset.fee;
+    const txnPopup = document.getElementById('transactionPopup');
+    if (txnPopup) txnPopup.style.display = 'block';
+  };
+
+  window.completeTransaction = () => {
+    alert('✅ Payment confirmed!');
+    const txnPopup = document.getElementById('transactionPopup');
+    if (txnPopup) txnPopup.style.display = 'none';
+  };
+
+  /* =========================
+     Render Review
+  ========================= */
+  function renderReview() {
+    if (currentStep !== 4) return;
+    const area = document.getElementById('finalReview');
+    if (!area) return;
+    const person = document.getElementById('personName')?.value || '';
+    const designation = document.getElementById('designation')?.value || '';
+    const sector = document.getElementById('sectorInput')?.value || '';
+    const service = document.getElementById('selectedPackage')?.innerText || '';
+    const fee = document.getElementById('selectedFee')?.innerText || '';
+
+    area.innerHTML = `
+      <strong>Person Name:</strong> ${person}<br>
+      <strong>Designation:</strong> ${designation}<br>
+      <strong>Sector:</strong> ${sector}<br>
+      <strong>Selected Service:</strong> ${service}<br>
+      <strong>Fee:</strong> ZMW ${fee}
+    `;
+  }
+
+  /* =========================
+     Submit Registration
+  ========================= */
+  window.submitApplication = () => {
+    alert('✅ Membership application submitted successfully!');
+    closeModal('registerModal');
+  };
+
 });
-
-/* Service selection */
-function selectPackage(card){
-  document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-  card.classList.add('selected');
-  document.getElementById('selectedPackage').innerText = card.dataset.package;
-  document.getElementById('selectedFee').innerText = card.dataset.fee;
-  document.getElementById('transactionPopup').style.display = 'block';
-}
-function completeTransaction(){
-  alert('✅ Payment confirmed!');
-  document.getElementById('transactionPopup').style.display = 'none';
-}
-
-/* Render review */
-function renderReview(){
-  if(currentStep !== 4) return;
-  const area = document.getElementById('finalReview');
-  const person = document.getElementById('personName')?.value || '';
-  const designation = document.getElementById('designation')?.value || '';
-  const sector = document.getElementById('sectorInput')?.value || '';
-  const service = document.getElementById('selectedPackage')?.innerText || '';
-  const fee = document.getElementById('selectedFee')?.innerText || '';
-  area.innerHTML = `
-    <strong>Person Name:</strong> ${person}<br>
-    <strong>Designation:</strong> ${designation}<br>
-    <strong>Sector:</strong> ${sector}<br>
-    <strong>Selected Service:</strong> ${service}<br>
-    <strong>Fee:</strong> ZMW ${fee}
-  `;
-}
-
-/* Submit registration */
-function submitApplication(){
-  alert('✅ Membership application submitted successfully!');
-  closeModal('registerModal');
-}
 </script>
+
 </body>
 </html>
