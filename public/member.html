@@ -78,6 +78,17 @@
   height: 100vh;
   overflow: hidden;
 }
+/* Fade-in animation for sections */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .slide {
   position: absolute;
@@ -602,6 +613,17 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
   .sidebar.open { width: 220px; }
 
   .sidebar-toggle { left: 0; }}
+
+      section { max-width: 1000px; margin: 60px auto; padding: 0 20px; text-align: center; }
+section h2 { font-size: 1.8rem; margin-bottom: 20px; color: var(--primary); }
+.card-grid, .testimonial-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.service-card, .testimonial-card { background: #fff; padding: 20px; border-radius: var(--radius); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.testimonial-card { font-style: italic; color: var(--text-dark); }
+ul { list-style-type: disc; padding-left: 20px; text-align: left; max-width: 600px; margin: 0 auto; }
+ul li { margin-bottom: 8px; }
+#contactForm input, #contactForm textarea { margin-bottom: 12px; width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem; }
+#contactForm button { width: 100%; }
+
 </style>
 
 </head>
@@ -614,13 +636,13 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
     <div class="stripe orange"></div>
   </div>
   <ul>
-    <li><a href="#home"><i data-feather="home"></i><span>Home</span></a></li>
-    <li><a href="#about"><i data-feather="info"></i><span>About Us</span></a></li>
+    <li><a href="index.html"><i data-feather="home"></i><span>Home</span></a></li>
+    <li><a href="index.html"><i data-feather="info"></i><span>About Us</span></a></li>
     <li><a href="member.html"><i data-feather="user-plus"></i><span>Members</span></a></li>
-    <li><a href="#events"><i data-feather="calendar"></i><span>Events</span></a></li>
-    <li><a href="#services"><i data-feather="briefcase"></i><span>Services</span></a></li>
-    <li><a href="#partners"><i data-feather="users"></i><span>Partners</span></a></li>
-    <li><a href="#contact"><i data-feather="send"></i><span>Contact</span></a></li>
+    <li><a href="index.html"><i data-feather="calendar"></i><span>Events</span></a></li>
+    <li><a href="index.html"><i data-feather="briefcase"></i><span>Services</span></a></li>
+    <li><a href="index.html"><i data-feather="users"></i><span>Partners</span></a></li>
+    <li><a href="index.html"><i data-feather="send"></i><span>Contact</span></a></li>
   </ul>
   <a href="payroll.html" class="commitment-btn">Payroll & ERPs</a>
   <a href="web.html" class="commitment-btn">Web Based Services</a>
@@ -668,12 +690,14 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
     </aside>
 
     <!-- Center Steps -->
-    <aside class="center-steps">
-      <div class="brand">
-        <div class="logo">LC</div>
-        <div>
-          <h3>Company Membership</h3>
-          <div class="muted">5 steps to join</div>
+   <aside class="center-steps">
+  <div class="brand">
+    <div class="logo">
+      <img src="logo.jpg" alt="Lusaka Chamber Logo">
+    </div>
+    <div>
+      <h3>Company Membership</h3>
+      <div class="muted">5 steps to join</div>
         </div>
       </div>
 
@@ -885,10 +909,71 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
 </div>
 
 <!-- About Section -->
-<section>
+<section id="about">
   <h2>About the Chamber</h2>
-  <p>The Lusaka Chamber of Commerce is a non-profit partnership building a stronger economy and community.</p>
+  <p>The Lusaka Chamber of Commerce is a non-profit partnership building a stronger economy and community. We provide advocacy, networking, and business development opportunities for members across all sectors.</p>
 </section>
+
+<!-- Our Services Section -->
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="card-grid">
+    <div class="service-card">
+      <h3>Business Advocacy</h3>
+      <p>We represent members’ interests in policy-making and support regulatory compliance.</p>
+    </div>
+    <div class="service-card">
+      <h3>Networking Events</h3>
+      <p>Attend exclusive events to connect with industry leaders and potential partners.</p>
+    </div>
+    <div class="service-card">
+      <h3>Training & Workshops</h3>
+      <p>Upskill your team with practical business, management, and digital training sessions.</p>
+    </div>
+    <div class="service-card">
+      <h3>Market Access</h3>
+      <p>We help members expand their reach locally and internationally through trade missions and expos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Membership Benefits -->
+<section id="membership">
+  <h2>Membership Benefits</h2>
+  <ul>
+    <li>Exclusive networking opportunities with business leaders.</li>
+    <li>Access to market research and industry reports.</li>
+    <li>Priority registration for workshops, seminars, and events.</li>
+    <li>Support in business advocacy and regulatory matters.</li>
+    <li>Discounts with partner organizations and service providers.</li>
+  </ul>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials">
+  <h2>What Our Members Say</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <p>"Joining Lusaka Chamber helped our company connect with key stakeholders and expand into new markets." – CEO, Tech Solutions</p>
+    </div>
+    <div class="testimonial-card">
+      <p>"The workshops and training programs offered are very practical and useful for our staff." – HR Manager, Green Foods Ltd.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Have questions or need support? Reach out to our team:</p>
+  <form id="contactForm">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+</section>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1144,6 +1229,29 @@ forgotForm.addEventListener('submit', e => {
     sidebar.classList.toggle('open');
     toggle.classList.toggle('open');
   });
+// Fade-in on scroll
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+
+  sections.forEach(section => {
+    section.classList.add("fade-in-section"); // Add animation class
+  });
+
+  const observerOptions = {
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target); // Animate once
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
+});
 
 </script>
 
