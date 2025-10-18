@@ -354,18 +354,36 @@ function prevStep(n){updateStepper(n);}
 
 /* Email validation */
 const popup=document.getElementById('registerPopup');let attempts=0;
-function isBusinessEmail(e){return e.includes('@')&&!e.match(/@(gmail|yahoo|hotmail|outlook)\.com$/i);}
-function validateEmail(){
-  const e=document.getElementById('registerEmail').value.trim();
-  if(!isBusinessEmail(e)){
+function isBusinessEmail(email) {
+  // Trim whitespace and lowercase
+  const e = email.trim().toLowerCase();
+
+  // Reject common free email domains
+  const freeDomains = ["gmail.com","yahoo.com","hotmail.com","outlook.com"];
+  const domain = e.split("@")[1]; // get domain part
+  if (!domain) return false;       // invalid if no domain
+  if (freeDomains.includes(domain)) return false;
+
+  // Must contain @ and a domain
+  return e.includes("@") && domain.includes(".");
+}
+
+function validateEmail() {
+  const e = document.getElementById('registerEmail').value;
+  if (!isBusinessEmail(e)) {
     attempts++;
-    if(attempts>=2){popup.style.display='block';}
-    else{alert('Please use a business email (e.g. name@company.com)');}
+    if (attempts >= 2) {
+      popup.style.display = 'block';
+    } else {
+      alert('Please use a business email (e.g. name@company.com)');
+    }
     return;
   }
-  popup.style.display='none';
+
+  popup.style.display = 'none';
   nextStep(3);
 }
+
 
 /* Service Selection & Transaction Modal */
 function selectService(card){
