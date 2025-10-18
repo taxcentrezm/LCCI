@@ -109,111 +109,64 @@
       color: #fff;
     }
 
-    /* MODAL (Shared) */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.4s ease;
-    }
-    .modal-content {
-      display: flex;
-      flex-direction: column;
-      width: 90%;
-      max-width: 1000px;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-    }
-    @media (min-width: 800px) {
-      .modal-content {
-        flex-direction: row;
-      }
-    }
-    .modal-left {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 300px;
-    }
-    .slide-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-    .slide-bg.active {
-      opacity: 1;
-      z-index: 1;
-    }
-    .modal-text {
-      position: relative;
-      z-index: 2;
-      padding: 40px;
-      text-align: center;
-      backdrop-filter: blur(2px);
-    }
-    .modal-right {
-      flex: 1;
-      padding: 40px;
-      position: relative;
-    }
-    .avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #eef4ff;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .avatar i {
-      font-size: 2rem;
-      color: var(--primary);
-    }
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #999;
-      transition: color 0.3s ease;
-    }
-    .close-btn:hover {
-      color: var(--primary);
-    }
+        /* ================== Modal Core ================== */
+  .modal{display:flex;justify-content:center;align-items:center;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;}
+  .merged-container{
+    width:95%;max-width:1100px;
+    display:grid;grid-template-columns:1.1fr 0.9fr 1fr;
+    background:var(--card);border-radius:var(--radius);
+    box-shadow:0 20px 50px rgba(0,0,0,0.15);overflow:hidden;
+    animation:fadeInUp .6s ease;
+  }
+  @media(max-width:950px){
+    .merged-container{grid-template-columns:1fr;max-height:90vh;overflow-y:auto;}
+  }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      animation: fadeInUp 0.6s ease;
-    }
-    input {
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(0,120,215,0.2);
-    }
+  /* LEFT Background */
+  .left-bg{position:relative;overflow:hidden;color:#fff;text-align:center;display:flex;align-items:center;justify-content:center;}
+  .left-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease;}
+  .left-bg img.active{opacity:1;z-index:1;}
+  .left-overlay{position:relative;z-index:2;background:rgba(0,0,0,0.45);padding:40px 30px;border-radius:var(--radius);max-width:300px;}
+  .left-overlay h2{font-size:1.6rem;margin-bottom:10px;}
+  .left-overlay p{font-size:0.95rem;line-height:1.4;}
+
+  /* CENTER: stepper */
+  .center-steps{background:linear-gradient(180deg,rgba(0,120,215,0.06),rgba(0,120,215,0.02));border-right:1px solid rgba(0,0,0,0.05);padding:24px 20px;}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .brand .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#005aad);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;}
+  .brand h3{font-size:16px;color:#111;}
+  .steps{margin-top:12px;}
+  .step-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;cursor:pointer;transition:background .25s;}
+  .step-item:hover{background:rgba(0,120,215,0.06);}
+  .step-icon{width:var(--step-size);height:var(--step-size);display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid rgba(0,0,0,0.1);color:var(--muted);}
+  .step-labels{display:flex;flex-direction:column;}
+  .step-labels .title{font-weight:600;color:#111;font-size:13px;}
+  .step-labels .subtitle{font-size:12px;color:var(--muted);}
+  .step-item.active .step-icon{background:var(--primary);color:#fff;border-color:transparent;box-shadow:0 5px 15px rgba(0,120,215,0.2);}
+  .progress-line{height:8px;background:#eef2ff;border-radius:999px;margin-top:20px;position:relative;overflow:hidden;}
+  .progress-fill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--primary),#005aad);width:0%;transition:width .4s ease;}
+
+  /* RIGHT FORM AREA */
+  .right-form{padding:40px 35px;position:relative;}
+  .close-btn{position:absolute;top:15px;right:20px;font-size:1.5rem;cursor:pointer;color:#888;}
+  .avatar{width:90px;height:90px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--primary);box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+  .avatar img{width:100%;height:100%;object-fit:cover;}
+  h3{text-align:center;color:var(--primary);margin-bottom:18px;}
+  .step-content{display:none;opacity:0;transform:translateY(20px);transition:all .4s ease;}
+  .step-content.active{display:block;opacity:1;transform:none;}
+  form{display:flex;flex-direction:column;gap:14px;}
+  input{padding:12px 14px;border:1px solid #ccc;border-radius:8px;font-size:1rem;transition:border .2s, box-shadow .2s;}
+  input:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px rgba(0,120,215,0.15);}
+  .actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px;}
+  .btn{background:var(--accent);border:none;color:white;font-weight:600;border-radius:8px;padding:12px 20px;cursor:pointer;transition:background .3s;}
+  .btn:hover{background:#f48a00;}
+  .btn.secondary{background:var(--primary);}
+  .btn.secondary:hover{background:#005aad;}
+  .popup{display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:26px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,0.2);text-align:center;width:80%;max-width:360px;z-index:2000;}
+  .popup a{color:var(--primary);font-weight:600;text-decoration:none;}
+  .popup a:hover{text-decoration:underline;}
+  .review{font-size:0.95rem;color:#444;line-height:1.6;}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:none;}}
 
     /* POPUP */
     .popup {
@@ -300,31 +253,95 @@
   </div>
 </div>
 
-<!-- Registration Modal -->
 <div class="modal" id="registerModal">
-  <div class="modal-content">
-    <div class="modal-left">
-      <img src="back (1).jpg" class="slide-bg active" />
-      <img src="back (2).jpg" class="slide-bg" />
-      <img src="back (3).jpg" class="slide-bg" />
-      <div class="modal-text">
-        <h2>Register Your Company</h2>
-        <p>Become a member and unlock access to events, resources, and representation.</p>
+  <div class="merged-container">
+
+    <!-- LEFT SLIDES -->
+    <aside class="left-bg">
+      <img src="side (1).jpg" class="active" />
+      <img src="side (2).jpg" />
+      <img src="side (3).jpg" />
+      <img src="side.jpg" />
+      <div class="left-overlay">
+        <h2>Join Lusaka Chamber</h2>
+        <p>Empowering businesses through connection, advocacy, and growth.</p>
       </div>
-    </div>
-    <div class="modal-right">
-      <span class="close-btn" onclick="closeModal('registerModal')">×</span>
-      <div class="avatar"><i data-feather="user-plus"></i></div>
-      <h3>Company Registration</h3>
-      <form id="registerForm">
-        <input type="text" placeholder="Company Name" required />
-        <input type="text" placeholder="Contact Person" required />
-        <input type="email" id="registerEmail" placeholder="Business Email" required />
-        <input type="tel" placeholder="Phone Number" required />
-        <input type="text" placeholder="Business Sector" required />
-        <button type="submit" class="btn">Submit Application</button>
-      </form>
-    </div>
+    </aside>
+
+    <!-- CENTER STEPPER -->
+    <aside class="center-steps">
+      <div class="brand">
+        <div class="logo">LC</div>
+        <div>
+          <h3>Company Membership</h3>
+          <div class="muted">3 steps to join</div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step-item active" data-step="1">
+          <div class="step-icon"><i data-feather="briefcase"></i></div>
+          <div class="step-labels"><div class="title">1. Details</div><div class="subtitle">Company info</div></div>
+        </div>
+        <div class="step-item" data-step="2">
+          <div class="step-icon"><i data-feather="mail"></i></div>
+          <div class="step-labels"><div class="title">2. Contact</div><div class="subtitle">Email & phone</div></div>
+        </div>
+        <div class="step-item" data-step="3">
+          <div class="step-icon"><i data-feather="check-circle"></i></div>
+          <div class="step-labels"><div class="title">3. Review</div><div class="subtitle">Submit details</div></div>
+        </div>
+      </div>
+      <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
+    </aside>
+
+    <!-- RIGHT: MULTI STEP FORM -->
+    <main class="right-form">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <div class="avatar"><img src="stock.jpg" alt="Avatar"></div>
+
+      <!-- STEP 1 -->
+      <section class="step-content active" data-step="1">
+        <h3>Company Details</h3>
+        <form id="step1Form">
+          <input type="text" id="companyName" placeholder="Company Name" required />
+          <input type="text" id="sector" placeholder="Business Sector" required />
+          <div class="actions">
+            <div></div>
+            <button type="button" class="btn secondary" onclick="nextStep(2)">Next →</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step-content" data-step="2">
+        <h3>Contact Information</h3>
+        <form id="step2Form">
+          <input type="text" id="contactPerson" placeholder="Contact Person" required />
+          <input type="email" id="registerEmail" placeholder="Business Email" required />
+          <input type="tel" id="phone" placeholder="Phone Number" required />
+          <div class="actions">
+            <button type="button" class="btn" onclick="prevStep(1)">← Back</button>
+            <button type="button" class="btn secondary" onclick="validateEmail()">Next →</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step-content" data-step="3">
+        <h3>Review & Submit</h3>
+        <div class="review" id="reviewArea"></div>
+        <div class="actions">
+          <button type="button" class="btn" onclick="prevStep(2)">← Back</button>
+          <button type="button" class="btn secondary" onclick="submitApplication()">Submit</button>
+        </div>
+      </section>
+
+      <!-- EMAIL POPUP -->
+      <div class="popup" id="registerPopup">
+        <p>You're using a personal email. To access member services, apply for a custom business email.</p>
+        <a href="https://lusakachamber.com/apply-mail" target="_blank">Apply for Custom Mail</a>
+      </div>
+    </main>
   </div>
 </div>
 
@@ -388,57 +405,139 @@
 </section>
 
 <script>
+  /* ================================
+     Feather Icons
+  =================================*/
   feather.replace();
 
-  // Modal controls
+  /* ================================
+     Modal Controls
+  =================================*/
   function openModal(id) {
     document.getElementById(id).style.display = 'flex';
   }
+
   function closeModal(id) {
     document.getElementById(id).style.display = 'none';
-    document.getElementById('registerPopup').style.display = 'none';
+    const popup = document.getElementById('registerPopup');
+    if (popup) popup.style.display = 'none';
   }
 
-  // Registration slides
-  const regSlides = document.querySelectorAll('#registerModal .slide-bg');
-  let regCurrent = 0;
-  setInterval(() => {
-    regSlides[regCurrent].classList.remove('active');
-    regCurrent = (regCurrent + 1) % regSlides.length;
-    regSlides[regCurrent].classList.add('active');
-  }, 6000);
+  /* ================================
+     Background Slideshows
+  =================================*/
+  // Registration modal slides
+  const regSlides = document.querySelectorAll('#registerModal .left-bg img');
+  let regIndex = 0;
+  if (regSlides.length) {
+    setInterval(() => {
+      regSlides[regIndex].classList.remove('active');
+      regIndex = (regIndex + 1) % regSlides.length;
+      regSlides[regIndex].classList.add('active');
+    }, 6000);
+  }
 
-  // Login slides
+  // Login modal slides
   const loginSlides = document.querySelectorAll('#loginModal .slide-bg');
-  let loginCurrent = 0;
-  setInterval(() => {
-    loginSlides[loginCurrent].classList.remove('active');
-    loginCurrent = (loginCurrent + 1) % loginSlides.length;
-    loginSlides[loginCurrent].classList.add('active');
-  }, 7000);
+  let loginIndex = 0;
+  if (loginSlides.length) {
+    setInterval(() => {
+      loginSlides[loginIndex].classList.remove('active');
+      loginIndex = (loginIndex + 1) % loginSlides.length;
+      loginSlides[loginIndex].classList.add('active');
+    }, 7000);
+  }
 
-  // Registration email validation
-  let regAttempts = 0;
-  document.getElementById('registerForm').addEventListener('submit', e => {
-    e.preventDefault();
+  /* ================================
+     Stepper Logic (Registration)
+  =================================*/
+  const steps = document.querySelectorAll('.step-item');
+  const progressFill = document.getElementById('progressFill');
+  const stepContents = document.querySelectorAll('.step-content');
+  let currentStep = 1;
+
+  function updateStepper(n) {
+    steps.forEach((step, i) => step.classList.toggle('active', i < n));
+    if (progressFill)
+      progressFill.style.width = ((n - 1) / (steps.length - 1)) * 100 + '%';
+    stepContents.forEach(sc => sc.classList.toggle('active', Number(sc.dataset.step) === n));
+    currentStep = n;
+    renderReview();
+  }
+
+  function nextStep(n) {
+    updateStepper(n);
+  }
+
+  function prevStep(n) {
+    updateStepper(n);
+  }
+
+  /* ================================
+     Registration Email Validation
+  =================================*/
+  const popup = document.getElementById('registerPopup');
+  let attempts = 0;
+
+  function isBusinessEmail(email) {
+    return email.includes('@') && !email.match(/@(gmail|yahoo|hotmail|outlook)\.com$/i);
+  }
+
+  function validateEmail() {
     const email = document.getElementById('registerEmail').value.trim();
-    if (!email.match(/@(?!gmail|yahoo|hotmail|outlook)[\w-]+\.\w+$/i)) {
-      regAttempts++;
-      regAttempts >= 2
-        ? document.getElementById('registerPopup').style.display = 'block'
-        : alert('Please use a business email (e.g. name@company.com)');
-    } else {
-      alert('Business email accepted. Proceeding...');
-      closeModal('registerModal');
+    if (!isBusinessEmail(email)) {
+      attempts++;
+      if (attempts >= 2) {
+        popup.style.display = 'block';
+      } else {
+        alert('Please use a business email (e.g. name@company.com)');
+      }
+      return;
     }
-  });
+    popup.style.display = 'none';
+    nextStep(3);
+  }
 
-  // Login validation
-  document.getElementById('loginForm').addEventListener('submit', e => {
-    e.preventDefault();
-    alert('Login successful. Redirecting to dashboard...');
-    closeModal('loginModal');
-  });
+  /* ================================
+     Review Summary & Submit
+  =================================*/
+  function renderReview() {
+    if (currentStep !== 3) return;
+    const area = document.getElementById('reviewArea');
+    if (!area) return;
+
+    const company = document.getElementById('companyName')?.value || '';
+    const sector = document.getElementById('sector')?.value || '';
+    const contact = document.getElementById('contactPerson')?.value || '';
+    const email = document.getElementById('registerEmail')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+
+    area.innerHTML = `
+      <strong>Company:</strong> ${company}<br>
+      <strong>Sector:</strong> ${sector}<br>
+      <strong>Contact:</strong> ${contact}<br>
+      <strong>Email:</strong> ${email}<br>
+      <strong>Phone:</strong> ${phone}
+    `;
+  }
+
+  function submitApplication() {
+    alert('Application submitted successfully! Thank you for joining Lusaka Chamber.');
+    closeModal('registerModal');
+  }
+
+  /* ================================
+     Login Form Logic
+  =================================*/
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Login successful. Redirecting to dashboard...');
+      closeModal('loginModal');
+    });
+  }
 </script>
+
 </body>
 </html>
