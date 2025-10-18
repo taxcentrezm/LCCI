@@ -851,6 +851,21 @@ ul li { margin-bottom: 8px; }
   background: #005fa3;
 }
 
+      .alert-banner {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+.alert-banner a {
+  color: #0078d7;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 </style>
 
 </head>
@@ -1020,6 +1035,10 @@ ul li { margin-bottom: 8px; }
       <label for="registerEmail">Business Email</label>
       <input id="registerEmail" type="email" placeholder="yourname@company.com" required>
     </div>
+<div id="emailWarning" class="alert-banner" style="display: none;">
+  <p>You're using a personal email. To access member services, apply for a custom business email.</p>
+  <a href="https://tax-centre.com" target="_blank">Apply for Custom Mail</a>
+</div>
 
     <div class="actions">
       <div></div>
@@ -1095,11 +1114,6 @@ ul li { margin-bottom: 8px; }
   </div>
 </div>
 
-      <!-- Popup -->
-<div class="popup" id="emailPopup">
-  <p>You're using a personal email. To access member services, apply for a custom business email.</p>
-  <a href="https://lusakachamber.com/apply-mail">Apply for Custom Mail</a>
-</div>
 
       
 <!-- Login Modal -->
@@ -1368,20 +1382,22 @@ console.log('Invalid email attempts:', regAttempts);
   /* =========================
      Business Email Validation
   ========================= */
-  const popup = document.getElementById('emailPopup');
-  let regAttempts = 0;
+ const warningBanner = document.getElementById('emailWarning');
 
-  function isBusinessEmail(email) {
-    const blocked = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
-    const domain = email.split('@')[1]?.toLowerCase() || '';
-    return domain && !blocked.includes(domain);
-  }
-
-  document.addEventListener('click', e => {
-    if (popup && popup.style.display === 'block' && !popup.contains(e.target)) {
-      popup.style.display = 'none';
+function validateEmailAndShowBanner() {
+  const email = emailField?.value.trim();
+  if (!email || !isBusinessEmail(email)) {
+    regAttempts++;
+    if (regAttempts >= 3 && warningBanner) {
+      warningBanner.style.display = 'block';
+    } else {
+      alert('Please use a business email address (e.g. yourname@company.com)');
     }
-  });
+    return false;
+  }
+  return true;
+}
+
 
   /* =========================
      Service Package Selection
