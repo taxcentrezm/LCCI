@@ -78,7 +78,9 @@ a { text-decoration: none; color: var(--primary); }
 }
 .btn-outline:hover { background: var(--primary); color: #fff; }
 
-/* Modal */
+/* =========================
+   Modal & Horizontal Layout
+========================= */
 .modal {
   display: none;
   justify-content: center;
@@ -90,18 +92,20 @@ a { text-decoration: none; color: var(--primary); }
   overflow-y: auto;
 }
 .merged-container {
-  display: grid;
-  grid-template-columns: 1.2fr 1.8fr;
-  max-width: 1100px;
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
   width: 95%;
+  height: 80vh;
   background: #fff;
   border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
-@media(max-width:900px){ .merged-container { grid-template-columns:1fr; } }
 
 /* Left Background */
 .left-bg {
+  flex: 1;
   position: relative;
   display: flex;
   align-items: center;
@@ -133,7 +137,11 @@ a { text-decoration: none; color: var(--primary); }
 
 /* Center Steps */
 .center-steps {
+  flex: 1;
   padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: #f5f7fa;
 }
 .brand { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
@@ -155,8 +163,8 @@ a { text-decoration: none; color: var(--primary); }
 
 /* Right Form */
 .right-form {
+  flex: 1;
   padding: 35px 30px;
-  max-height: 90vh;
   overflow-y: auto;
   position: relative;
 }
@@ -170,7 +178,7 @@ a { text-decoration: none; color: var(--primary); }
 
 /* Step Contents */
 .step-content { display: none; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; }
-.step-content.active { display: block; opacity: 1; transform: none; }
+.step-content.active { display: flex; flex-direction: column; opacity: 1; transform: none; }
 .step-content h3 { text-align: center; color: var(--primary); margin-bottom: 20px; }
 .field-row { margin-bottom: 16px; display: flex; flex-direction: column; }
 input, select { padding: 12px 14px; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem; width: 100%; }
@@ -235,8 +243,12 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
 @media(max-width:900px){
   .row { flex-direction: column; }
   .category-cards { flex-direction: column; }
+  .merged-container { flex-direction: column; height: auto; }
+  .left-bg, .center-steps, .right-form { flex: unset; width: 100%; border: none; }
+  .center-steps { border: none; }
 }
 </style>
+
 </head>
 <body>
 
