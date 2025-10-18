@@ -1256,7 +1256,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('registerEmail').value.trim();
       if (!isBusinessEmail(email)) {
         regAttempts++;
-        if (regAttempts >= 2 && popup) {
+        if (regAttempts >= 3 && popup) {
           popup.style.display = 'block';
         } else {
           alert('Please use a business email address (e.g. yourname@company.com)');
@@ -1357,10 +1357,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================
-     Business Email Validation & Popup
+     Business Email Validation
   ========================= */
-  const emailField = document.getElementById('registerEmail');
-  const popup = document.getElementById('registerPopup');
+  const popup = document.getElementById('loginPopup');
   let regAttempts = 0;
 
   function isBusinessEmail(email) {
@@ -1370,7 +1369,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('click', e => {
-    if (popup && popup.style.display === 'block' && !popup.contains(e.target) && e.target !== emailField) {
+    if (popup && popup.style.display === 'block' && !popup.contains(e.target)) {
       popup.style.display = 'none';
     }
   });
