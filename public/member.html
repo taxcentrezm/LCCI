@@ -1106,7 +1106,7 @@ ul li { margin-bottom: 8px; }
 </div>
 
       <!-- Popup -->
-<div class="popup" id="loginPopup">
+<div class="popup" id="emailPopup">
   <p>You're using a personal email. To access member services, apply for a custom business email.</p>
   <a href="https://lusakachamber.com/apply-mail">Apply for Custom Mail</a>
 </div>
@@ -1304,7 +1304,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
       }
     }
-
+console.log('Invalid email attempts:', regAttempts);
     return true;
   }
 
@@ -1378,7 +1378,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      Business Email Validation
   ========================= */
-  const popup = document.getElementById('loginPopup');
+  const popup = document.getElementById('emailPopup');
   let regAttempts = 0;
 
   function isBusinessEmail(email) {
