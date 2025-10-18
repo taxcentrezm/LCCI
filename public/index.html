@@ -17,6 +17,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
+
     :root {
       --green: #006400;
       --red: #e53935;
@@ -112,7 +113,7 @@ h2{font-size: 2rem;
 button, 
 .hero-buttons a, 
 .contact-form button {
-  background: #ff9800;              /* Orange flag color */
+  background: #0078d7;              /* Orange flag color */
   color: #fff;
   padding: 12px 24px;
   border: none;
@@ -128,7 +129,7 @@ button:hover,
 .hero-buttons a:hover, 
 .contact-form button:hover {
   transform: scale(1.08);           /* Expand on hover */
-  box-shadow: 0 6px 18px rgba(255, 152, 0, 0.4); /* Glow effect */
+  box-shadow: 0 6px 18px rgba(145, 207, 255, 0.65); /* Glow effect */
 }
 
     /* ===== Section Styles ===== */
@@ -249,10 +250,10 @@ button:hover,
 
     /* ===== Footer / Contact ===== */
 footer {
-  background: var(--dark);
+  background: #0078d7;
   color: #fff;
   padding: 60px 20px 20px;
-  border-top: 5px solid var(--green);
+  border-top: 5px solid #ff9800;
 }
 .footer-container {
   display: grid;
@@ -339,7 +340,7 @@ footer {
   top: 50%;
   left: 10px;       /* matches collapsed sidebar width */
   transform: translateY(-50%);
-  background: #ff9800;
+  background: #0078d7;
   color: #fff;
   border-radius: 50%;
   width: 30px; height: 30px;
@@ -358,11 +359,11 @@ footer {
 }
 .commitment-btn {
   background: transparent;
-  color: #ff9800;
+  color: #0078d7;
   font-weight: 600;
   text-decoration: none;
   padding: 10px 20px;
-  border: 2px solid #ff9800;
+  border: 2px solid #0078d7;
   border-radius: 8px;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
@@ -370,7 +371,7 @@ footer {
   display: inline-block;
 }
 .commitment-btn:hover {
-  background-color: #ff9800;
+  background-color: #0078d7;
   color: #fff;
   transform: scale(1.05); /* subtle expand effect */
 }
@@ -403,7 +404,7 @@ footer {
 }
 
 .about-highlights i {
-  color: #ff9800;
+  color: #0078d7;
   margin-right: 10px;
   font-size: 1.2rem;
 }
@@ -517,7 +518,7 @@ footer {
 }
 .contact-info-block h3 {
   margin-bottom: 10px;
-  color: var(--orange);
+  color: #0078d7;
 }
 .contact-icon {
   font-size: 1.5rem;
@@ -699,6 +700,7 @@ background-size: 200% 200%;
   .slide p { font-size: 0.9rem; }
   button, .hero-buttons a { padding: 10px 16px; font-size: 0.9rem; }
 }
+
 
   </style>
 </head>
@@ -888,21 +890,33 @@ background-size: 200% 200%;
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="contact-us-section" data-aos="fade-up">
-  <h2 class="contact-us-heading">Contact Us</h2>
-  <div class="contact-row">
-    <div class="contact-info-block">
-      <i class="fas fa-phone-alt contact-icon"></i>
-      <h3>Phone</h3>
-      <p>0978-980170 / 0955-229501 / 0954-075515 / 0978-426580</p>
-    </div>
-    <div class="contact-info-block">
-      <i class="fas fa-envelope contact-icon"></i>
-      <h3>Email</h3>
-      <p><a href="mailto:info@lusakachamber.com">info@lusakachamber.com</a></p>
-    </div>
+<contact-block>
+  <div class="contact-block" style="text-align:center; margin-top:40px;">
+    <p style="line-height:1.8;">
+      <i data-feather="map-pin" style="margin-right:6px; vertical-align:middle;"></i>
+      <strong>Plot No 8907, Dunduza Crescent, Ndeke Hotel</strong><br>
+
+      <i data-feather="phone" style="margin-right:6px; vertical-align:middle;"></i>
+      <strong>0978-980170 / 0955-229501 / 0954-075515 / 0978-426580</strong><br>
+
+      <i data-feather="mail" style="margin-right:6px; vertical-align:middle;"></i>
+      <strong><a href="mailto:info@lusakachamber.com">info@lusakachamber.com</a></strong>
+    </p>
+    <a href="membership-form.html" class="commitment-btn">Register Membership</a>
   </div>
-</section>
+</contact-block>
+<div id="map" style="margin-top:40px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2); height:320px;"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([-15.4167, 28.2833], 15); // Lusaka coordinates
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  L.marker([-15.4167, 28.2833]).addTo(map)
+    .bindPopup('Lusaka Chamber of Commerce<br>Plot No 8907, Dunduza Crescent')
+    .openPopup();
+</script>
+
 
 <!-- Footer -->
 <footer>
@@ -915,6 +929,32 @@ background-size: 200% 200%;
 <script>
   feather.replace();
   AOS.init();
+  
+  // Sidebar toggle
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('sidebarToggle');
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+
+  // Slideshow logic
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+
+  setInterval(nextSlide, 6000); // Change slide every 6 seconds
 </script>
+
 </body>
 </html>
