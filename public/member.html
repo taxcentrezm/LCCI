@@ -1222,7 +1222,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* =========================
-     Stepper Logic
+     Stepper Logic with Validation
   ========================= */
   const steps = document.querySelectorAll('.step-item');
   const progress = document.getElementById('progressFill');
@@ -1234,11 +1234,60 @@ document.addEventListener('DOMContentLoaded', () => {
     if (progress) progress.style.width = ((n - 1) / (steps.length - 1)) * 100 + '%';
     stepContents.forEach(sc => sc.classList.toggle('active', Number(sc.dataset.step) === n));
     currentStep = n;
-    renderReview();
+    if (n === 4) renderReview();
   }
 
-  window.nextStep = n => updateStepper(n);
+  window.nextStep = n => {
+    if (validateStep(currentStep)) updateStepper(n);
+  };
+
   window.prevStep = n => updateStepper(n);
+
+  function validateStep(step) {
+    if (step === 1) {
+      const required = ['companyName', 'country', 'phone', 'registerEmail'];
+      for (const id of required) {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
+          alert(`Please fill in the ${id.replace(/([A-Z])/g, ' $1')} field.`);
+          return false;
+        }
+      }
+      const email = document.getElementById('registerEmail').value.trim();
+      if (!isBusinessEmail(email)) {
+        regAttempts++;
+        if (regAttempts >= 2 && popup) {
+          popup.style.display = 'block';
+        } else {
+          alert('Please use a business email address (e.g. yourname@company.com)');
+        }
+        return false;
+      }
+    }
+
+    if (step === 2) {
+      const sector = document.getElementById('sectorInput')?.value.trim();
+      const selected = document.querySelector('.service-card.selected');
+      if (!sector) {
+        alert('Please enter your sector or service area.');
+        return false;
+      }
+      if (!selected) {
+        alert('Please select a membership package.');
+        return false;
+      }
+    }
+
+    if (step === 3) {
+      const person = document.getElementById('personName')?.value.trim();
+      if (!person) {
+        alert('Please enter the full name of a company representative.');
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   /* =========================
      Country / District / Town Selectors
@@ -1308,9 +1357,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================
-     Registration Email Validation & Popup
+     Business Email Validation & Popup
   ========================= */
-  const registerForm = document.getElementById('registerForm');
   const emailField = document.getElementById('registerEmail');
   const popup = document.getElementById('registerPopup');
   let regAttempts = 0;
@@ -1319,29 +1367,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const blocked = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
     const domain = email.split('@')[1]?.toLowerCase() || '';
     return domain && !blocked.includes(domain);
-  }
-
-  function validateRegisterEmail() {
-    if (!emailField) return false;
-    const email = emailField.value.trim();
-    if (!isBusinessEmail(email)) {
-      regAttempts++;
-      if (regAttempts >= 2 && popup) {
-        popup.style.display = 'block';
-      } else {
-        alert('Please use a business email address (e.g. yourname@company.com)');
-      }
-      return false;
-    }
-    return true;
-  }
-
-  if (registerForm) {
-    registerForm.addEventListener('submit', e => {
-      if (!validateRegisterEmail()) {
-        e.preventDefault();
-      }
-    });
   }
 
   document.addEventListener('click', e => {
@@ -1372,7 +1397,6 @@ document.addEventListener('DOMContentLoaded', () => {
      Final Review Renderer
   ========================= */
   function renderReview() {
-    if (currentStep !== 4) return;
     const area = document.getElementById('finalReview');
     if (!area) return;
     const person = document.getElementById('personName')?.value || '';
@@ -1398,7 +1422,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal('registerModal');
   };
 });
-    </script>
+</script>
   <script>
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.left-bg img'); // All images inside left-bg
