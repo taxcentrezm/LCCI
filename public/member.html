@@ -299,40 +299,148 @@ a { text-decoration: none; color: var(--primary); }
 .left-overlay p { font-size: 1rem; }
 
 /* Center Steps */
-.brand { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-
-      .center-steps .brand {
+/* ===========================
+   Center Steps (Stepper)
+   =========================== */
+.center-steps {
+  padding: 25px 20px;
+  background: #f5f7fa;
   display: flex;
-  flex-direction: column; /* stack logo and text vertically */
-  align-items: center;    /* center horizontally */
-  text-align: center;     /* center text under logo */
-  gap: 12px;              /* spacing between logo and text */
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Brand / Logo */
+.center-steps .brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
 .center-steps .brand .logo {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: var(--primary);
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 10px; }
-.step-item {
-  display: flex; align-items: center; gap: 12px; opacity: 0.5; transition: all var(--transition);
+.center-steps .brand .logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.step-item.active { opacity: 1; }
-.step-icon { font-size: 1.5rem; color: var(--primary); }
-.step-labels .title { font-weight: 600; font-size: 0.95rem; }
-.step-labels .subtitle { font-size: 0.8rem; color: var(--muted); }
-.progress-line { height: 4px; background: #ddd; border-radius: 2px; margin-top: 10px; }
-.progress-fill { height: 4px; background: var(--primary); width: 0; border-radius: 2px; transition: width var(--transition); }
+
+/* Brand Text */
+.center-steps .brand h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.center-steps .brand .muted {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Steps Container */
+.center-steps .steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Individual Step Items */
+.center-steps .step-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: #fff;
+  opacity: 0.5;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+
+.center-steps .step-item.active {
+  opacity: 1;
+  background: #eef4ff;
+  box-shadow: 0 4px 12px rgba(0,120,215,0.15);
+}
+
+/* Step Icon */
+.center-steps .step-item .step-icon {
+  font-size: 1.4rem;
+  color: var(--primary);
+  min-width: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Step Labels */
+.center-steps .step-labels {
+  display: flex;
+  flex-direction: column;
+}
+
+.center-steps .step-labels .title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.center-steps .step-labels .subtitle {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Progress Bar */
+.center-steps .progress-line {
+  height: 5px;
+  width: 100%;
+  background: #ddd;
+  border-radius: 3px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+
+.center-steps .progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .center-steps {
+    padding: 20px 15px;
+  }
+
+  .center-steps .steps {
+    gap: 12px;
+  }
+
+  .center-steps .step-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .center-steps .step-item .step-icon {
+    min-width: auto;
+  }
+}
 
 /* Right Form */
 .right-form {
@@ -624,10 +732,69 @@ section h2 { font-size: 1.8rem; margin-bottom: 12px; }
 
   .sidebar-toggle { left: 0; }}
 
-      section { max-width: 1000px; margin: 60px auto; padding: 0 20px; text-align: center; }
-section h2 { font-size: 1.8rem; margin-bottom: 20px; color: var(--primary); }
+      /* Card Grid Styling */
+#services {
+  padding: 60px 20px;
+  background: #f9fafc;
+  text-align: center;
+}
+#services h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: var(--primary);
+}
+
+/* Service Cards */
+.service-card {
+  flex: 1 1 calc(50% - 20px);
+  border-radius: var(--radius);
+  padding: 25px 20px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.15);
+}
+
+/* Card Colors */
+.service-card:nth-child(1) { background: #ff6b6b; }
+.service-card:nth-child(2) { background: #ff9f43; }
+.service-card:nth-child(3) { background: #1dd1a1; }
+.service-card:nth-child(4) { background: #54a0ff; }
+
+/* Card Icon */
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+}
+
+/* Text */
+.service-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.service-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Fade-in animation */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.service-card.show {
+  animation: fadeUp 0.6s forwards;
+}
 .card-grid, .testimonial-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-.service-card, .testimonial-card { background: #fff; padding: 20px; border-radius: var(--radius); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.testimonial-card { background: #fff; padding: 20px; border-radius: var(--radius); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
 .testimonial-card { font-style: italic; color: var(--text-dark); }
 ul { list-style-type: disc; padding-left: 20px; text-align: left; max-width: 600px; margin: 0 auto; }
 ul li { margin-bottom: 8px; }
@@ -635,12 +802,12 @@ ul li { margin-bottom: 8px; }
 #contactForm button { width: 100%; }
 /* Card Colors */
 .action-card:nth-child(1) {
-  background: #e0f7fa; /* light cyan */
+  background: #fff; /* light cyan */
   color: #006064;
 }
 .action-card:nth-child(2) {
-  background: #fce4ec; /* light pink */
-  color: #880e4f;
+  background: #eeb889; /* light pink */
+  color: #131313;
 }
 .action-card:nth-child(3) {
   background: #fff3e0; /* light orange */
@@ -656,7 +823,6 @@ ul li { margin-bottom: 8px; }
   transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
-
 </style>
 
 </head>
@@ -951,19 +1117,23 @@ ul li { margin-bottom: 8px; }
 <section id="services">
   <h2>Our Services</h2>
   <div class="card-grid">
-    <div class="service-card">
+    <div class="service-card" data-delay="0">
+      <div class="card-icon"><i data-feather="briefcase"></i></div>
       <h3>Business Advocacy</h3>
       <p>We represent members’ interests in policy-making and support regulatory compliance.</p>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-delay="100">
+      <div class="card-icon"><i data-feather="users"></i></div>
       <h3>Networking Events</h3>
       <p>Attend exclusive events to connect with industry leaders and potential partners.</p>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-delay="200">
+      <div class="card-icon"><i data-feather="book-open"></i></div>
       <h3>Training & Workshops</h3>
       <p>Upskill your team with practical business, management, and digital training sessions.</p>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-delay="300">
+      <div class="card-icon"><i data-feather="globe"></i></div>
       <h3>Market Access</h3>
       <p>We help members expand their reach locally and internationally through trade missions and expos.</p>
     </div>
@@ -1285,7 +1455,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sections.forEach(section => observer.observe(section));
 });
+const cards = document.querySelectorAll('.service-card');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const delay = entry.target.dataset.delay || 0;
+      setTimeout(() => {
+        entry.target.classList.add('show');
+      }, delay);
+    }
+  });
+},{threshold: 0.2});
 
+cards.forEach(card => observer.observe(card));
 </script>
 
 </body>
