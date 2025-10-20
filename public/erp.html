@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payroll & ERP Systems | Tax Centre</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+<style>
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px;
+  background: #f9f9f9;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  color: #003366;
+}
+
+.hero-text h2 {
+  font-size: 1.5rem;
+  color: #005fa3;
+  margin-top: 10px;
+}
+
+.hero-text p {
+  margin: 20px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.hero-text button {
+  background: #ffc107;
+  color: #003366;
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.hero-text button:hover {
+  background: #e0a800;
+}
+
+.hero-image {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Features Section */
+.features {
+  padding: 60px 40px;
+  background: #003366;
+  color: #fff;
+}
+
+.features h3 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+.columns div {
+  flex: 1;
+  min-width: 280px;
+}
+
+.columns h4 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.columns ul {
+  list-style: none;
+  padding: 0;
+}
+
+.columns li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.columns li i {
+  color: #ffc107;
+}
+
+/* Comparison Section */
+.comparison {
+  padding: 60px 40px;
+  background: #f0f0f0;
+}
+
+.comparison h3 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.comparison table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.comparison th, .comparison td {
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.comparison td i {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.icon-success {
+  color: #28a745;
+}
+
+.icon-fail {
+  color: #dc3545;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 60px 40px;
+  background: #fafafa;
+  text-align: center;
+}
+
+.testimonials h3 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.testimonial-card img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Contact Section */
+.contact {
+  padding: 60px 40px;
+  background: #fff;
+  text-align: center;
+}
+
+.contact h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #003366;
+}
+
+.contact p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.contact button {
+  background: #ffc107;
+  color: #003366;
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.contact button:hover {
+  background: #e0a800;
+}
+
+.contact-details p {
+  margin: 8px 0;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-details i {
+  color: #005fa3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .columns {
+    flex-direction: column;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.2rem;
+  }
+
+  .comparison table, .comparison th, .comparison td {
+    font-size: 0.95rem;
+  }
+}
+
+  .sticky-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.floating-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffc107;
+  color: #003366;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+  .footer {
+  background: #003366;
+  color: #fff;
+  padding: 40px;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.footer h4 {
+  margin-bottom: 12px;
+}
+
+.footer form {
+  display: flex;
+  gap: 10px;
+}
+
+.footer input {
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+.footer button {
+  background: #ffc107;
+  color: #003366;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.footer i {
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.map iframe {
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+</style>
+
+
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Payroll & ERP Systems</h1>
+      <h2>Built for African Businesses</h2>
+      <p>Streamline your operations. Empower your team. Grow with confidence.</p>
+      <button onclick="scrollToSection('contact')">Get Started Today</button>
+    </div>
+    <div class="hero-image">
+      <img src="hero-image.png" alt="ERP dashboard illustration" />
+    </div>
+  </header>
+
+  <div class="sticky-header">
+  <h2>Tax Centre</h2>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="floating-cta" onclick="scrollToSection('contact')">
+  Book a Demo
+</div>
+
+  <section class="features" data-aos="fade-up">
+    <h3>What We Offer</h3>
+    <div class="columns">
+      <div>
+        <h4><i data-feather="file-text"></i> Payroll System</h4>
+        <ul>
+          <li><i data-feather="check-circle"></i> Automated salary calculations (ZRA, NAPSA, NHIMA)</li>
+          <li><i data-feather="download"></i> Branded payslip PDF export</li>
+          <li><i data-feather="calendar"></i> Leave tracking with approval workflows</li>
+          <li><i data-feather="bar-chart-2"></i> Payroll analytics with exportable charts</li>
+        </ul>
+      </div>
+      <div>
+        <h4><i data-feather="layers"></i> ERP System</h4>
+        <ul>
+          <li><i data-feather="users"></i> Staff onboarding & department tagging</li>
+          <li><i data-feather="file"></i> Invoice generation & payment tracking</li>
+          <li><i data-feather="package"></i> Inventory & service package management</li>
+          <li><i data-feather="pie-chart"></i> Client dashboards & reporting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+<section class="comparison" data-aos="fade-left">
+  <h3>Why Choose Us?</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Our System</th>
+        <th>Generic Solutions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><i data-feather="flag"></i> Local Compliance</td>
+        <td><i data-feather="check-circle" class="icon-success"></i></td>
+        <td><i data-feather="x-circle" class="icon-fail"></i></td>
+      </tr>
+      <tr>
+        <td><i data-feather="cpu"></i> Smart Automation</td>
+        <td><i data-feather="check-circle" class="icon-success"></i></td>
+        <td><i data-feather="x-circle" class="icon-fail"></i></td>
+      </tr>
+      <tr>
+        <td><i data-feather="file-text"></i> Branded Documents</td>
+        <td><i data-feather="check-circle" class="icon-success"></i></td>
+        <td><i data-feather="x-circle" class="icon-fail"></i></td>
+      </tr>
+      <tr>
+        <td><i data-feather="bar-chart-2"></i> Exportable Insights</td>
+        <td><i data-feather="check-circle" class="icon-success"></i></td>
+        <td><i data-feather="x-circle" class="icon-fail"></i></td>
+      </tr>
+      <tr>
+        <td><i data-feather="lock"></i> Secure & Scalable</td>
+        <td><i data-feather="check-circle" class="icon-success"></i></td>
+        <td><i data-feather="x-circle" class="icon-fail"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+  <section class="testimonials" data-aos="zoom-in">
+    <h3>What Our Clients Say</h3>
+    <div class="testimonial-card">
+      <img src="testimonial-card.png" alt="Finance Manager testimonial" />
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h3>Ready to Upgrade?</h3>
+    <p>Let’s help you automate payroll, streamline operations, and scale with confidence.</p>
+    <button>Book a Demo</button>
+    <div class="contact-details">
+      <p><i data-feather="phone"></i> +260 97 123 4567</p>
+      <p><i data-feather="mail"></i> info@tax-centre.com</p>
+      <p><i data-feather="globe"></i> www.tax-centre.com</p>
+    </div>
+  </section>
+<section id="pricing" data-aos="fade-up">
+  <h3>Pricing Plans</h3>
+  <div class="toggle">
+    <label><input type="radio" name="plan" checked /> Monthly</label>
+    <label><input type="radio" name="plan" /> Annual</label>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan">
+      <h4>Starter</h4>
+      <p>ZMW 500 / month</p>
+      <ul>
+        <li>Payroll for up to 10 staff</li>
+        <li>PDF payslips & leave tracking</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <h4>Business</h4>
+      <p>ZMW 1200 / month</p>
+      <ul>
+        <li>ERP + Payroll for 50 staff</li>
+        <li>Invoices, analytics, dashboards</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="demo" data-aos="fade-up">
+  <h3>Book a Demo</h3>
+  <form>
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Business Email" required />
+    <input type="tel" placeholder="Phone Number" />
+    <textarea placeholder="Your Message"></textarea>
+    <button type="submit">Submit Request</button>
+  </form>
+</section>
+<footer class="footer" data-aos="fade-up">
+  <div class="footer-columns">
+    <div>
+      <h4>Tax Centre</h4>
+      <p>Automate payroll. Streamline operations. Scale confidently.</p>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      <form>
+        <input type="email" placeholder="Enter your email" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <p>
+        <i data-feather="facebook"></i>
+        <i data-feather="twitter"></i>
+        <i data-feather="linkedin"></i>
+      </p>
+    </div>
+  </div>
+  <div class="map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.9999999999995!2d28.322!3d-15.387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x196c6f9f9f9f9f9f%3A0x123456789abcdef!2sTax%20Centre!5e0!3m2!1sen!2szm!4v1234567890"
+      width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+    </iframe>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+    feather.replace();
+    function scrollToSection(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
