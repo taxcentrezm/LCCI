@@ -896,7 +896,9 @@ function scrollToSection(id){
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
 
-/* HERO SLIDESHOW */
+/* =========================
+   HERO SLIDESHOW
+========================= */
 const slides = document.querySelectorAll('.hero-slide');
 const heroTitle = document.getElementById('hero-title');
 const heroText = document.getElementById('hero-text');
@@ -927,12 +929,15 @@ function showSlide(index){
   heroDots.querySelectorAll('span').forEach((d,i)=>d.classList.toggle('active', i===index));
 }
 
+// Auto-slide hero
 setInterval(()=>{
   currentSlide = (currentSlide + 1) % slides.length;
   showSlide(currentSlide);
-},5000);
+}, 5000);
 
-/* TESTIMONIALS CAROUSEL */
+/* =========================
+   TESTIMONIALS CAROUSEL
+========================= */
 let testimonialIndex = 0;
 const testimonialContainer = document.getElementById('testimonial-container');
 const testimonialCards = document.querySelectorAll('.testimonial-card');
@@ -964,22 +969,9 @@ function prevTestimonial(){
 // Auto-slide testimonials
 setInterval(nextTestimonial, 5000);
 
-// Sticky nav highlight
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.sticky-header nav a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section=>{
-    const sectionTop = section.offsetTop - 70;
-    if(window.pageYOffset >= sectionTop) current=section.getAttribute('id');
-  });
-  navLinks.forEach(link=>{
-    link.classList.remove('active');
-    if(link.getAttribute('href') === '#' + current) link.classList.add('active');
-  });
-});
-
-  // Active nav highlighting
+/* =========================
+   STICKY NAV HIGHLIGHT
+========================= */
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.sticky-header nav a');
 
@@ -987,7 +979,7 @@ window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(section => {
     const sectionTop = section.offsetTop - 70;
-    if (pageYOffset >= sectionTop) current = section.getAttribute('id');
+    if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
   });
   navLinks.forEach(link => {
     link.classList.remove('active');
@@ -995,7 +987,9 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Pricing toggle functionality
+/* =========================
+   PRICING TOGGLE
+========================= */
 const toggleRadios = document.querySelectorAll('.toggle input[name="plan"]');
 const plans = document.querySelectorAll('.pricing-grid .plan');
 
@@ -1012,5 +1006,6 @@ toggleRadios.forEach(radio => {
   });
 });
 </script>
+
 </body>
 </html>
