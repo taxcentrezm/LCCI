@@ -28,7 +28,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 60px 40px;
-  background: #f9f9f9;
+  background: linear-gradient(135deg, #f9f9f9 0%, #e6f0fa 100%);
+  position: relative;
 }
 
 .hero-text {
@@ -61,11 +62,12 @@ body {
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .hero-text button:hover {
   background: #e0a800;
+  transform: scale(1.05);
 }
 
 .hero-image {
@@ -76,6 +78,58 @@ body {
 .hero-image img {
   max-width: 100%;
   height: auto;
+  transition: transform 0.5s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Sticky Header */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky-header nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #003366;
+  transition: color 0.3s;
+}
+
+.sticky-header nav a:hover,
+.sticky-header nav a.active {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+/* Floating CTA */
+.floating-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffc107;
+  color: #003366;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 1000;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 /* Features Section */
@@ -101,6 +155,15 @@ body {
 .columns div {
   flex: 1;
   min-width: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.columns div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .columns h4 {
@@ -212,9 +275,11 @@ body {
   border-radius: 6px;
   cursor: pointer;
   margin-bottom: 20px;
+  transition: transform 0.3s ease;
 }
 
 .contact button:hover {
+  transform: scale(1.05);
   background: #e0a800;
 }
 
@@ -231,57 +296,101 @@ body {
   color: #005fa3;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .columns {
-    flex-direction: column;
-  }
-
-  .hero-text h1 {
-    font-size: 2rem;
-  }
-
-  .hero-text h2 {
-    font-size: 1.2rem;
-  }
-
-  .comparison table, .comparison th, .comparison td {
-    font-size: 0.95rem;
-  }
+/* Pricing Section */
+#pricing {
+  padding: 60px 40px;
+  background: #f9f9f9;
 }
 
-  .sticky-header {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  z-index: 999;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 10px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+#pricing h3 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
 }
 
-.floating-cta {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #ffc107;
-  color: #003366;
-  padding: 12px 20px;
-  border-radius: 50px;
+.toggle {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.toggle label {
+  margin: 0 10px;
   font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   cursor: pointer;
-  z-index: 1000;
 }
 
-  .footer {
+.pricing-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.plan {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 250px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.plan h4 {
+  margin-bottom: 10px;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+}
+
+.plan li {
+  margin-bottom: 10px;
+}
+
+/* Demo Form */
+#demo {
+  padding: 60px 40px;
+  background: #fff;
+  text-align: center;
+}
+
+#demo form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: auto;
+}
+
+#demo input, #demo textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+#demo button {
+  background: #003366;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#demo button:hover {
+  background: #005fa3;
+}
+
+/* Footer */
+.footer {
   background: #003366;
   color: #fff;
   padding: 40px;
@@ -321,6 +430,12 @@ body {
 .footer i {
   margin-right: 12px;
   cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer i:hover {
+  transform: scale(1.2);
+  color: #ffc107;
 }
 
 .map iframe {
@@ -328,10 +443,42 @@ body {
   border-radius: 8px;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .columns {
+    flex-direction: column;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.2rem;
+  }
+
+  .comparison table, .comparison th, .comparison td {
+    font-size: 0.95rem;
+  }
+
+  .pricing-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+  }
+}
 </style>
 
-
-  <script src="https://unpkg.com/feather-icons"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
 <body>
   <header class="hero">
@@ -347,19 +494,19 @@ body {
   </header>
 
   <div class="sticky-header">
-  <h2>Tax Centre</h2>
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</div>
+    <h2>Tax Centre</h2>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 
-<div class="floating-cta" onclick="scrollToSection('contact')">
-  Book a Demo
-</div>
+  <div class="floating-cta" onclick="scrollToSection('contact')">
+    Book a Demo
+  </div>
 
-  <section class="features" data-aos="fade-up">
+  <section class="features" id="features" data-aos="fade-up">
     <h3>What We Offer</h3>
     <div class="columns">
       <div>
@@ -383,45 +530,45 @@ body {
     </div>
   </section>
 
-<section class="comparison" data-aos="fade-left">
-  <h3>Why Choose Us?</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>Our System</th>
-        <th>Generic Solutions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><i data-feather="flag"></i> Local Compliance</td>
-        <td><i data-feather="check-circle" class="icon-success"></i></td>
-        <td><i data-feather="x-circle" class="icon-fail"></i></td>
-      </tr>
-      <tr>
-        <td><i data-feather="cpu"></i> Smart Automation</td>
-        <td><i data-feather="check-circle" class="icon-success"></i></td>
-        <td><i data-feather="x-circle" class="icon-fail"></i></td>
-      </tr>
-      <tr>
-        <td><i data-feather="file-text"></i> Branded Documents</td>
-        <td><i data-feather="check-circle" class="icon-success"></i></td>
-        <td><i data-feather="x-circle" class="icon-fail"></i></td>
-      </tr>
-      <tr>
-        <td><i data-feather="bar-chart-2"></i> Exportable Insights</td>
-        <td><i data-feather="check-circle" class="icon-success"></i></td>
-        <td><i data-feather="x-circle" class="icon-fail"></i></td>
-      </tr>
-      <tr>
-        <td><i data-feather="lock"></i> Secure & Scalable</td>
-        <td><i data-feather="check-circle" class="icon-success"></i></td>
-        <td><i data-feather="x-circle" class="icon-fail"></i></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <section class="comparison" data-aos="fade-left">
+    <h3>Why Choose Us?</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Our System</th>
+          <th>Generic Solutions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><i data-feather="flag"></i> Local Compliance</td>
+          <td><i data-feather="check-circle" class="icon-success"></i></td>
+          <td><i data-feather="x-circle" class="icon-fail"></i></td>
+        </tr>
+        <tr>
+          <td><i data-feather="cpu"></i> Smart Automation</td>
+          <td><i data-feather="check-circle" class="icon-success"></i></td>
+          <td><i data-feather="x-circle" class="icon-fail"></i></td>
+        </tr>
+        <tr>
+          <td><i data-feather="file-text"></i> Branded Documents</td>
+          <td><i data-feather="check-circle" class="icon-success"></i></td>
+          <td><i data-feather="x-circle" class="icon-fail"></i></td>
+        </tr>
+        <tr>
+          <td><i data-feather="bar-chart-2"></i> Exportable Insights</td>
+          <td><i data-feather="check-circle" class="icon-success"></i></td>
+          <td><i data-feather="x-circle" class="icon-fail"></i></td>
+        </tr>
+        <tr>
+          <td><i data-feather="lock"></i> Secure & Scalable</td>
+          <td><i data-feather="check-circle" class="icon-success"></i></td>
+          <td><i data-feather="x-circle" class="icon-fail"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
   <section class="testimonials" data-aos="zoom-in">
     <h3>What Our Clients Say</h3>
@@ -440,79 +587,113 @@ body {
       <p><i data-feather="globe"></i> www.tax-centre.com</p>
     </div>
   </section>
-<section id="pricing" data-aos="fade-up">
-  <h3>Pricing Plans</h3>
-  <div class="toggle">
-    <label><input type="radio" name="plan" checked /> Monthly</label>
-    <label><input type="radio" name="plan" /> Annual</label>
-  </div>
-  <div class="pricing-grid">
-    <div class="plan">
-      <h4>Starter</h4>
-      <p>ZMW 500 / month</p>
-      <ul>
-        <li>Payroll for up to 10 staff</li>
-        <li>PDF payslips & leave tracking</li>
-      </ul>
-    </div>
-    <div class="plan">
-      <h4>Business</h4>
-      <p>ZMW 1200 / month</p>
-      <ul>
-        <li>ERP + Payroll for 50 staff</li>
-        <li>Invoices, analytics, dashboards</li>
-      </ul>
-    </div>
-  </div>
-</section>
 
-<section id="demo" data-aos="fade-up">
-  <h3>Book a Demo</h3>
-  <form>
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Business Email" required />
-    <input type="tel" placeholder="Phone Number" />
-    <textarea placeholder="Your Message"></textarea>
-    <button type="submit">Submit Request</button>
-  </form>
-</section>
-<footer class="footer" data-aos="fade-up">
-  <div class="footer-columns">
-    <div>
-      <h4>Tax Centre</h4>
-      <p>Automate payroll. Streamline operations. Scale confidently.</p>
+  <section id="pricing" data-aos="fade-up">
+    <h3>Pricing Plans</h3>
+    <div class="toggle">
+      <label><input type="radio" name="plan" checked /> Monthly</label>
+      <label><input type="radio" name="plan" /> Annual</label>
     </div>
-    <div>
-      <h4>Newsletter</h4>
-      <form>
-        <input type="email" placeholder="Enter your email" />
-        <button type="submit">Subscribe</button>
-      </form>
+    <div class="pricing-grid">
+      <div class="plan">
+        <h4>Starter</h4>
+        <p data-monthly="ZMW 500 / month" data-annual="ZMW 5400 / year">ZMW 500 / month</p>
+        <ul>
+          <li>Payroll for up to 10 staff</li>
+          <li>PDF payslips & leave tracking</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <h4>Business</h4>
+        <p data-monthly="ZMW 1200 / month" data-annual="ZMW 12960 / year">ZMW 1200 / month</p>
+        <ul>
+          <li>ERP + Payroll for 50 staff</li>
+          <li>Invoices, analytics, dashboards</li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h4>Follow Us</h4>
-      <p>
-        <i data-feather="facebook"></i>
-        <i data-feather="twitter"></i>
-        <i data-feather="linkedin"></i>
-      </p>
-    </div>
-  </div>
-  <div class="map">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.9999999999995!2d28.322!3d-15.387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x196c6f9f9f9f9f9f%3A0x123456789abcdef!2sTax%20Centre!5e0!3m2!1sen!2szm!4v1234567890"
-      width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
-    </iframe>
-  </div>
-</footer>
+  </section>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <section id="demo" data-aos="fade-up">
+    <h3>Book a Demo</h3>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Business Email" required />
+      <input type="tel" placeholder="Phone Number" />
+      <textarea placeholder="Your Message"></textarea>
+      <button type="submit">Submit Request</button>
+    </form>
+  </section>
+
+  <footer class="footer" data-aos="fade-up">
+    <div class="footer-columns">
+      <div>
+        <h4>Tax Centre</h4>
+        <p>Automate payroll. Streamline operations. Scale confidently.</p>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <form>
+          <input type="email" placeholder="Enter your email" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <p>
+          <i data-feather="facebook"></i>
+          <i data-feather="twitter"></i>
+          <i data-feather="linkedin"></i>
+        </p>
+      </div>
+    </div>
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d298.9324922024464!2d28.286126!3d-15.410619!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f5279fcffdbb%3A0xcf1f78e2cf129563!2sTax%20Man%20Solution!5e1!3m2!1sen!2sus!4v1760979600403!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </footer>
+
 <script>
-  AOS.init({ duration: 800, once: true });
-    feather.replace();
-    function scrollToSection(id) {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
+AOS.init({ duration: 800, once: true });
+feather.replace();
+
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Active nav highlighting
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.sticky-header nav a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 70;
+    if (pageYOffset >= sectionTop) current = section.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if(link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+// Pricing toggle functionality
+const toggleRadios = document.querySelectorAll('.toggle input[name="plan"]');
+const plans = document.querySelectorAll('.pricing-grid .plan');
+
+toggleRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    plans.forEach(plan => {
+      const pTag = plan.querySelector('p');
+      if(radio.parentElement.textContent.includes('Annual')){
+        pTag.textContent = pTag.dataset.annual;
+      } else {
+        pTag.textContent = pTag.dataset.monthly;
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
