@@ -138,95 +138,202 @@ footer a { color:white; text-decoration:none; transition:color 0.3s; }
 footer a:hover { color:var(--accent1); }
 .map { width:100%; height:300px; border:0; margin-top:30px; border-radius:12px; }
 
-  .contact-modal-content {
+/* =========================
+   CONTACT FORM MODAL STYLES
+   ========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.contact-modal-content {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
+  background: #fff;
   border-radius: 16px;
+  max-width: 850px;
+  width: 90%;
   overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+  animation: popIn 0.4s ease forwards;
+  position: relative;
 }
 
-.contact-left {
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #444;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #e63946;
+}
+
+/* Left image section */
+.contact-modal-content > div:first-child {
   flex: 1;
-  min-width: 300px;
+  min-width: 280px;
+  height: 500px;
   background: url('image.jpg') center/cover no-repeat;
+  border-radius: 16px 0 0 16px;
 }
 
+/* Right section */
 .contact-right {
   flex: 1;
-  min-width: 300px;
-  padding: 30px;
+  min-width: 320px;
+  padding: 40px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.contact-right img.avatar {
-  width: 80px;
-  border-radius: 50%;
-  margin: 0 auto 20px;
+  background: rgba(255, 255, 255, 0.95);
+  position: relative;
 }
 
 .contact-right h2 {
   text-align: center;
+  font-weight: 700;
   margin-bottom: 20px;
+  color: #222;
 }
 
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 20px;
+  border: 3px solid #eee;
+}
+
+/* Input fields */
 .contact-input {
-  margin-bottom: 16px;
   position: relative;
+  margin-bottom: 18px;
 }
 
+.contact-input input,
+.contact-input textarea {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-input input:focus,
+.contact-input textarea:focus {
+  border-color: #0077ff;
+  box-shadow: 0 0 5px rgba(0, 119, 255, 0.3);
+}
+
+/* Icons inside input fields */
 .contact-input i {
   position: absolute;
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
   color: #888;
+  width: 18px;
+  height: 18px;
 }
 
-.contact-input input,
-.contact-input textarea {
-  width: 100%;
-  padding: 12px 12px 12px 36px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  outline: none;
-}
-
-.contact-input textarea {
-  resize: none;
-  padding-top: 12px;
-}
-
+/* Country code for phone */
 .contact-phone {
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.contact-phone span.country-code {
-  font-size: 1.1rem;
+.contact-phone .country-code {
+  margin-right: 8px;
+  font-size: 1rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* BUTTON */
+/* Textarea icon adjustment */
+.contact-input textarea {
+  padding-top: 14px;
+  resize: none;
+}
+
+/* Submit button */
 .contact-right button {
   margin-top: 10px;
-  background: var(--accent1);
+  background: #0077ff;
+  color: #fff;
+  padding: 12px 18px;
   border: none;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease, transform 0.2s;
 }
 
 .contact-right button:hover {
-  background: #ff875b;
+  background: #005fcc;
+  transform: translateY(-2px);
 }
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-modal-content {
+    flex-direction: column;
+    border-radius: 12px;
+  }
+
+  .contact-modal-content > div:first-child {
+    height: 200px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .contact-right {
+    padding: 25px;
+  }
+}
+
 
 /* =========================
    ANIMATIONS
@@ -236,18 +343,18 @@ footer a:hover { color:var(--accent1); }
   to { opacity: 1; transform: scale(1); }
 }
 
-  <style>
+
 /* =========================
    PRICING SECTION
 ========================= */
 .pricing-section {
-  padding: 80px 20px;
-  background: #f4f4f8;
+  padding: 100px 20px;
+  background: #f9f9fc;
   text-align: center;
 }
 
 .pricing-section h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 10px;
 }
 
@@ -256,13 +363,41 @@ footer a:hover { color:var(--accent1); }
   color: #555;
 }
 
+.pricing-carousel {
+  position: relative;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-track {
+  display: flex;
+  transition: transform 1s ease-in-out;
+  width: 100%;
+}
+
+.pricing-group {
+  flex: 0 0 100%;
+  padding: 20px;
+}
+
+.pricing-group h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: var(--accent1);
+  text-transform: capitalize;
+}
+
 .price-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
+  gap: 20px;
 }
 
+/* =========================
+   PRICE CARDS
+========================= */
 .price-card {
   background: white;
   border-radius: 16px;
@@ -272,6 +407,13 @@ footer a:hover { color:var(--accent1); }
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardFadeUp 1s forwards;
+}
+
+@keyframes cardFadeUp {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .price-card:hover {
@@ -279,7 +421,7 @@ footer a:hover { color:var(--accent1); }
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
-.price-card h3 {
+.price-card h4 {
   font-size: 1.3rem;
   margin-bottom: 12px;
 }
@@ -314,12 +456,12 @@ footer a:hover { color:var(--accent1); }
   color: white;
 }
 
-.status-free { background: var(--accent3); }
+.status-basic { background: var(--accent3); }
 .status-popular { background: var(--accent2); }
 .status-premium { background: var(--accent1); }
 
 /* =========================
-   PRICING MODAL
+   MODAL
 ========================= */
 .modal-pricing {
   position: fixed;
@@ -371,8 +513,6 @@ footer a:hover { color:var(--accent1); }
   background: none;
   border: none;
 }
-</style>
-
 </style>
   <script src="https://unpkg.com/feather-icons"></script>
 </head>
@@ -434,47 +574,136 @@ footer a:hover { color:var(--accent1); }
   </div>
 </section>
 <section class="pricing-section" id="pricing">
-  <h2>Our Pricing Plans</h2>
-  <p>Choose the plan that fits your business needs. Click “Request” to get started.</p>
+  <h2>Pricing & Services</h2>
+  <p>Explore our service categories and request a plan that fits your goals.</p>
 
-  <div class="price-grid">
-    <div class="price-card" data-price="Free Plan">
-      <div class="status-badge status-free">Free</div>
-      <h3>Free Plan</h3>
-      <div class="price">$0</div>
-      <ul class="features">
-        <li>Basic access to tools</li>
-        <li>Community support</li>
-        <li>Limited features</li>
-      </ul>
-      <button onclick="openPricingModal('Free Plan')">Request</button>
-    </div>
+  <div class="pricing-carousel">
+    <div class="pricing-track" id="pricingTrack">
 
-    <div class="price-card" data-price="Popular Plan">
-      <div class="status-badge status-popular">Popular</div>
-      <h3>Popular Plan</h3>
-      <div class="price">$49/mo</div>
-      <ul class="features">
-        <li>All Free features</li>
-        <li>Email support</li>
-        <li>Full access to core tools</li>
-      </ul>
-      <button onclick="openPricingModal('Popular Plan')">Request</button>
-    </div>
+      <!-- 1️⃣ CLOUD SYSTEMS & DATABASES -->
+      <div class="pricing-group">
+        <h3>Cloud Systems & Database Services</h3>
+        <div class="price-grid">
+          <div class="price-card">
+            <div class="status-badge status-basic">Basic</div>
+            <h4>Cloud Setup</h4>
+            <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>Cloud server setup</li>
+              <li>Basic storage configuration</li>
+              <li>1-month monitoring</li>
+            </ul>
+            <button onclick="openPricingModal('Cloud Setup')">Request</button>
+          </div>
 
-    <div class="price-card" data-price="Premium Plan">
-      <div class="status-badge status-premium">Premium</div>
-      <h3>Premium Plan</h3>
-      <div class="price">$99/mo</div>
-      <ul class="features">
-        <li>All Popular features</li>
-        <li>Priority support</li>
-        <li>Advanced integrations & analytics</li>
-      </ul>
-      <button onclick="openPricingModal('Premium Plan')">Request</button>
+          <div class="price-card">
+            <div class="status-badge status-popular">Popular</div>
+            <h4>Database Optimization</h4>
+            <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>Performance tuning</li>
+              <li>Backup automation</li>
+              <li>High availability setup</li>
+            </ul>
+            <button onclick="openPricingModal('Database Optimization')">Request</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2️⃣ WEBSITE DESIGN & DEVELOPMENT -->
+      <div class="pricing-group">
+        <h3>Website Design & Development</h3>
+        <div class="price-grid">
+          <div class="price-card">
+            <div class="status-badge status-popular">Popular</div>
+            <h4>Startup Website</h4>
+           <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>3 pages</li>
+              <li>Responsive design</li>
+              <li>1-year domain & hosting</li>
+            </ul>
+            <button onclick="openPricingModal('Startup Website')">Request</button>
+          </div>
+
+          <div class="price-card">
+            <div class="status-badge status-premium">Premium</div>
+            <h4>Custom Business Website</h4>
+            <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>Unlimited pages</li>
+              <li>Admin dashboard</li>
+              <li>Advanced SEO</li>
+            </ul>
+            <button onclick="openPricingModal('Custom Business Website')">Request</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3️⃣ HOSTING & DOMAINS -->
+      <div class="pricing-group">
+        <h3>Hosting & Domains</h3>
+        <div class="price-grid">
+          <div class="price-card">
+            <div class="status-badge status-basic">Basic</div>
+            <h4>Standard Hosting</h4>
+            <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>5GB storage</li>
+              <li>99.9% uptime</li>
+              <li>Free SSL</li>
+            </ul>
+            <button onclick="openPricingModal('Standard Hosting')">Request</button>
+          </div>
+
+          <div class="price-card">
+            <div class="status-badge status-premium">Premium</div>
+            <h4>Business Domain</h4>
+            <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>Custom domain registration</li>
+              <li>Free DNS management</li>
+              <li>Privacy protection</li>
+            </ul>
+            <button onclick="openPricingModal('Business Domain')">Request</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4️⃣ ERPs, GATEWAYS, EMAILS -->
+      <div class="pricing-group">
+        <h3>Custom ERPs, Payment Gateways & Business Emails</h3>
+        <div class="price-grid">
+          <div class="price-card">
+            <div class="status-badge status-popular">Popular</div>
+            <h4>ERP Integration</h4>
+            <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>Inventory & HR modules</li>
+              <li>Custom dashboards</li>
+              <li>Cloud deployment</li>
+            </ul>
+            <button onclick="openPricingModal('ERP Integration')">Request</button>
+          </div>
+
+          <div class="price-card">
+            <div class="status-badge status-premium">Premium</div>
+            <h4>Payment Gateway Setup</h4>
+            <div class="price">Get Qoute</div>
+            <ul class="features">
+              <li>API integration</li>
+              <li>Secure encryption</li>
+              <li>Testing sandbox setup</li>
+            </ul>
+            <button onclick="openPricingModal('Payment Gateway Setup')">Request</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
 
 <!-- MAP & CONTACT -->
 <footer id="contact">
@@ -612,28 +841,36 @@ footer a:hover { color:var(--accent1); }
     setInterval(() => changeSlide(true), 6000);
   }
 
-  // =========================
-  // SERVICE GRID CAROUSEL (3 per slide)
-  // =========================
-  const grid = document.getElementById('serviceGrid');
-  if (grid) {
-    const totalCards = grid.children.length;
-    const cardsPerSlide = 3;
-    let offset = 0;
+// =========================
+// SERVICE GRID CAROUSEL (3 per slide)
+// =========================
+const grid = document.getElementById('serviceGrid');
+if(grid){
+  const cards = Array.from(grid.children);
+  const slides = [];
+  const cardsPerSlide = 3;
 
-    // flex width calculation
-    grid.style.display = 'flex';
-    grid.style.transition = 'transform 0.7s ease-in-out';
-    grid.style.width = `${(totalCards / cardsPerSlide) * 100}%`;
-    Array.from(grid.children).forEach(child => {
-      child.style.flex = `0 0 ${100 / (totalCards / cardsPerSlide)}%`;
-    });
+  // Clear existing children
+  grid.innerHTML = '';
 
-    setInterval(() => {
-      offset = (offset + 1) % Math.ceil(totalCards / cardsPerSlide);
-      grid.style.transform = `translateX(-${offset * 100}%)`;
-    }, 7000);
+  // Wrap cards into slides
+  while(cards.length){
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    for(let i=0; i<cardsPerSlide; i++){
+      if(cards.length) slide.appendChild(cards.shift());
+    }
+    grid.appendChild(slide);
+    slides.push(slide);
   }
+
+  let offset = 0;
+  setInterval(()=>{
+    offset = (offset + 1) % slides.length;
+    grid.style.transform = `translateX(-${offset*100}%)`;
+  }, 7000);
+}
+
 
   // =========================
   // SCROLL HELPER
@@ -642,17 +879,32 @@ footer a:hover { color:var(--accent1); }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  
+// =========================
+// PRICING CAROUSEL
+// =========================
+const track = document.getElementById('pricingTrack');
+let pricingIndex = 0;
+
+function slidePricing() {
+  const groups = document.querySelectorAll('.pricing-group');
+  pricingIndex = (pricingIndex + 1) % groups.length;
+  track.style.transform = `translateX(-${pricingIndex * 100}%)`;
+}
+
+setInterval(slidePricing, 7000);
+
+// =========================
+// MODAL LOGIC
+// =========================
 function openPricingModal(planName) {
   const modal = document.createElement('div');
   modal.className = 'modal-pricing';
   modal.style.display = 'flex';
-
   modal.innerHTML = `
     <div class="modal-content">
       <button class="close-btn" onclick="this.closest('.modal-pricing').remove()">&times;</button>
       <h2>Request: ${planName}</h2>
-      <p>Fill in your details and we will contact you regarding this plan.</p>
+      <p>Provide your details and we’ll get back to you shortly.</p>
       <input type="text" placeholder="Full Name" required>
       <input type="email" placeholder="Email Address" required>
       <input type="tel" placeholder="Phone Number" required>
@@ -660,15 +912,12 @@ function openPricingModal(planName) {
       <button onclick="sendPricingRequest('${planName}', this)">Submit Request</button>
     </div>
   `;
-
   document.body.appendChild(modal);
 }
 
-// Send request (via mailto)
 function sendPricingRequest(planName, btn) {
   const modal = btn.closest('.modal-pricing');
-  const inputs = modal.querySelectorAll('input, textarea');
-  const [name, email, phone, message] = Array.from(inputs).map(i => i.value.trim());
+  const [name, email, phone, message] = Array.from(modal.querySelectorAll('input, textarea')).map(i => i.value.trim());
 
   if (!name || !email || !phone) {
     alert("Please fill in all required fields.");
@@ -676,12 +925,9 @@ function sendPricingRequest(planName, btn) {
   }
 
   const mailtoLink = `mailto:dev@smaitdev.com?subject=Pricing Request: ${encodeURIComponent(planName)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`)}`;
-  
   window.location.href = mailtoLink;
   modal.remove();
 }
 </script>
-
-
 </body>
 </html>
