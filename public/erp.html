@@ -768,9 +768,248 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
+     /* ===== Sidebar Nav ===== */
+ .sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 10px;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  transition: width 0.4s ease;
+  overflow: hidden;
+  z-index: 1000;
+}
+.sidebar.open { width: 280px; }
+ 
+    .sidebar ul { list-style: none; margin:0; padding:0; }
+    .sidebar li {
+      padding: 18px; display:flex; align-items:center;
+      transition: background 0.3s;
+    }
+    .sidebar li:hover { background: rgba(0, 120, 215, 0.6); }
+    .sidebar a {
+      color:#fff; text-decoration:none; display:flex; align-items:center;
+    }
+    .sidebar i { margin-right:12px; color: var(--orange); }
+
+    .hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active { opacity: 1; z-index: 1; }
+
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6); /* dark overlay */
+  z-index: 1;
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+}
+
+    
+    /* ===== Buttons (Global) ===== */
+button, 
+.hero-buttons a, 
+.contact-form button {
+  background: #0078d7;              /* Orange flag color */
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover, 
+.hero-buttons a:hover, 
+.contact-form button:hover {
+  transform: scale(1.08);           /* Expand on hover */
+  box-shadow: 0 6px 18px rgba(145, 207, 255, 0.65); /* Glow effect */
+}
+/* Sidebar Flag Stripe */
+/* Sidebar Flag Stripe */
+.flag-stripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 12px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1100;
+}
+.flag-stripe .stripe {
+  flex: 1;
+  transform: translateX(-100%);   /* hidden initially */
+  transition: transform 0.5s ease;
+}
+.sidebar.open .flag-stripe .stripe {
+  transform: translateX(0);       /* slide in when expanded */
+}
+
+/* Add a little stagger effect */
+.sidebar.open .flag-stripe .stripe:nth-child(1) { transition-delay: 0s; }
+.sidebar.open .flag-stripe .stripe:nth-child(2) { transition-delay: 0.1s; }
+.sidebar.open .flag-stripe .stripe:nth-child(3) { transition-delay: 0.2s; }
+.sidebar.open .flag-stripe .stripe:nth-child(4) { transition-delay: 0.3s; }
+
+.stripe.green { background: #006400; }
+.stripe.red { background: #e53935; }
+.stripe.black { background: #111; }
+.stripe.orange { background: #ff9800; }
+
+/* Toggle Arrow */
+.sidebar-toggle {
+  position: fixed;  /* fixed to viewport so it moves with sidebar width */
+  top: 50%;
+  left: 10px;       /* matches collapsed sidebar width */
+  transform: translateY(-50%);
+  background: #0078d7;
+  color: #fff;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: left 0.4s ease, transform 0.3s ease;
+  z-index: 1200;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+/* When sidebar is open */
+.sidebar.open ~ .sidebar-toggle {
+  left: 220px; /* push toggle outward with sidebar */
+}
+.sidebar.open ~ .sidebar-toggle i {
+  transform: rotate(180deg); /* arrow points left */
+}
+.commitment-btn {
+  background: transparent;
+  color: #0078d7;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #0078d7;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  display: inline-block;
+}
+.commitment-btn:hover {
+  background-color: #0078d7;
+  color: #fff;
+  transform: scale(1.05); /* subtle expand effect */
+}
+ 
+/* Sidebar footer button */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px;
+  text-align: center;
+}
+ 
+.about-text p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.about-highlights {
+  list-style: none;
+  padding: 0;
+}
+
+.about-highlights li {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.about-highlights i {
+  color: #0078d7;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+ .about-text h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+    footer a { color:#ff9800; text-decoration:none; }
+
+@media (max-width: 768px) {
+  /* Sidebar auto-collapse */
+  .sidebar { width: 0; }
+  .sidebar.open { width: 220px; }
+
+  .sidebar-toggle { left: 0; }
+}
 </style>
 </head>
 <body>
+
+  <!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="flag-stripe">
+    <div class="stripe green"></div>
+    <div class="stripe red"></div>
+    <div class="stripe black"></div>
+    <div class="stripe orange"></div>
+  </div>
+  <ul>
+    <li><a href="index.html"><i data-feather="home"></i><span>Home</span></a></li>
+    <li><a href="#features"><i data-feather="info"></i><span>About Us</span></a></li>
+    <li><a href="erp-products"><i data-feather="user-plus"></i><span>Products</span></a></li>
+    <li><a href="#pricing"><i data-feather="calendar"></i><span>Pricing</span></a></li>
+    <li><a href="#testimonial-container"><i data-feather="briefcase"></i><span>Testimonials</span></a></li>
+    <li><a href="#demo"><i data-feather="send"></i><span>Contact</span></a></li>
+  </ul>
+  <a href="erp.html" class="commitment-btn">Payroll & ERPs</a>
+  <a href="web.html" class="commitment-btn">Web Based Services</a>
+  <a href="https://tax-centre.com" class="commitment-btn">Basic Book-keeping</a>
+  <a href="#" class="commitment-btn">Smart-Invoicing </a>
+  <a href="#" class="commitment-btn">CDF Form Application</a>
+</aside>
+<div class="sidebar-toggle" id="sidebarToggle">
+  <i class="fas fa-chevron-right"></i>
+</div>
 
 <!-- Hero Section -->
 <header class="hero">
@@ -1020,7 +1259,7 @@ body {
       <strong>- ., Finance Manager</strong>
     </div>
     <div class="testimonial-card">
-      <img src="zra.jpg" alt="Client 2">
+      <img src="zra.png" alt="Client 2">
       <p>"ERP dashboards are intuitive and powerful. Amazing support team."</p>
       <strong>- John K., Operations Director</strong>
     </div>
