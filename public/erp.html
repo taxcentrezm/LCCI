@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+fit the section in this html structre: <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -651,6 +651,123 @@ body {
     flex-direction: column;
   }
 }
+
+  /* =========================
+   ERP SECTION
+========================= */
+.erp-section {
+  padding: 80px 20px;
+  background: #fafafa;
+  text-align: center;
+}
+
+.erp-section .section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.erp-section .section-subtitle {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.erp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+.erp-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  max-width: 320px;
+}
+
+.erp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.erp-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.erp-card h3 {
+  font-size: 1.1rem;
+  margin: 12px 0 6px;
+  color: #222;
+}
+
+.erp-card p {
+  font-size: 0.9rem;
+  color: #555;
+  padding: 0 16px 20px;
+}
+
+/* =========================
+   MODAL STYLES
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 700px;
+  text-align: left;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.modal-content h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 </style>
 </head>
 <body>
@@ -711,54 +828,147 @@ body {
   </div>
 </section>
 
-<!-- Testimonials Carousel -->
-<section class="testimonials" data-aos="zoom-in">
-  <h3>What Our Clients Say</h3>
-  <div class="testimonial-container" id="testimonial-container">
-    <div class="testimonial-card">
-      <img src="logo.jpg" alt="Client 1">
-      <p>"This payroll system saved us hours every week. Highly recommend!"</p>
-      <strong>- ., Finance Manager</strong>
-    </div>
-    <div class="testimonial-card">
-      <img src="zra.jpg" alt="Client 2">
-      <p>"ERP dashboards are intuitive and powerful. Amazing support team."</p>
-      <strong>- John K., Operations Director</strong>
-    </div>
-    <div class="testimonial-card">
-      <img src="sme.jpeg" alt="Client 3">
-      <p>"Our company scaled seamlessly thanks to the automated payroll."</p>
-      <strong>- Sarah T., HR Head</strong>
+<!-- =========================
+     ERP PRODUCTS SECTION
+========================= -->
+<section id="erp-products" class="erp-section">
+  <div class="container">
+    <h2 class="section-title">Our ERP Solutions</h2>
+    <p class="section-subtitle">Explore our full suite of integrated systems built for growth, accuracy, and compliance.</p>
+
+    <div class="erp-grid">
+      <div class="erp-card" data-modal="erp1Modal">
+        <img src="payroll-hr.png" alt="Payroll ERP" />
+        <h3>Payroll with Currency Converter</h3>
+        <p>Automate multi-currency payroll and ensure local compliance effortlessly.</p>
+      </div>
+
+      <div class="erp-card" data-modal="erp2Modal">
+        <img src="hr.png" alt="HR Management ERP" />
+        <h3>HR Management</h3>
+        <p>Manage recruitment, performance, attendance, and staff records seamlessly.</p>
+      </div>
+
+      <div class="erp-card" data-modal="erp3Modal">
+        <img src="finance.png" alt="Accounting ERP" />
+        <h3>Accounting & Finance</h3>
+        <p>Automate bookkeeping, ledger control, and real-time financial insights.</p>
+      </div>
+
+      <div class="erp-card" data-modal="erp4Modal">
+        <img src="fiscal.png" alt="Fiscal ERP" />
+        <h3>Fiscal Management</h3>
+        <p>Integrated tax, compliance, and fiscal reporting built to match regulations.</p>
+      </div>
+
+      <div class="erp-card" data-modal="erp5Modal">
+        <img src="sales.png" alt="Sales & CRM ERP" />
+        <h3>Sales & CRM</h3>
+        <p>Track leads, manage clients, and boost sales performance with actionable insights.</p>
+      </div>
+
+      <div class="erp-card" data-modal="erp6Modal">
+        <img src="inventory.png" alt="Inventory ERP" />
+        <h3>Inventory Management</h3>
+        <p>Monitor stock, automate reorders, and streamline supply chain operations.</p>
+      </div>
+
+      <div class="erp-card" data-modal="erp7Modal">
+        <img src="loans.png" alt="Loans ERP" />
+        <h3>Loans Management</h3>
+        <p>Manage lending, repayments, and customer portfolios from one dashboard.</p>
+      </div>
     </div>
   </div>
-  <button class="arrow prev" onclick="prevTestimonial()">&#10094;</button>
-  <button class="arrow next" onclick="nextTestimonial()">&#10095;</button>
-  <div class="testimonial-dots" id="testimonial-dots"></div>
 </section>
 
- <section class="features" id="features" data-aos="fade-up">
-    <h3>What We Offer</h3>
-    <div class="columns">
-      <div>
-        <h4><i data-feather="file-text"></i> Payroll System</h4>
-        <ul>
-          <li><i data-feather="check-circle"></i> Automated salary calculations (ZRA, NAPSA, NHIMA)</li>
-          <li><i data-feather="download"></i> Branded payslip PDF export</li>
-          <li><i data-feather="calendar"></i> Leave tracking with approval workflows</li>
-          <li><i data-feather="bar-chart-2"></i> Payroll analytics with exportable charts</li>
-        </ul>
-      </div>
-      <div>
-        <h4><i data-feather="layers"></i> ERP System</h4>
-        <ul>
-          <li><i data-feather="users"></i> Staff onboarding & department tagging</li>
-          <li><i data-feather="file"></i> Invoice generation & payment tracking</li>
-          <li><i data-feather="package"></i> Inventory & service package management</li>
-          <li><i data-feather="pie-chart"></i> Client dashboards & reporting</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<!-- =========================
+     ERP MODALS
+========================= -->
+<div id="erp1Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('erp1Modal')">&times;</button>
+    <h2>Payroll with Currency Converter</h2>
+    <img src="payroll-hr.png" alt="Payroll ERP UI" />
+    <p>
+      Automate payroll processing across currencies, handle exchange rates dynamically,
+      and ensure complete compliance with ZRA, NAPSA, and NHIMA. Perfect for multi-branch operations.
+    </p>
+  </div>
+</div>
+
+<div id="erp2Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('erp2Modal')">&times;</button>
+    <h2>HR Management System</h2>
+    <img src="hr.png" alt="HR ERP UI" />
+    <p>
+      Streamline recruitment, attendance, appraisals, and employee lifecycle management.
+      Centralize HR operations for better productivity and transparency.
+    </p>
+  </div>
+</div>
+
+<div id="erp3Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('erp3Modal')">&times;</button>
+    <h2>Accounting & Finance ERP</h2>
+    <img src="accounting.png" alt="Accounting ERP UI" />
+    <p>
+      Gain real-time insights into your organization’s finances. Automate ledgers, generate
+      tax reports, and maintain precision with audit-ready statements.
+    </p>
+  </div>
+</div>
+
+<div id="erp4Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('erp4Modal')">&times;</button>
+    <h2>Fiscal Management ERP</h2>
+    <img src="fiscal.png" alt="Fiscal ERP UI" />
+    <p>
+      Built for compliance — handle tax records, receipts, and fiscal reports with ease.
+      Compatible with local e-invoicing and government integrations.
+    </p>
+  </div>
+</div>
+
+<div id="erp5Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('erp5Modal')">&times;</button>
+    <h2>Sales & CRM ERP</h2>
+    <img src="sales.png" alt="Sales CRM ERP UI" />
+    <p>
+      Track leads, manage sales pipelines, automate client communications, and increase revenue
+      with integrated analytics and CRM tools.
+    </p>
+  </div>
+</div>
+
+<div id="erp6Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('erp6Modal')">&times;</button>
+    <h2>Inventory Management ERP</h2>
+    <img src="inventory.png" alt="Inventory ERP UI" />
+    <p>
+      Keep stock levels optimized, automate purchase orders, and connect warehouses and sales channels
+      for real-time inventory control.
+    </p>
+  </div>
+</div>
+
+<div id="erp7Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('erp7Modal')">&times;</button>
+    <h2>Loans Management ERP</h2>
+    <img src="loans.png" alt="Loans ERP UI" />
+    <p>
+      Simplify loan origination, credit scoring, repayment schedules, and customer management
+      in one secure, automated platform.
+    </p>
+  </div>
+</div>
+
 
   <section class="comparison" data-aos="fade-left">
     <h3>Why Choose Us?</h3>
@@ -800,12 +1010,30 @@ body {
     </table>
   </section>
 
-  <section class="testimonials" data-aos="zoom-in">
-    <h3>What Our Clients Say</h3>
+  <!-- Testimonials Carousel -->
+<section class="testimonials" data-aos="zoom-in">
+  <h3>What Our Clients Say</h3>
+  <div class="testimonial-container" id="testimonial-container">
     <div class="testimonial-card">
-      <img src="testimonial-card.png" alt="Finance Manager testimonial" />
+      <img src="logo.jpg" alt="Client 1">
+      <p>"This payroll system saved us hours every week. Highly recommend!"</p>
+      <strong>- ., Finance Manager</strong>
     </div>
-  </section>
+    <div class="testimonial-card">
+      <img src="zra.jpg" alt="Client 2">
+      <p>"ERP dashboards are intuitive and powerful. Amazing support team."</p>
+      <strong>- John K., Operations Director</strong>
+    </div>
+    <div class="testimonial-card">
+      <img src="sme.jpeg" alt="Client 3">
+      <p>"Our company scaled seamlessly thanks to the automated payroll."</p>
+      <strong>- Sarah T., HR Head</strong>
+    </div>
+  </div>
+  <button class="arrow prev" onclick="prevTestimonial()">&#10094;</button>
+  <button class="arrow next" onclick="nextTestimonial()">&#10095;</button>
+  <div class="testimonial-dots" id="testimonial-dots"></div>
+</section>
 
   <section class="contact" id="contact">
     <h3>Ready to Upgrade?</h3>
@@ -1005,6 +1233,34 @@ toggleRadios.forEach(radio => {
     });
   });
 });
+
+  /* =========================
+   ERP MODAL LOGIC
+========================= */
+document.querySelectorAll('.erp-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const modalId = card.getAttribute('data-modal');
+    openModal(modalId);
+  });
+});
+
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.style.display = 'none';
+}
+
+// Close modal when clicking outside content
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+});
+
 </script>
 
 </body>
