@@ -172,7 +172,7 @@ footer a:hover { color:var(--accent1); }
     <div class="hero-overlay">
       <h1>Empowering Businesses with Cloud Infrastructure</h1>
       <p>Fast, flexible, and reliable web infrastructure management.</p>
-      <button onclick="openContactModal()">Get Started</button>
+      <button onclick="openContactModal()">Contact Us</button>
     </div>
   </div>
 
@@ -199,37 +199,7 @@ footer a:hover { color:var(--accent1); }
   </div>
 </section>
 
-  <!-- CONTACT FORM MODAL -->
-<div id="contactFormModal" class="modal">
-  <div class="modal-content" style="display:flex; max-width:800px; flex-wrap:wrap;">
-    <button class="close-btn" onclick="closeModal('contactFormModal')">&times;</button>
-    <!-- LEFT IMAGE -->
-    <div style="flex:1; min-width:300px; background:url('file/contact-bg.jpg') center/cover no-repeat; border-radius:16px 0 0 16px;"></div>
-    <!-- RIGHT FORM -->
-    <div style="flex:1; min-width:300px; padding:30px; display:flex; flex-direction:column; justify-content:center;">
-      <img src="file/avatar.png" alt="User Avatar" style="width:80px; border-radius:50%; margin:0 auto 20px;">
-      <h2 style="text-align:center; margin-bottom:20px;">Contact Us</h2>
-      <div style="margin-bottom:16px; position:relative;">
-        <i data-feather="user" style="position:absolute; top:50%; left:10px; transform:translateY(-50%);"></i>
-        <input type="text" placeholder="Full Name" style="padding:12px 12px 12px 36px; width:100%; border-radius:8px; border:1px solid #ccc;">
-      </div>
-      <div style="margin-bottom:16px; position:relative;">
-        <i data-feather="mail" style="position:absolute; top:50%; left:10px; transform:translateY(-50%);"></i>
-        <input type="email" placeholder="Email Address" style="padding:12px 12px 12px 36px; width:100%; border-radius:8px; border:1px solid #ccc;">
-      </div>
-      <div style="margin-bottom:16px; position:relative; display:flex; align-items:center;">
-        <span style="font-size:1.1rem; margin-right:6px;">🇿🇲 +260</span>
-        <i data-feather="phone" style="position:absolute; top:50%; left:50px; transform:translateY(-50%);"></i>
-        <input type="tel" placeholder="Phone Number" style="padding:12px 12px 12px 36px; width:100%; border-radius:8px; border:1px solid #ccc;">
-      </div>
-      <div style="margin-bottom:16px; position:relative;">
-        <i data-feather="message-square" style="position:absolute; top:10px; left:10px;"></i>
-        <textarea placeholder="Your Message" rows="4" style="padding:12px 12px 12px 36px; width:100%; border-radius:8px; border:1px solid #ccc;"></textarea>
-      </div>
-      <button style="margin-top:10px;">Send Message</button>
-    </div>
-  </div>
-</div>
+  
 
 
 
@@ -254,6 +224,43 @@ footer a:hover { color:var(--accent1); }
 <script>
 // Feather icons
 feather.replace();
+
+
+  // =========================
+// CONTACT FORM MODAL
+// =========================
+function openContactModal() {
+  // Create modal container
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+
+  modal.innerHTML = `
+    <div class="modal-content" style="display:flex; flex-wrap:wrap; gap:20px;">
+      <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+
+      <!-- Left image -->
+      <div style="flex:1; min-width:250px; background:url('image.jpg') center/cover; border-radius:12px;"></div>
+
+      <!-- Right form -->
+      <div style="flex:1; min-width:250px; display:flex; flex-direction:column; gap:15px;">
+        <img src="avatar.jpg" alt="User" style="width:60px; border-radius:50%; margin-bottom:10px;">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Email">
+        <input type="tel" placeholder="Phone (+260)">
+        <textarea placeholder="Your Message" rows="4"></textarea>
+        <button onclick="alert('Message sent!')">Send Message</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Close modal when clicking outside
+  modal.addEventListener('click', e => {
+    if(e.target === modal) modal.remove();
+  });
+}
 
 // =========================
 // MODAL LOGIC
