@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ntchito Web-Based Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* HERO */
+.hero-service {
+  position: relative;
+  background: url('demo (2).jpg') center/cover no-repeat;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  background: rgba(0,0,0,0.55);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.hero-overlay h1 {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.hero-overlay p {
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.hero-overlay button {
+  background: #ff6a3d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.hero-overlay button:hover {
+  background: #ff834f;
+}
+
+/* SERVICE GRID */
+.service-section {
+  padding: 80px 20px;
+  background: #fafafa;
+  text-align: center;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  max-width: 320px;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 700px;
+  text-align: left;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+  </style>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+<header class="sticky-header">
+  <div class="container">
+    <h1 class="logo">SMAIT Developers | Smart Digital Solutions </h1>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a href="/">Back to ERP</a>
+    </nav>
+  </div>
+</header>
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+<section class="hero-service">
+  <div class="hero-overlay">
+    <h1>Web-Based Solutions for Modern Businesses</h1>
+    <p>From hosting to payments, we power your digital ecosystem with secure and scalable tools.</p>
+    <button onclick="scrollToSection('services')">Explore Services</button>
+  </div>
+</section>
+
+<!-- =========================
+     SERVICES GRID
+========================= -->
+<section id="services" class="service-section">
+  <div class="container">
+    <h2 class="section-title">Our Web-Based Services</h2>
+    <p class="section-subtitle">Comprehensive cloud and digital solutions built for reliability and growth.</p>
+
+    <div class="service-grid">
+      <div class="service-card" data-modal="service1Modal">
+        <img src="images/hosting.jpg" alt="Web Hosting" />
+        <h3>Web Hosting</h3>
+        <p>Secure and fast hosting for all your web applications and business websites.</p>
+      </div>
+
+      <div class="service-card" data-modal="service2Modal">
+        <img src="images/web-design.jpg" alt="Web Design" />
+        <h3>Web Design</h3>
+        <p>Clean, modern, responsive websites that captivate your audience.</p>
+      </div>
+
+      <div class="service-card" data-modal="service3Modal">
+        <img src="image.jpg" alt="Web Development" />
+        <h3>Web Development</h3>
+        <p>Full-stack web solutions built with scalability, performance, and security in mind.</p>
+      </div>
+
+      <div class="service-card" data-modal="service4Modal">
+        <img src="image2.jpg" alt="Custom Email" />
+        <h3>Custom Email Solutions</h3>
+        <p>Professional email addresses that enhance your brand and trustworthiness.</p>
+      </div>
+
+      <div class="service-card" data-modal="service5Modal">
+        <img src="images/cloud-storage.jpg" alt="Cloud Storage" />
+        <h3>Cloud Storage</h3>
+        <p>Store, manage, and access your business files securely from anywhere.</p>
+      </div>
+
+      <div class="service-card" data-modal="service6Modal">
+        <img src="image3.jpg" alt="Cloud Database" />
+        <h3>Cloud Database</h3>
+        <p>Reliable, scalable, and high-performance cloud-hosted data systems.</p>
+      </div>
+
+      <div class="service-card" data-modal="service7Modal">
+        <img src="image4.jpg" alt="Payment Gateway Integration" />
+        <h3>Payment Gateway Integration</h3>
+        <p>Accept secure online payments from multiple providers globally.</p>
+      </div>
+
+      <div class="service-card" data-modal="service8Modal">
+        <img src="image5.jpg" alt="Web Analytics" />
+        <h3>Web Analytics & SEO</h3>
+        <p>Understand your audience and optimize your online presence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     MODALS FOR SERVICES
+========================= -->
+<div id="service1Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service1Modal')">&times;</button>
+    <h2>Web Hosting</h2>
+    <img src="images/hosting-large.jpg" alt="Web Hosting UI" />
+    <p>
+      Experience reliable hosting with 99.9% uptime, dedicated resources, SSL security,
+      and domain management tools — all under one platform.
+    </p>
+  </div>
+</div>
+
+<div id="service2Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service2Modal')">&times;</button>
+    <h2>Web Design</h2>
+    <img src="images/web-design-large.jpg" alt="Web Design" />
+    <p>
+      We design sleek, mobile-friendly websites that communicate your brand and drive engagement.
+    </p>
+  </div>
+</div>
+
+<div id="service3Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service3Modal')">&times;</button>
+    <h2>Web Development</h2>
+    <img src="images/web-dev-large.jpg" alt="Web Development" />
+    <p>
+      From small business sites to enterprise apps, our development team builds powerful,
+      secure, and user-centric platforms tailored to your needs.
+    </p>
+  </div>
+</div>
+
+<div id="service4Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service4Modal')">&times;</button>
+    <h2>Custom Email Solutions</h2>
+    <img src="images/email-large.jpg" alt="Custom Email" />
+    <p>
+      Create personalized business email accounts with advanced spam protection and secure cloud storage.
+    </p>
+  </div>
+</div>
+
+<div id="service5Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service5Modal')">&times;</button>
+    <h2>Cloud Storage</h2>
+    <img src="images/cloud-storage-large.jpg" alt="Cloud Storage" />
+    <p>
+      Keep your business data accessible and secure with our encrypted, multi-device cloud storage solution.
+    </p>
+  </div>
+</div>
+
+<div id="service6Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service6Modal')">&times;</button>
+    <h2>Cloud Database</h2>
+    <img src="images/cloud-db-large.jpg" alt="Cloud Database" />
+    <p>
+      Scalable and high-speed database hosting with full data recovery and backup capabilities.
+    </p>
+  </div>
+</div>
+
+<div id="service7Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service7Modal')">&times;</button>
+    <h2>Payment Gateway Integration</h2>
+    <img src="images/payments-large.jpg" alt="Payment Gateway" />
+    <p>
+      Integrate secure and flexible payment systems with support for PayPal, Stripe, and mobile money.
+    </p>
+  </div>
+</div>
+
+<div id="service8Modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('service8Modal')">&times;</button>
+    <h2>Web Analytics & SEO</h2>
+    <img src="images/analytics-large.jpg" alt="Web Analytics" />
+    <p>
+      Track visitor behavior, optimize search visibility, and improve conversions with actionable insights.
+    </p>
+  </div>
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+<footer id="contact">
+  <div class="container">
+    <p>&copy; 2025 SMAIT-Developers Digital Solutions — All Rights Reserved</p>
+  </div>
+</footer>
+<script>
+feather.replace();
+  // Smooth scroll
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Modal logic
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const modalId = card.getAttribute('data-modal');
+    openModal(modalId);
+  });
+});
+
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.style.display = 'none';
+}
+
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+});
+
+</script>
+</body>
+</html>
