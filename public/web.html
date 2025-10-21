@@ -138,6 +138,241 @@ footer a { color:white; text-decoration:none; transition:color 0.3s; }
 footer a:hover { color:var(--accent1); }
 .map { width:100%; height:300px; border:0; margin-top:30px; border-radius:12px; }
 
+  .contact-modal-content {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 800px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.contact-left {
+  flex: 1;
+  min-width: 300px;
+  background: url('image.jpg') center/cover no-repeat;
+}
+
+.contact-right {
+  flex: 1;
+  min-width: 300px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-right img.avatar {
+  width: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+}
+
+.contact-right h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-input {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.contact-input i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.contact-input input,
+.contact-input textarea {
+  width: 100%;
+  padding: 12px 12px 12px 36px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+}
+
+.contact-input textarea {
+  resize: none;
+  padding-top: 12px;
+}
+
+.contact-phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-phone span.country-code {
+  font-size: 1.1rem;
+}
+
+/* BUTTON */
+.contact-right button {
+  margin-top: 10px;
+  background: var(--accent1);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.contact-right button:hover {
+  background: #ff875b;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+  <style>
+/* =========================
+   PRICING SECTION
+========================= */
+.pricing-section {
+  padding: 80px 20px;
+  background: #f4f4f8;
+  text-align: center;
+}
+
+.pricing-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.pricing-section p {
+  margin-bottom: 40px;
+  color: #555;
+}
+
+.price-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.price-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px 20px;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.price-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.price-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.price-card .price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--accent1);
+}
+
+.price-card .features {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.price-card .features li {
+  margin-bottom: 8px;
+  list-style: disc;
+  padding-left: 18px;
+  color: #555;
+}
+
+.price-card .status-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+}
+
+.status-free { background: var(--accent3); }
+.status-popular { background: var(--accent2); }
+.status-premium { background: var(--accent1); }
+
+/* =========================
+   PRICING MODAL
+========================= */
+.modal-pricing {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-pricing .modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  text-align: left;
+  position: relative;
+}
+
+.modal-pricing .modal-content input,
+.modal-pricing .modal-content textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.modal-pricing .modal-content button {
+  background: var(--accent1);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.modal-pricing .modal-content button:hover { background: #ff875b; }
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+</style>
+
 </style>
   <script src="https://unpkg.com/feather-icons"></script>
 </head>
@@ -198,10 +433,48 @@ footer a:hover { color:var(--accent1); }
     </div>
   </div>
 </section>
+<section class="pricing-section" id="pricing">
+  <h2>Our Pricing Plans</h2>
+  <p>Choose the plan that fits your business needs. Click “Request” to get started.</p>
 
-  
+  <div class="price-grid">
+    <div class="price-card" data-price="Free Plan">
+      <div class="status-badge status-free">Free</div>
+      <h3>Free Plan</h3>
+      <div class="price">$0</div>
+      <ul class="features">
+        <li>Basic access to tools</li>
+        <li>Community support</li>
+        <li>Limited features</li>
+      </ul>
+      <button onclick="openPricingModal('Free Plan')">Request</button>
+    </div>
 
+    <div class="price-card" data-price="Popular Plan">
+      <div class="status-badge status-popular">Popular</div>
+      <h3>Popular Plan</h3>
+      <div class="price">$49/mo</div>
+      <ul class="features">
+        <li>All Free features</li>
+        <li>Email support</li>
+        <li>Full access to core tools</li>
+      </ul>
+      <button onclick="openPricingModal('Popular Plan')">Request</button>
+    </div>
 
+    <div class="price-card" data-price="Premium Plan">
+      <div class="status-badge status-premium">Premium</div>
+      <h3>Premium Plan</h3>
+      <div class="price">$99/mo</div>
+      <ul class="features">
+        <li>All Popular features</li>
+        <li>Priority support</li>
+        <li>Advanced integrations & analytics</li>
+      </ul>
+      <button onclick="openPricingModal('Premium Plan')">Request</button>
+    </div>
+  </div>
+</section>
 
 <!-- MAP & CONTACT -->
 <footer id="contact">
@@ -222,141 +495,193 @@ footer a:hover { color:var(--accent1); }
   <p style="margin-top:20px;">&copy; 2025 SMAIT Developers. All rights reserved.</p>
 </footer>
 <script>
-// Feather icons
-feather.replace();
-
+  // =========================
+  // Feather Icons
+  // =========================
+  feather.replace();
 
   // =========================
-// CONTACT FORM MODAL
-// =========================
-function openContactModal() {
-  // Create modal container
+  // SERVICE MODAL LOGIC
+  // =========================
+  function openServiceModal(id) {
+    const card = document.querySelector(`[data-modal="${id}"]`);
+    if (!card) return;
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+    
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+        <h2>${card.querySelector('h3').innerText}</h2>
+        <img src="${card.querySelector('img').src}" alt="${card.querySelector('h3').innerText}">
+        <p>${card.querySelector('p').innerText}</p>
+        <div class="extra-info">
+          <p>Here you can add more detailed information about this service, including features, benefits, pricing options, or customer success stories.</p>
+          <p>Additional content can also include links, resources, or call-to-actions to engage the user further.</p>
+        </div>
+        <button onclick="openContactModal()">Apply for qoute</button>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+
+    // Close on clicking outside
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.remove();
+    });
+  }
+
+  // Attach service card click
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', () => openServiceModal(card.dataset.modal));
+  });
+
+  // =========================
+  // CONTACT FORM MODAL
+  // =========================
+  function openContactModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+
+    modal.innerHTML = `
+      <div class="contact-modal-content">
+        <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+         <div style="flex:1; min-width:250px; background:url('image.jpg') center/cover; border-radius:12px;"></div>
+        <div class="contact-right">
+          <img src="avatar.jpg" class="avatar" alt="User Avatar">
+          <h2>Contact Us</h2>
+          <div class="contact-input">
+            <i data-feather="user"></i>
+            <input type="text" placeholder="Full Name">
+          </div>
+          <div class="contact-input">
+            <i data-feather="mail"></i>
+            <input type="email" placeholder="Email Address">
+          </div>
+          <div class="contact-input contact-phone">
+            <span class="country-code">🇿🇲 +260</span>
+            <i data-feather="phone"></i>
+            <input type="tel" placeholder="Phone Number">
+          </div>
+          <div class="contact-input">
+            <i data-feather="message-square"></i>
+            <textarea placeholder="Your Message" rows="4"></textarea>
+          </div>
+          <button>Send Message</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    feather.replace(); // apply feather icons
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.remove();
+    });
+  }
+
+  // =========================
+  // HERO SLIDESHOW
+  // =========================
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsContainer = document.querySelector('.dots');
+
+  if (slides.length && dotsContainer) {
+    slides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('span');
+    let currentSlide = 0;
+
+    function changeSlide(next = true) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = next
+        ? (currentSlide + 1) % slides.length
+        : (currentSlide - 1 + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    setInterval(() => changeSlide(true), 6000);
+  }
+
+  // =========================
+  // SERVICE GRID CAROUSEL (3 per slide)
+  // =========================
+  const grid = document.getElementById('serviceGrid');
+  if (grid) {
+    const totalCards = grid.children.length;
+    const cardsPerSlide = 3;
+    let offset = 0;
+
+    // flex width calculation
+    grid.style.display = 'flex';
+    grid.style.transition = 'transform 0.7s ease-in-out';
+    grid.style.width = `${(totalCards / cardsPerSlide) * 100}%`;
+    Array.from(grid.children).forEach(child => {
+      child.style.flex = `0 0 ${100 / (totalCards / cardsPerSlide)}%`;
+    });
+
+    setInterval(() => {
+      offset = (offset + 1) % Math.ceil(totalCards / cardsPerSlide);
+      grid.style.transform = `translateX(-${offset * 100}%)`;
+    }, 7000);
+  }
+
+  // =========================
+  // SCROLL HELPER
+  // =========================
+  window.scrollToSection = function(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  
+function openPricingModal(planName) {
   const modal = document.createElement('div');
-  modal.className = 'modal';
+  modal.className = 'modal-pricing';
   modal.style.display = 'flex';
 
   modal.innerHTML = `
-    <div class="modal-content" style="display:flex; flex-wrap:wrap; gap:20px;">
-      <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
-
-      <!-- Left image -->
-      <div style="flex:1; min-width:250px; background:url('image.jpg') center/cover; border-radius:12px;"></div>
-
-      <!-- Right form -->
-      <div style="flex:1; min-width:250px; display:flex; flex-direction:column; gap:15px;">
-        <img src="avatar.jpg" alt="User" style="width:60px; border-radius:50%; margin-bottom:10px;">
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Email">
-        <input type="tel" placeholder="Phone (+260)">
-        <textarea placeholder="Your Message" rows="4"></textarea>
-        <button onclick="alert('Message sent!')">Send Message</button>
-      </div>
+    <div class="modal-content">
+      <button class="close-btn" onclick="this.closest('.modal-pricing').remove()">&times;</button>
+      <h2>Request: ${planName}</h2>
+      <p>Fill in your details and we will contact you regarding this plan.</p>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <textarea placeholder="Your Message" rows="4"></textarea>
+      <button onclick="sendPricingRequest('${planName}', this)">Submit Request</button>
     </div>
   `;
 
   document.body.appendChild(modal);
-
-  // Close modal when clicking outside
-  modal.addEventListener('click', e => {
-    if(e.target === modal) modal.remove();
-  });
 }
 
-// =========================
-// MODAL LOGIC
-// =========================
-function openModal(id){
-  const card = document.querySelector(`[data-modal="${id}"]`);
-  if(!card) return;
+// Send request (via mailto)
+function sendPricingRequest(planName, btn) {
+  const modal = btn.closest('.modal-pricing');
+  const inputs = modal.querySelectorAll('input, textarea');
+  const [name, email, phone, message] = Array.from(inputs).map(i => i.value.trim());
 
-  const modal = document.createElement('div');
-  modal.className = 'modal';
-  modal.style.display = 'flex';
-  modal.innerHTML = `
-    <div class="modal-content">
-      <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
-      <h2>${card.querySelector('h3').innerText}</h2>
-      <img src="${card.querySelector('img').src}" alt="${card.querySelector('h3').innerText}">
-      <p>${card.querySelector('p').innerText}</p>
-      <button onclick="alert('Action for ${card.querySelector('h3').innerText}')">Learn More</button>
-    </div>`;
-  document.body.appendChild(modal);
-
-  modal.addEventListener('click', e => {
-    if(e.target === modal) modal.remove();
-  });
-}
-
-// =========================
-// HERO SLIDESHOW
-// =========================
-const slides = document.querySelectorAll('.hero-slide');
-const dotsContainer = document.querySelector('.dots');
-
-if(slides.length && dotsContainer){
-  slides.forEach((_, i) => {
-    const dot = document.createElement('span');
-    if(i===0) dot.classList.add('active');
-    dotsContainer.appendChild(dot);
-  });
-  const dots = dotsContainer.querySelectorAll('span');
-  let currentSlide = 0;
-
-  function changeSlide(next=true){
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = next ? (currentSlide +1)%slides.length : (currentSlide-1+slides.length)%slides.length;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-  }
-  setInterval(()=>changeSlide(true),6000);
-}
-
-// =========================
-// SERVICE GRID CAROUSEL (3 per slide)
-// =========================
-const grid = document.getElementById('serviceGrid');
-if(grid){
-  const cards = Array.from(grid.children);
-  const slides = [];
-  const cardsPerSlide = 3;
-
-  // Clear existing children
-  grid.innerHTML = '';
-
-  // Wrap cards into slides
-  while(cards.length){
-    const slide = document.createElement('div');
-    slide.className = 'slide';
-    for(let i=0; i<cardsPerSlide; i++){
-      if(cards.length) slide.appendChild(cards.shift());
-    }
-    grid.appendChild(slide);
-    slides.push(slide);
+  if (!name || !email || !phone) {
+    alert("Please fill in all required fields.");
+    return;
   }
 
-  let offset = 0;
-  setInterval(()=>{
-    offset = (offset + 1) % slides.length;
-    grid.style.transform = `translateX(-${offset*100}%)`;
-  }, 7000);
+  const mailtoLink = `mailto:dev@smaitdev.com?subject=Pricing Request: ${encodeURIComponent(planName)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`)}`;
+  
+  window.location.href = mailtoLink;
+  modal.remove();
 }
-
-
-// =========================
-// SCROLL HELPER
-// =========================
-window.scrollToSection = function(id){
-  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
-};
-
-// =========================
-// SERVICE CARD CLICK
-// =========================
-document.querySelectorAll('.service-card').forEach(card=>{
-  card.addEventListener('click',()=>openModal(card.dataset.modal));
-});
 </script>
+
 
 </body>
 </html>
