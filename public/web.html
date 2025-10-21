@@ -345,174 +345,217 @@ footer a:hover { color:var(--accent1); }
 
 
 /* =========================
-   PRICING SECTION
-========================= */
-.pricing-section {
-  padding: 100px 20px;
-  background: #f9f9fc;
-  text-align: center;
-}
-
-.pricing-section h2 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-}
-
-.pricing-section p {
-  margin-bottom: 40px;
-  color: #555;
-}
-
+   PRICING CAROUSEL SECTION
+   ========================= */
 .pricing-carousel {
-  position: relative;
   overflow: hidden;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  margin: 80px auto;
+  background: #f8fafc;
+  padding: 60px 0;
 }
 
 .pricing-track {
   display: flex;
   transition: transform 1s ease-in-out;
-  width: 100%;
+  width: 400%;
 }
 
 .pricing-group {
-  flex: 0 0 100%;
-  padding: 20px;
+  flex: 1 0 100%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
 }
+
+.pricing-group:nth-child(1) { animation-delay: 0.3s; }
+.pricing-group:nth-child(2) { animation-delay: 0.6s; }
+.pricing-group:nth-child(3) { animation-delay: 0.9s; }
+.pricing-group:nth-child(4) { animation-delay: 1.2s; }
 
 .pricing-group h3 {
   font-size: 1.6rem;
-  margin-bottom: 20px;
-  color: var(--accent1);
-  text-transform: capitalize;
-}
-
-.price-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-/* =========================
-   PRICE CARDS
-========================= */
-.price-card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px 20px;
-  width: 300px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #222;
   position: relative;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: cardFadeUp 1s forwards;
 }
 
-@keyframes cardFadeUp {
-  to { opacity: 1; transform: translateY(0); }
+.pricing-group h3::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #0077ff;
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* Price grid (2 per group) */
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  justify-items: center;
+  padding: 0 10px;
+}
+
+.price-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 30px 24px;
+  transition: all 0.4s ease;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .price-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 30px rgba(0, 119, 255, 0.15);
 }
 
-.price-card h4 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-}
-
-.price-card .price {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--accent1);
-}
-
-.price-card .features {
-  text-align: left;
-  margin-bottom: 16px;
-}
-
-.price-card .features li {
-  margin-bottom: 8px;
-  list-style: disc;
-  padding-left: 18px;
-  color: #555;
-}
-
-.price-card .status-badge {
+/* Status badges */
+.status-badge {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   padding: 6px 12px;
-  border-radius: 12px;
+  border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: white;
+  color: #fff;
 }
 
-.status-basic { background: var(--accent3); }
-.status-popular { background: var(--accent2); }
-.status-premium { background: var(--accent1); }
+.status-basic { background: #6c757d; }
+.status-popular { background: #0077ff; }
+.status-premium { background: #e63946; }
 
-/* =========================
-   MODAL
-========================= */
-.modal-pricing {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+/* Card content */
+.price-card h4 {
+  font-size: 1.2rem;
+  margin: 20px 0 10px;
+  color: #222;
 }
 
-.modal-pricing .modal-content {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  width: 90%;
-  max-width: 600px;
-  text-align: left;
-  position: relative;
-}
-
-.modal-pricing .modal-content input,
-.modal-pricing .modal-content textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.modal-pricing .modal-content button {
-  background: var(--accent1);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
+.price {
+  font-size: 1rem;
+  color: #0077ff;
   font-weight: 600;
+  margin-bottom: 18px;
 }
 
-.modal-pricing .modal-content button:hover { background: #ff875b; }
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
 
-.close-btn {
+.features li {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 6px 0;
+  position: relative;
+  padding-left: 18px;
+}
+
+.features li::before {
+  content: "✓";
   position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 24px;
-  cursor: pointer;
-  background: none;
-  border: none;
+  left: 0;
+  color: #00b894;
+  font-weight: 700;
 }
+
+/* Request button */
+.price-card button {
+  background: #0077ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.price-card button:hover {
+  background: #005fcc;
+  transform: translateY(-2px);
+}
+
+/* Carousel Controls (optional) */
+.pricing-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.pricing-controls button {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  pointer-events: all;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pricing-controls button:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pricing-group {
+    padding: 20px;
+  }
+  .price-card {
+    max-width: 100%;
+  }
+  .pricing-group h3 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .price-card {
+    padding: 24px 16px;
+  }
+  .price-card h4 {
+    font-size: 1rem;
+  }
+  .price-card button {
+    width: 100%;
+  }
+}
+
 </style>
   <script src="https://unpkg.com/feather-icons"></script>
 </head>
@@ -879,55 +922,107 @@ if(grid){
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-// =========================
-// PRICING CAROUSEL
-// =========================
-const track = document.getElementById('pricingTrack');
-let pricingIndex = 0;
 
-function slidePricing() {
-  const groups = document.querySelectorAll('.pricing-group');
-  pricingIndex = (pricingIndex + 1) % groups.length;
-  track.style.transform = `translateX(-${pricingIndex * 100}%)`;
-}
+/* =========================
+   PRICING CAROUSEL LOGIC
+   ========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("pricingTrack");
+  const groups = document.querySelectorAll(".pricing-group");
+  let currentIndex = 0;
+  const totalGroups = groups.length;
 
-setInterval(slidePricing, 7000);
-
-// =========================
-// MODAL LOGIC
-// =========================
-function openPricingModal(planName) {
-  const modal = document.createElement('div');
-  modal.className = 'modal-pricing';
-  modal.style.display = 'flex';
-  modal.innerHTML = `
-    <div class="modal-content">
-      <button class="close-btn" onclick="this.closest('.modal-pricing').remove()">&times;</button>
-      <h2>Request: ${planName}</h2>
-      <p>Provide your details and we’ll get back to you shortly.</p>
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email Address" required>
-      <input type="tel" placeholder="Phone Number" required>
-      <textarea placeholder="Your Message" rows="4"></textarea>
-      <button onclick="sendPricingRequest('${planName}', this)">Submit Request</button>
-    </div>
+  // Create navigation controls
+  const controls = document.createElement("div");
+  controls.className = "pricing-controls";
+  controls.innerHTML = `
+    <button id="prevPricing"><i data-feather="chevron-left"></i></button>
+    <button id="nextPricing"><i data-feather="chevron-right"></i></button>
   `;
-  document.body.appendChild(modal);
-}
+  document.querySelector(".pricing-carousel").appendChild(controls);
+  feather.replace();
 
-function sendPricingRequest(planName, btn) {
-  const modal = btn.closest('.modal-pricing');
-  const [name, email, phone, message] = Array.from(modal.querySelectorAll('input, textarea')).map(i => i.value.trim());
-
-  if (!name || !email || !phone) {
-    alert("Please fill in all required fields.");
-    return;
+  // Function to show current group
+  function showGroup(index) {
+    const offset = -index * 100;
+    track.style.transform = `translateX(${offset}%)`;
+    groups.forEach((g, i) => {
+      g.style.opacity = i === index ? "1" : "0.5";
+      g.style.transform = i === index ? "scale(1)" : "scale(0.97)";
+    });
   }
 
-  const mailtoLink = `mailto:dev@smaitdev.com?subject=Pricing Request: ${encodeURIComponent(planName)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`)}`;
-  window.location.href = mailtoLink;
-  modal.remove();
+  // Next / Prev controls
+  document.getElementById("nextPricing").addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % totalGroups;
+    showGroup(currentIndex);
+  });
+
+  document.getElementById("prevPricing").addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + totalGroups) % totalGroups;
+    showGroup(currentIndex);
+  });
+
+  // Auto-slide every 7 seconds
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % totalGroups;
+    showGroup(currentIndex);
+  }, 7000);
+
+  // Initialize view
+  showGroup(currentIndex);
+});
+
+/* =========================
+   PRICING MODAL FUNCTION
+   ========================= */
+function openPricingModal(serviceName) {
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.style.display = "flex";
+
+  modal.innerHTML = `
+    <div class="modal-content pricing-modal-content">
+      <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+      <h2>Request Quote for ${serviceName}</h2>
+      <p>Fill in the form below and our development team will reach out with a personalized quote and details for <strong>${serviceName}</strong>.</p>
+      
+      <form id="pricingForm">
+        <div class="input-group">
+          <i data-feather="user"></i>
+          <input type="text" placeholder="Full Name" required>
+        </div>
+        <div class="input-group">
+          <i data-feather="mail"></i>
+          <input type="email" placeholder="Email Address" required>
+        </div>
+        <div class="input-group">
+          <i data-feather="phone"></i>
+          <input type="tel" placeholder="Phone Number" required>
+        </div>
+        <textarea placeholder="Additional details or requirements" rows="4"></textarea>
+        <button type="submit">Submit Request</button>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  feather.replace();
+
+  // Handle form submission
+  document.getElementById("pricingForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const phone = formData.get("phone");
+
+    // Send email (backend endpoint or mailto fallback)
+    window.location.href = `mailto:dev@smaitdev.com?subject=Quote Request: ${serviceName}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}`;
+    modal.remove();
+  });
 }
 </script>
+
 </body>
 </html>
