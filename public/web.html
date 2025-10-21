@@ -3,351 +3,331 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ntchito Web-Based Services</title>
+  <title>Ntchito Web-Based Services | SMAIT Developers</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --accent1: #ff6a3d;
+      --accent2: #3b82f6;
+      --accent3: #10b981;
+      --accent4: #f59e0b;
+      --accent5: #8b5cf6;
+      --accent6: #ef4444;
+      --dark: #0d1117;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body { background: #fff; color: #222; }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      z-index: 100;
+      padding: 12px 30px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    header .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent1); }
+    nav a { margin: 0 12px; color: #333; text-decoration: none; font-weight: 600; }
+    nav a:hover { color: var(--accent1); }
+
     /* HERO */
-.hero-service {
-  position: relative;
-  background: url('file/file (13).jpg') center/cover no-repeat;
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .hero {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 1.5s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
 
-.hero-overlay {
-  background: rgba(0,0,0,0.55);
-  color: white;
-  padding: 60px 20px;
-  text-align: center;
-  border-radius: 12px;
-}
+    .hero-overlay {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: 40px 20px;
+      border-radius: 12px;
+      animation: fadeSlide 1.2s ease;
+    }
+    .hero-overlay h1 {
+      font-size: 2.2rem; margin-bottom: 10px;
+    }
+    .hero-overlay p {
+      font-size: 1.1rem; margin-bottom: 24px;
+    }
+    .hero-overlay button {
+      background: var(--accent1);
+      border: none; padding: 12px 24px; color: white;
+      border-radius: 8px; font-weight: 600; cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .hero-overlay button:hover { background: #ff875b; }
 
-.hero-overlay h1 {
-  font-size: 2.2rem;
-  margin-bottom: 12px;
-}
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.hero-overlay p {
-  font-size: 1rem;
-  margin-bottom: 24px;
-}
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      transition: background 0.3s;
+    }
+    .dots span.active { background: var(--accent1); }
 
-.hero-overlay button {
-  background: #ff6a3d;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
+    /* SERVICES */
+    .service-section {
+      padding: 100px 20px 80px;
+      background: #fafafa;
+      text-align: center;
+    }
+    .service-section h2 { font-size: 2rem; margin-bottom: 10px; }
+    .service-section p { margin-bottom: 40px; color: #555; }
 
-.hero-overlay button:hover {
-  background: #ff834f;
-}
+    .service-carousel {
+      display: flex; overflow: hidden; position: relative;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .service-grid {
+      display: flex; transition: transform 1s ease;
+    }
+    .service-card {
+      background: white;
+      border-radius: 16px;
+      margin: 0 10px;
+      flex: 0 0 calc(33.333% - 20px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: cardEnter 1.2s forwards;
+      cursor: pointer;
+    }
+    @keyframes cardEnter {
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .service-card img {
+      width: 100%; height: 160px; object-fit: cover;
+    }
+    .service-card h3 {
+      font-size: 1.2rem; margin: 16px;
+    }
+    .service-card p {
+      margin: 0 16px 20px;
+      color: #555;
+    }
+    .color1 { border-top: 6px solid var(--accent1); }
+    .color2 { border-top: 6px solid var(--accent2); }
+    .color3 { border-top: 6px solid var(--accent3); }
+    .color4 { border-top: 6px solid var(--accent4); }
+    .color5 { border-top: 6px solid var(--accent5); }
+    .color6 { border-top: 6px solid var(--accent6); }
 
-/* SERVICE GRID */
-.service-section {
-  padding: 80px 20px;
-  background: #fafafa;
-  text-align: center;
-}
+    /* MODAL */
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: none; justify-content: center; align-items: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      width: 90%;
+      max-width: 700px;
+      text-align: left;
+      position: relative;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-content img {
+      width: 100%; border-radius: 12px; margin: 20px 0;
+    }
+    .close-btn {
+      position: absolute; top: 12px; right: 16px;
+      background: none; border: none; font-size: 24px;
+      cursor: pointer;
+    }
+    .modal-content button {
+      background: var(--accent1);
+      color: white; border: none;
+      padding: 12px 24px; border-radius: 8px;
+      cursor: pointer; font-weight: 600;
+    }
+    .modal-content button:hover { background: #ff875b; }
 
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  justify-items: center;
-}
+    /* CONTACT */
+    footer {
+      background: var(--dark);
+      color: white; padding: 60px 20px;
+      text-align: center;
+    }
+    footer .socials {
+      margin: 20px 0;
+      display: flex; justify-content: center; gap: 20px;
+    }
+    footer a { color: white; text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--accent1); }
 
-.service-card {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  max-width: 320px;
-}
-
-.service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
-.service-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-/* MODAL */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-content {
-  background: #fff;
-  border-radius: 16px;
-  padding: 30px;
-  width: 90%;
-  max-width: 700px;
-  text-align: left;
-  position: relative;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.modal-content img {
-  width: 100%;
-  border-radius: 12px;
-  margin: 20px 0;
-}
-
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
+    .map {
+      width: 100%; height: 300px;
+      border: 0; margin-top: 30px;
+      border-radius: 12px;
+    }
 
   </style>
   <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
-<header class="sticky-header">
-  <div class="container">
-    <h1 class="logo">SMAIT Developers | Smart Digital Solutions </h1>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-      <a href="/">Back to ERP</a>
-    </nav>
-  </div>
+<header>
+  <h1 class="logo">SMAIT Developers</h1>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="/">Back to ERP</a>
+  </nav>
 </header>
 
-<!-- =========================
-     HERO SECTION
-========================= -->
-<section class="hero-service">
-  <div class="hero-overlay">
-    <h1>Web-Based Solutions for Modern Businesses</h1>
-    <p>From hosting to payments, we power your digital ecosystem with secure and scalable tools.</p>
-    <button onclick="scrollToSection('services')">Explore Services</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slide active" style="background-image:url('file/file (13).jpg')">
+    <div class="hero-overlay">
+      <h1>Web-Based Solutions for Modern Businesses</h1>
+      <p>Secure, scalable tools powering your digital growth.</p>
+      <button onclick="scrollToSection('services')">Explore Services</button>
+    </div>
   </div>
+  <div class="hero-slide" style="background-image:url('file/file (9).jpg')">
+    <div class="hero-overlay">
+      <h1>Systems Modeling and Artificial Integration Tools</h1>
+      <p>AI-driven systems and smart digital frameworks for enterprises.</p>
+      <button>Learn More</button>
+    </div>
+  </div>
+  <div class="hero-slide" style="background-image:url('file/file (6).jpg')">
+    <div class="hero-overlay">
+      <h1>Empowering Businesses with Cloud Infrastructure</h1>
+      <p>Fast, flexible, and reliable web infrastructure management.</p>
+      <button>Get Started</button>
+    </div>
+  </div>
+
+  <div class="dots"></div>
 </section>
 
-<!-- =========================
-     SERVICES GRID
-========================= -->
+<!-- SERVICES -->
 <section id="services" class="service-section">
-  <div class="container">
-    <h2 class="section-title">Our Web-Based Services</h2>
-    <p class="section-subtitle">Comprehensive cloud and digital solutions built for reliability and growth.</p>
+  <h2>Our Web-Based Services</h2>
+  <p>Comprehensive cloud and digital tools built for growth.</p>
 
-    <div class="service-grid">
-      <div class="service-card" data-modal="service1Modal">
-        <img src="file/file (4).jpg" alt="Web Hosting" />
-        <h3>Web Hosting</h3>
-        <p>Secure and fast hosting for all your web applications and business websites.</p>
-      </div>
-
-      <div class="service-card" data-modal="service2Modal">
-        <img src="file/file (8).jpg" alt="Web Design" />
-        <h3>Web Design</h3>
-        <p>Clean, modern, responsive websites that captivate your audience.</p>
-      </div>
-
-      <div class="service-card" data-modal="service3Modal">
-        <img src="file/file (6).jpg" alt="Web Development" />
-        <h3>Web Development</h3>
-        <p>Full-stack web solutions built with scalability, performance, and security in mind.</p>
-      </div>
-
-      <div class="service-card" data-modal="service4Modal">
-        <img src="file/file (9).jpg" alt="Custom Email" />
-        <h3>Custom Email Solutions</h3>
-        <p>Professional email addresses that enhance your brand and trustworthiness.</p>
-      </div>
-
-      <div class="service-card" data-modal="service5Modal">
-        <img src="file/file (3).jpg" alt="Cloud Storage" />
-        <h3>Cloud Storage</h3>
-        <p>Store, manage, and access your business files securely from anywhere.</p>
-      </div>
-
-      <div class="service-card" data-modal="service6Modal">
-        <img src="file/file (11).jpg" alt="Cloud Database" />
-        <h3>Cloud Database</h3>
-        <p>Reliable, scalable, and high-performance cloud-hosted data systems.</p>
-      </div>
-
-      <div class="service-card" data-modal="service7Modal">
-        <img src="file/file (7).jpg" alt="Payment Gateway Integration" />
-        <h3>Payment Gateway Integration</h3>
-        <p>Accept secure online payments from multiple providers globally.</p>
-      </div>
-
-      <div class="service-card" data-modal="service8Modal">
-        <img src="file/file (5).jpg" alt="Web Analytics" />
-        <h3>Web Analytics & SEO</h3>
-        <p>Understand your audience and optimize your online presence.</p>
-      </div>
+  <div class="service-carousel">
+    <div class="service-grid" id="serviceGrid">
+      <div class="service-card color1" data-modal="1"><img src="file/file (4).jpg"><h3>Web Hosting</h3><p>Fast, secure hosting for all your business sites.</p></div>
+      <div class="service-card color2" data-modal="2"><img src="file/file (8).jpg"><h3>Web Design</h3><p>Responsive and elegant design for engagement.</p></div>
+      <div class="service-card color3" data-modal="3"><img src="file/file (6).jpg"><h3>Web Development</h3><p>Scalable and high-performance web solutions.</p></div>
+      <div class="service-card color4" data-modal="4"><img src="file/file (9).jpg"><h3>Custom Email</h3><p>Professional business email solutions.</p></div>
+      <div class="service-card color5" data-modal="5"><img src="file/file (3).jpg"><h3>Cloud Storage</h3><p>Secure multi-device access to business files.</p></div>
+      <div class="service-card color6" data-modal="6"><img src="file/file (11).jpg"><h3>Cloud Database</h3><p>High-speed and reliable data management.</p></div>
+      <div class="service-card color2" data-modal="7"><img src="file/file (7).jpg"><h3>Payment Gateway</h3><p>Accept payments securely and globally.</p></div>
+      <div class="service-card color3" data-modal="8"><img src="file/file (5).jpg"><h3>SEO & Analytics</h3><p>Optimize visibility and track performance.</p></div>
     </div>
   </div>
 </section>
 
-<!-- =========================
-     MODALS FOR SERVICES
-========================= -->
-<div id="service1Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service1Modal')">&times;</button>
-    <h2>Web Hosting</h2>
-     <img src="file/file (4).jpg" alt="Web Hosting" />
-    <p>
-      Experience reliable hosting with 99.9% uptime, dedicated resources, SSL security,
-      and domain management tools — all under one platform.
-    </p>
-  </div>
-</div>
-
-<div id="service2Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service2Modal')">&times;</button>
-    <h2>Web Design</h2>
-     <img src="file/file (8).jpg" alt="Web Design" />
-    <p>
-      We design sleek, mobile-friendly websites that communicate your brand and drive engagement.
-    </p>
-  </div>
-</div>
-
-<div id="service3Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service3Modal')">&times;</button>
-    <h2>Web Development</h2>
-    <img src="file/file (6).jpg" alt="Web Development" />
-    <p>
-      From small business sites to enterprise apps, our development team builds powerful,
-      secure, and user-centric platforms tailored to your needs.
-    </p>
-  </div>
-</div>
-
-<div id="service4Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service4Modal')">&times;</button>
-    <h2>Custom Email Solutions</h2>
-    <img src="file/file (9).jpg" alt="Custom Email" />
-    <p>
-      Create personalized business email accounts with advanced spam protection and secure cloud storage.
-    </p>
-  </div>
-</div>
-
-<div id="service5Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service5Modal')">&times;</button>
-    <h2>Cloud Storage</h2>
-    <img src="file/file (3).jpg" alt="Cloud Storage" />
-    <p>
-      Keep your business data accessible and secure with our encrypted, multi-device cloud storage solution.
-    </p>
-  </div>
-</div>
-
-<div id="service6Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service6Modal')">&times;</button>
-    <h2>Cloud Database</h2>
-     <img src="file/file (11).jpg" alt="Cloud Database" />
-    <p>
-      Scalable and high-speed database hosting with full data recovery and backup capabilities.
-    </p>
-  </div>
-</div>
-
-<div id="service7Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service7Modal')">&times;</button>
-    <h2>Payment Gateway Integration</h2>
-    <img src="file/file (7).jpg" alt="Payment Gateway Integration" />
-    <p>
-      Integrate secure and flexible payment systems with support for PayPal, Stripe, and mobile money.
-    </p>
-  </div>
-</div>
-
-<div id="service8Modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal('service8Modal')">&times;</button>
-    <h2>Web Analytics & SEO</h2>
-    <img src="file/file (5).jpg" alt="Web Analytics" />
-    <p>
-      Track visitor behavior, optimize search visibility, and improve conversions with actionable insights.
-    </p>
-  </div>
-</div>
-
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- MAP & CONTACT -->
 <footer id="contact">
-  <div class="container">
-    <p>&copy; 2025 SMAIT-Developers Digital Solutions — All Rights Reserved</p>
+  <h3>Contact Us</h3>
+  <p>Email: support@smaitdev.com | Phone: +260 751 814 451</p>
+  <div class="socials">
+    <a href="#"><i data-feather="globe"></i></a>
+    <a href="#"><i data-feather="facebook"></i></a>
+    <a href="#"><i data-feather="twitter"></i></a>
+    <a href="#"><i data-feather="linkedin"></i></a>
+    <a href="#"><i data-feather="mail"></i></a>
   </div>
+
+  <div class="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d19131.991173015816!2d28.297795745849612!3d-15.407232404072811!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f5279fcffdbb%3A0xcf1f78e2cf129563!2sTax%20Man%20Solution!5e1!3m2!1sen!2sus!4v1761044895830!5m2!1sen!2sus" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+  <p style="margin-top:20px;">&copy; 2025 SMAIT Developers. All rights reserved.</p>
 </footer>
+
 <script>
 feather.replace();
-  // Smooth scroll
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-}
 
-// Modal logic
+// HERO SLIDESHOW
+const slides = document.querySelectorAll('.hero-slide');
+const dotsContainer = document.querySelector('.dots');
+slides.forEach((_, i) => {
+  const dot = document.createElement('span');
+  if (i === 0) dot.classList.add('active');
+  dotsContainer.appendChild(dot);
+});
+const dots = dotsContainer.querySelectorAll('span');
+let currentSlide = 0;
+
+function changeSlide(next = true) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = next ? (currentSlide + 1) % slides.length : (currentSlide - 1 + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+setInterval(() => changeSlide(true), 6000);
+
+// SERVICE GRID CAROUSEL (3 per slide)
+const grid = document.getElementById('serviceGrid');
+let offset = 0;
+setInterval(() => {
+  offset = (offset + 1) % Math.ceil(grid.children.length / 3);
+  grid.style.transform = `translateX(-${offset * 100}%)`;
+}, 7000);
+
+// MODALS
 document.querySelectorAll('.service-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const modalId = card.getAttribute('data-modal');
-    openModal(modalId);
-  });
+  card.addEventListener('click', () => openModal(card.dataset.modal));
 });
 
 function openModal(id) {
-  const modal = document.getElementById(id);
-  if (modal) modal.style.display = 'flex';
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+      <h2>${document.querySelector(\`[data-modal="${id}"] h3\`).innerText}</h2>
+      <img src="${document.querySelector(\`[data-modal="${id}"] img\`).src}">
+      <p>${document.querySelector(\`[data-modal="${id}"] p\`).innerText}</p>
+      <button>Learn More</button>
+    </div>`;
+  document.body.appendChild(modal);
 }
 
-function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (modal) modal.style.display = 'none';
+// Scroll helper
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
-
-document.querySelectorAll('.modal').forEach(modal => {
-  modal.addEventListener('click', e => {
-    if (e.target === modal) modal.style.display = 'none';
-  });
-});
-
 </script>
 </body>
 </html>
