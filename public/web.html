@@ -5,196 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ntchito Web-Based Services | SMAIT Developers</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-  
-    :root {
-      --accent1: #ff6a3d;
-      --accent2: #3b82f6;
-      --accent3: #10b981;
-      --accent4: #f59e0b;
-      --accent5: #8b5cf6;
-      --accent6: #ef4444;
-      --dark: #0d1117;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-    body { background: #fff; color: #222; }
+<style>
+  :root {
+  --accent1: #ff6a3d;
+  --accent2: #3b82f6;
+  --accent3: #10b981;
+  --accent4: #f59e0b;
+  --accent5: #8b5cf6;
+  --accent6: #ef4444;
+  --dark: #0d1117;
+}
 
-    /* HEADER */
-    header {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: rgba(255,255,255,0.95);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      z-index: 100;
-      padding: 12px 30px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    header .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent1); }
-    nav a { margin: 0 12px; color: #333; text-decoration: none; font-weight: 600; }
-    nav a:hover { color: var(--accent1); }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; scroll-behavior:smooth; }
+body { background:#fff; color:#222; }
 
-    /* HERO */
-    .hero {
-      height: 108vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-slide {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      opacity: 0; transition: opacity 1.5s ease-in-out;
-    }
-    .hero-slide.active { opacity: 1; }
+/* HEADER */
+header {
+  position:fixed; top:0; left:0; right:0;
+  background:rgba(255,255,255,0.95);
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  z-index:100;
+  padding:12px 30px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+header .logo { font-weight:700; font-size:1.1rem; color:var(--accent1); }
+nav a { margin:0 12px; color:#333; text-decoration:none; font-weight:600; }
+nav a:hover { color:var(--accent1); }
 
-    .hero-overlay {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: white;
-      background: rgba(0,0,0,0.5);
-      padding: 40px 20px;
-      border-radius: 12px;
-      animation: fadeSlide 1.2s ease;
-    }
-    .hero-overlay h1 {
-      font-size: 2.2rem; margin-bottom: 10px;
-    }
-    .hero-overlay p {
-      font-size: 1.1rem; margin-bottom: 24px;
-    }
-    .hero-overlay button {
-      background: var(--accent1);
-      border: none; padding: 12px 24px; color: white;
-      border-radius: 8px; font-weight: 600; cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .hero-overlay button:hover { background: #ff875b; }
+/* HERO */
+.hero { height:108vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.hero-slide {
+  position:absolute; inset:0;
+  background-size:cover; background-position:center;
+  opacity:0; transition:opacity 1.5s ease-in-out;
+}
+.hero-slide.active { opacity:1; }
 
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.hero-overlay {
+  position:relative; z-index:2;
+  text-align:center; color:white;
+  background:rgba(0,0,0,0.5); padding:40px 20px; border-radius:12px;
+  animation:fadeSlide 1.2s ease;
+}
+.hero-overlay h1 { font-size:2.2rem; margin-bottom:10px; }
+.hero-overlay p { font-size:1.1rem; margin-bottom:24px; }
+.hero-overlay button {
+  background:var(--accent1); border:none; padding:12px 24px; color:white;
+  border-radius:8px; font-weight:600; cursor:pointer;
+  transition:background 0.3s ease;
+}
+.hero-overlay button:hover { background:#ff875b; }
 
-    .dots {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-    }
-    .dots span {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: rgba(255,255,255,0.5);
-      transition: background 0.3s;
-    }
-    .dots span.active { background: var(--accent1); }
+@keyframes fadeSlide { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
-    /* SERVICES */
-    .service-section {
-      padding: 100px 20px 80px;
-      background: #fafafa;
-      text-align: center;
-    }
-    .service-section h2 { font-size: 2rem; margin-bottom: 10px; }
-    .service-section p { margin-bottom: 40px; color: #555; }
+.dots {
+  position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+  display:flex; gap:10px;
+}
+.dots span {
+  width:10px; height:10px; border-radius:50%;
+  background:rgba(255,255,255,0.5); transition:background 0.3s;
+}
+.dots span.active { background:var(--accent1); }
 
-    .service-carousel {
-      display: flex; overflow: hidden; position: relative;
-      max-width: 1200px; margin: 0 auto;
-    }
-    .service-grid {
-      display: flex; transition: transform 1s ease;
-    }
-    .service-card {
-      background: white;
-      border-radius: 16px;
-      margin: 0 10px;
-      flex: 0 0 calc(33.333% - 20px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      overflow: hidden;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: cardEnter 1.2s forwards;
-      cursor: pointer;
-    }
-    @keyframes cardEnter {
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .service-card img {
-      width: 100%; height: 160px; object-fit: cover;
-    }
-    .service-card h3 {
-      font-size: 1.2rem; margin: 16px;
-    }
-    .service-card p {
-      margin: 0 16px 20px;
-      color: #555;
-    }
-    .color1 { border-top: 6px solid var(--accent1); }
-    .color2 { border-top: 6px solid var(--accent2); }
-    .color3 { border-top: 6px solid var(--accent3); }
-    .color4 { border-top: 6px solid var(--accent4); }
-    .color5 { border-top: 6px solid var(--accent5); }
-    .color6 { border-top: 6px solid var(--accent6); }
+/* SERVICES */
+.service-section { padding:100px 20px 80px; background:#fafafa; text-align:center; }
+.service-section h2 { font-size:2rem; margin-bottom:10px; }
+.service-section p { margin-bottom:40px; color:#555; }
 
-    /* MODAL */
-    .modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-      display: none; justify-content: center; align-items: center;
-      z-index: 999;
-    }
-    .modal-content {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      width: 90%;
-      max-width: 700px;
-      text-align: left;
-      position: relative;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .modal-content img {
-      width: 100%; border-radius: 12px; margin: 20px 0;
-    }
-    .close-btn {
-      position: absolute; top: 12px; right: 16px;
-      background: none; border: none; font-size: 24px;
-      cursor: pointer;
-    }
-    .modal-content button {
-      background: var(--accent1);
-      color: white; border: none;
-      padding: 12px 24px; border-radius: 8px;
-      cursor: pointer; font-weight: 600;
-    }
-    .modal-content button:hover { background: #ff875b; }
+.service-carousel { overflow:hidden; max-width:1200px; margin:0 auto; position:relative; }
+#serviceGrid { display:flex; transition:transform 0.7s ease-in-out; }
 
-    /* CONTACT */
-    footer {
-      background: var(--dark);
-      color: white; padding: 60px 20px;
-      text-align: center;
-    }
-    footer .socials {
-      margin: 20px 0;
-      display: flex; justify-content: center; gap: 20px;
-    }
-    footer a { color: white; text-decoration: none; transition: color 0.3s; }
-    footer a:hover { color: var(--accent1); }
+.service-card {
+  background:white; border-radius:16px; margin:0 10px;
+  flex:0 0 calc(33.333% - 20px); box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  cursor:pointer; transform:translateY(20px); opacity:0; animation:cardEnter 1.2s forwards;
+}
+@keyframes cardEnter { to{transform:translateY(0); opacity:1;} }
 
-    .map {
-      width: 100%; height: 300px;
-      border: 0; margin-top: 30px;
-      border-radius: 12px;
-    }
-  </style>
+.service-card img { width:100%; height:160px; object-fit:cover; }
+.service-card h3 { font-size:1.2rem; margin:16px; }
+.service-card p { margin:0 16px 20px; color:#555; }
+.color1{border-top:6px solid var(--accent1);}
+.color2{border-top:6px solid var(--accent2);}
+.color3{border-top:6px solid var(--accent3);}
+.color4{border-top:6px solid var(--accent4);}
+.color5{border-top:6px solid var(--accent5);}
+.color6{border-top:6px solid var(--accent6);}
+
+/* MODAL */
+.modal { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; justify-content:center; align-items:center; z-index:999; }
+.modal-content {
+  background:white; border-radius:16px; padding:30px; width:90%; max-width:700px; text-align:left;
+  position:relative; animation:fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn { from{opacity:0; transform:scale(0.9);} to{opacity:1; transform:scale(1);} }
+.modal-content img { width:100%; border-radius:12px; margin:20px 0; }
+.close-btn { position:absolute; top:12px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; }
+.modal-content button { background:var(--accent1); color:white; border:none; padding:12px 24px; border-radius:8px; cursor:pointer; font-weight:600; }
+.modal-content button:hover { background:#ff875b; }
+
+/* CONTACT / FOOTER */
+footer { background:var(--dark); color:white; padding:60px 20px; text-align:center; }
+footer .socials { margin:20px 0; display:flex; justify-content:center; gap:20px; }
+footer a { color:white; text-decoration:none; transition:color 0.3s; }
+footer a:hover { color:var(--accent1); }
+.map { width:100%; height:300px; border:0; margin-top:30px; border-radius:12px; }
+
+</style>
   <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
@@ -306,100 +224,95 @@
 
   <p style="margin-top:20px;">&copy; 2025 SMAIT Developers. All rights reserved.</p>
 </footer>
-
 <script>
-  // Feather icons
-  feather.replace();
+// Feather icons
+feather.replace();
 
-  // =========================
-  // MODAL LOGIC
-  // =========================
-  function openModal(id) {
-    const card = document.querySelector(`[data-modal="${id}"]`);
-    if (!card) return;
+// =========================
+// MODAL LOGIC
+// =========================
+function openModal(id){
+  const card = document.querySelector(`[data-modal="${id}"]`);
+  if(!card) return;
 
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'flex';
-    modal.innerHTML = `
-      <div class="modal-content">
-        <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
-        <h2>${card.querySelector('h3').innerText}</h2>
-        <img src="${card.querySelector('img').src}" alt="${card.querySelector('h3').innerText}">
-        <p>${card.querySelector('p').innerText}</p>
-        <button onclick="alert('Action for ${card.querySelector('h3').innerText}')">Learn More</button>
-      </div>`;
-    document.body.appendChild(modal);
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.display = 'flex';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+      <h2>${card.querySelector('h3').innerText}</h2>
+      <img src="${card.querySelector('img').src}" alt="${card.querySelector('h3').innerText}">
+      <p>${card.querySelector('p').innerText}</p>
+      <button onclick="alert('Action for ${card.querySelector('h3').innerText}')">Learn More</button>
+    </div>`;
+  document.body.appendChild(modal);
 
-    // Close modal on clicking outside
-    modal.addEventListener('click', e => {
-      if (e.target === modal) modal.remove();
-    });
-  }
-
-  // =========================
-  // HERO SLIDESHOW
-  // =========================
-  const slides = document.querySelectorAll('.hero-slide');
-  const dotsContainer = document.querySelector('.dots');
-
-  if (slides.length && dotsContainer) {
-    slides.forEach((_, i) => {
-      const dot = document.createElement('span');
-      if (i === 0) dot.classList.add('active');
-      dotsContainer.appendChild(dot);
-    });
-    const dots = dotsContainer.querySelectorAll('span');
-    let currentSlide = 0;
-
-    function changeSlide(next = true) {
-      slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
-      currentSlide = next
-        ? (currentSlide + 1) % slides.length
-        : (currentSlide - 1 + slides.length) % slides.length;
-      slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
-    }
-    setInterval(() => changeSlide(true), 6000);
-  }
-
-  // =========================
-  // SERVICE GRID CAROUSEL (3 per slide)
-  // =========================
-  const grid = document.getElementById('serviceGrid');
-  if (grid) {
-    const totalCards = grid.children.length;
-    const cardsPerSlide = 3;
-    let offset = 0;
-
-    // Ensure proper width for sliding
-    grid.style.display = 'flex';
-    grid.style.transition = 'transform 0.6s ease';
-    grid.style.width = `${(totalCards / cardsPerSlide) * 100}%`;
-    Array.from(grid.children).forEach(child => {
-      child.style.flex = `0 0 ${100 / (totalCards / cardsPerSlide)}%`;
-    });
-
-    setInterval(() => {
-      offset = (offset + 1) % Math.ceil(totalCards / cardsPerSlide);
-      grid.style.transform = `translateX(-${offset * 100}%)`;
-    }, 7000);
-  }
-
-  // =========================
-  // SCROLL HELPER
-  // =========================
-  window.scrollToSection = function(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // =========================
-  // SERVICE CARD CLICK
-  // =========================
-  document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('click', () => openModal(card.dataset.modal));
+  modal.addEventListener('click', e => {
+    if(e.target === modal) modal.remove();
   });
+}
+
+// =========================
+// HERO SLIDESHOW
+// =========================
+const slides = document.querySelectorAll('.hero-slide');
+const dotsContainer = document.querySelector('.dots');
+
+if(slides.length && dotsContainer){
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if(i===0) dot.classList.add('active');
+    dotsContainer.appendChild(dot);
+  });
+  const dots = dotsContainer.querySelectorAll('span');
+  let currentSlide = 0;
+
+  function changeSlide(next=true){
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = next ? (currentSlide +1)%slides.length : (currentSlide-1+slides.length)%slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+  setInterval(()=>changeSlide(true),6000);
+}
+
+// =========================
+// SERVICE GRID CAROUSEL
+// =========================
+const grid = document.getElementById('serviceGrid');
+if(grid){
+  const totalCards = grid.children.length;
+  const cardsPerSlide = 3;
+  let offset = 0;
+
+  grid.style.display='flex';
+  grid.style.transition='transform 0.7s ease-in-out';
+  grid.style.width=`${(totalCards/cardsPerSlide)*100}%`;
+  Array.from(grid.children).forEach(child => {
+    child.style.flex=`0 0 ${100/(totalCards/cardsPerSlide)}%`;
+  });
+
+  setInterval(()=>{
+    offset = (offset + 1) % Math.ceil(totalCards/cardsPerSlide);
+    grid.style.transform = `translateX(-${offset*100}%)`;
+  },7000);
+}
+
+// =========================
+// SCROLL HELPER
+// =========================
+window.scrollToSection = function(id){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+};
+
+// =========================
+// SERVICE CARD CLICK
+// =========================
+document.querySelectorAll('.service-card').forEach(card=>{
+  card.addEventListener('click',()=>openModal(card.dataset.modal));
+});
 </script>
 
 </body>
